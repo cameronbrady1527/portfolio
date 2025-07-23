@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# project organization files
+github_analysis.md
+portfolio_design_spec.md
