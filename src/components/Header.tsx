@@ -71,8 +71,12 @@ export function Header({ className = "" }: HeaderProps) {
           <div className="flex items-center">
             <a 
               href="/" 
-              className="text-xl font-bold text-white hover:text-purple-300 transition-colors duration-200"
+              className="flex items-center space-x-3 text-xl font-bold text-white hover:text-purple-300 transition-colors duration-200"
             >
+              {/* Brain Icon */}
+              <div className="text-2xl hover:scale-110 transition-transform duration-200">
+                🧠
+              </div>
               <ScramblingName 
                 text="Cameron Brady"
                 className="text-xl font-bold text-white hover:text-purple-300 transition-colors duration-200"
