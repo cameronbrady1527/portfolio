@@ -102,10 +102,10 @@ export default function Research() {
 
   const methodologies = [
     {
-      title: "Machine Learning Pipeline",
+      title: "ML Pipeline",
       description: "End-to-end ML pipeline from data collection to model deployment",
       steps: [
-        "Data Collection & Preprocessing",
+        "Data Collection & Prep",
         "Feature Engineering",
         "Model Selection & Training",
         "Validation & Testing",
@@ -304,7 +304,7 @@ export default function Research() {
                         <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
                           {stepIndex + 1}
                         </div>
-                        <span className="text-gray-300 text-sm">{step}</span>
+                        <span className="text-gray-300 text-sm whitespace-nowrap">{step}</span>
                       </div>
                     ))}
                   </div>
