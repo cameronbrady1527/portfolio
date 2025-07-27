@@ -14,7 +14,7 @@ import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -25,6 +25,16 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [isAtTop, setIsAtTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsAtTop(window.scrollY < 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -55,19 +65,13 @@ export default function Contact() {
     {
       icon: "📧",
       title: "Email",
-      value: "cameron.brady@example.com",
-      link: "mailto:cameron.brady@example.com"
-    },
-    {
-      icon: "📱",
-      title: "Phone",
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567"
+      value: "cameronbrady1527@gmail.com",
+      link: "mailto:cameronbrady1527@gmail.com"
     },
     {
       icon: "📍",
       title: "Location",
-      value: "Ithaca, NY / Remote",
+      value: "Hopewell Junction, NY / Remote",
       link: null
     },
     {
@@ -81,28 +85,16 @@ export default function Contact() {
   const socialLinks = [
     {
       name: "GitHub",
-      url: "https://github.com/cameronbrady",
+      url: "https://github.com/cameronbrady1527",
       icon: "🐙",
       color: "hover:text-gray-300"
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/cameronbrady",
+      url: "https://www.linkedin.com/in/cameron-brady-5770431b5",
       icon: "💼",
       color: "hover:text-blue-400"
     },
-    {
-      name: "Twitter",
-      url: "https://twitter.com/cameronbrady",
-      icon: "🐦",
-      color: "hover:text-blue-400"
-    },
-    {
-      name: "ResearchGate",
-      url: "https://researchgate.net/profile/cameron-brady",
-      icon: "🔬",
-      color: "hover:text-green-400"
-    }
   ];
 
   return (
@@ -131,6 +123,24 @@ export default function Contact() {
                 or just want to connect, I'd love to hear from you.
               </p>
             </GlassCard>
+
+            {/* Scroll Indicator - Smooth transition */}
+            <div 
+              className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
+                isAtTop 
+                  ? 'opacity-100 translate-y-0 animate-bounce' 
+                  : 'opacity-0 translate-y-4 pointer-events-none'
+              }`}
+            >
+              <div className="flex flex-col items-center text-white/60 hover:text-white/80 transition-colors cursor-pointer group">
+                <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">
+                  Scroll to explore
+                </span>
+                <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
+                  <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

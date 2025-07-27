@@ -47,7 +47,7 @@ export default function Home() {
                 />
               </h1>
               <p className="text-xl sm:text-2xl text-purple-300 font-medium mb-6">
-                Building AI systems that understand the brain to heal it
+                Building AI systems to decode and protect the brain
               </p>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
                 Interdisciplinary CS graduate from Cornell, developing ML solutions 
@@ -106,11 +106,11 @@ export default function Home() {
               <GlassCard interactive className="text-center">
                 <h3 className="text-xl font-bold mb-3 text-purple-300">Sesha v3</h3>
                 <p className="text-gray-300 mb-4">
-                  AI-powered pipeline for processing and analyzing complex data streams
+                  Generative AI pipeline and web application for article creation and source aggregation
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center mb-4">
-                  <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">Python</span>
-                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">ML</span>
+                  <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">TypeScript</span>
+                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">Full-Stack</span>
                   <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">AI</span>
                 </div>
                 <NeuralButton variant="accent" size="sm">
@@ -122,7 +122,7 @@ export default function Home() {
               <GlassCard interactive className="text-center">
                 <h3 className="text-xl font-bold mb-3 text-purple-300">Parkinson's Detection</h3>
                 <p className="text-gray-300 mb-4">
-                  ML model achieving 94.9% accuracy in early Parkinson's detection
+                  ML model achieving 94.9% accuracy in early Parkinson's detection using vocal measurements
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center mb-4">
                   <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">Healthcare</span>
@@ -138,12 +138,12 @@ export default function Home() {
               <GlassCard interactive className="text-center">
                 <h3 className="text-xl font-bold mb-3 text-purple-300">Nonprofit Scraper</h3>
                 <p className="text-gray-300 mb-4">
-                  Automated data collection system helping nonprofits access critical information
+                  Automated OCR and data collection system helping nonprofits access critical, comparative information
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center mb-4">
                   <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">Web Scraping</span>
                   <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">OCR</span>
-                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">Impact</span>
+                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">Python</span>
                 </div>
                 <NeuralButton variant="accent" size="sm">
                   View Project
@@ -184,10 +184,10 @@ export default function Home() {
                         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`const technologies = [
   "Python",        // ML/AI & Backend
-  "React/Next.js", // Frontend & Full-stack
+  "React/Next.js", // Frontend & Full-Stack
   "TypeScript",    // Type Safety & DX
   "PostgreSQL",    // Database & Data
-  "PyTorch"        // Deep Learning
+  "PyTorch",       // Deep Learning
 ];`}
                         </pre>
                       </div>
@@ -214,10 +214,10 @@ export default function Home() {
                         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`## Professional Journey
 
-• Full-Stack Development: 4+ years
+• Full-Stack Development: 5+ years
+• Research & Academia: 4+ years
 • Machine Learning: 3+ years  
-• Research & Academia: 2+ years
-• Teaching & Mentoring: 1+ year
+• Teaching & Mentoring: 3+ year
 
 Total: 6+ years of technical growth`}
                         </pre>
@@ -245,11 +245,11 @@ Total: 6+ years of technical growth`}
                         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`## Project Categories
 
-• AI/ML Applications: 5 projects
+• Research & Academic: 10 projects
+• AI/ML Applications: 8 projects
+• Data Analysis Tools: 5 projects
 • Full-Stack Web Apps: 4 projects
-• Data Analysis Tools: 3 projects
-• Research & Academic: 2 projects
-• Automation Scripts: 1 project
+• Automation Scripts: 2 projects
 
 Featured: Sesha v3, Parkinson's Detection,
          Nonprofit Scraper`}

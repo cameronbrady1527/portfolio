@@ -14,10 +14,21 @@ import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { projects, getProjectsByCategory } from "@/lib/projects-data";
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [isAtTop, setIsAtTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsAtTop(window.scrollY < 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const categories = [
     { id: "all", name: "All Projects", color: "purple" },
@@ -27,114 +38,7 @@ export default function Projects() {
     { id: "automation", name: "Automation", color: "pink" },
   ];
 
-  const projects = [
-    {
-      id: 1,
-      title: "Sesha v3",
-      description: "AI-powered pipeline for processing and analyzing complex data streams with real-time processing capabilities.",
-      longDescription: "A comprehensive data processing pipeline that leverages machine learning to analyze complex biomedical data streams. Features include real-time data ingestion, automated preprocessing, and advanced analytics with 99.2% accuracy in pattern recognition.",
-      technologies: ["Python", "PyTorch", "Docker", "PostgreSQL", "Redis"],
-      category: "ai-ml",
-      image: "/api/placeholder/400/300",
-      github: "https://github.com/cameronbrady/sesha-v3",
-      live: "https://sesha-demo.com",
-      featured: true,
-      stats: {
-        accuracy: "99.2%",
-        processingSpeed: "10x faster",
-        dataPoints: "1M+ daily"
-      }
-    },
-    {
-      id: 2,
-      title: "Parkinson's Detection System",
-      description: "ML model achieving 94.9% accuracy in early Parkinson's detection using voice analysis.",
-      longDescription: "A machine learning system that analyzes voice patterns to detect early signs of Parkinson's disease. The model processes audio recordings and extracts features to identify subtle changes in speech patterns that may indicate neurological changes.",
-      technologies: ["Python", "TensorFlow", "scikit-learn", "Librosa", "Flask"],
-      category: "research",
-      image: "/api/placeholder/400/300",
-      github: "https://github.com/cameronbrady/parkinsons-detection",
-      live: null,
-      featured: true,
-      stats: {
-        accuracy: "94.9%",
-        sensitivity: "92.3%",
-        specificity: "96.1%"
-      }
-    },
-    {
-      id: 3,
-      title: "Nonprofit Data Scraper",
-      description: "Automated data collection system helping nonprofits access critical information efficiently.",
-      longDescription: "An intelligent web scraping system designed specifically for nonprofit organizations to collect and organize data from various sources. Includes OCR capabilities for processing scanned documents and automated data validation.",
-      technologies: ["Python", "Selenium", "BeautifulSoup", "OCR", "PostgreSQL"],
-      category: "automation",
-      image: "/api/placeholder/400/300",
-      github: "https://github.com/cameronbrady/nonprofit-scraper",
-      live: null,
-      featured: true,
-      stats: {
-        efficiency: "85% faster",
-        accuracy: "98.5%",
-        organizations: "50+ served"
-      }
-    },
-    {
-      id: 4,
-      title: "Neural Portfolio",
-      description: "Modern portfolio website with neural theme and interactive animations.",
-      longDescription: "A responsive portfolio website built with Next.js and TypeScript, featuring a neural network theme with interactive animations, glassmorphism effects, and smooth user experience.",
-      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "React"],
-      category: "web",
-      image: "/api/placeholder/400/300",
-      github: "https://github.com/cameronbrady/neural-portfolio",
-      live: "https://cameronbrady.dev",
-      featured: false,
-      stats: {
-        performance: "98/100",
-        accessibility: "100/100",
-        seo: "95/100"
-      }
-    },
-    {
-      id: 5,
-      title: "Healthcare Analytics Dashboard",
-      description: "Real-time healthcare data visualization and analytics platform.",
-      longDescription: "A comprehensive dashboard for healthcare providers to monitor patient data, track treatment outcomes, and generate insights. Features real-time data visualization and predictive analytics.",
-      technologies: ["React", "D3.js", "Node.js", "MongoDB", "Socket.io"],
-      category: "web",
-      image: "/api/placeholder/400/300",
-      github: "https://github.com/cameronbrady/healthcare-dashboard",
-      live: "https://healthcare-analytics.demo.com",
-      featured: false,
-      stats: {
-        users: "500+",
-        dataPoints: "2M+",
-        uptime: "99.9%"
-      }
-    },
-    {
-      id: 6,
-      title: "Brain-Computer Interface Research",
-      description: "Research on neural signal processing for brain-computer interface applications.",
-      longDescription: "Advanced research project focusing on processing neural signals for brain-computer interface applications. Includes signal processing algorithms and real-time neural data analysis.",
-      technologies: ["Python", "NumPy", "SciPy", "Matplotlib", "LabVIEW"],
-      category: "research",
-      image: "/api/placeholder/400/300",
-      github: "https://github.com/cameronbrady/bci-research",
-      live: null,
-      featured: false,
-      stats: {
-        signals: "1000+",
-        accuracy: "87.3%",
-        latency: "<50ms"
-      }
-    }
-  ];
-
-  const filteredProjects = selectedCategory === "all" 
-    ? projects 
-    : projects.filter(project => project.category === selectedCategory);
+  const filteredProjects = getProjectsByCategory(selectedCategory);
 
   return (
     <div className="relative min-h-screen">
@@ -163,6 +67,24 @@ export default function Projects() {
                 boundaries of what's possible.
               </p>
             </GlassCard>
+
+            {/* Scroll Indicator - Smooth transition */}
+            <div 
+              className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
+                isAtTop 
+                  ? 'opacity-100 translate-y-0 animate-bounce' 
+                  : 'opacity-0 translate-y-4 pointer-events-none'
+              }`}
+            >
+              <div className="flex flex-col items-center text-white/60 hover:text-white/80 transition-colors cursor-pointer group">
+                <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">
+                  Scroll to explore
+                </span>
+                <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
+                  <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -194,7 +116,12 @@ export default function Projects() {
             {/* Projects Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
-                <GlassCard key={project.id} interactive className="group">
+                <GlassCard 
+                  key={project.id} 
+                  interactive 
+                  className="group cursor-pointer hover:scale-105 transition-transform duration-300"
+                  onClick={() => window.location.href = `/projects/${project.id}`}
+                >
                   {/* Project Image Placeholder */}
                   <div className="w-full h-48 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg mb-4 flex items-center justify-center">
                     <div className="text-4xl text-purple-300/50">📊</div>
@@ -243,7 +170,7 @@ export default function Projects() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-2">
+                  <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
                     <NeuralButton 
                       variant="accent" 
                       size="sm"
@@ -257,7 +184,7 @@ export default function Projects() {
                         variant="secondary" 
                         size="sm"
                         className="flex-1"
-                        onClick={() => window.open(project.live, '_blank')}
+                        onClick={() => window.open(project.live!, '_blank')}
                       >
                         Live Demo
                       </NeuralButton>

@@ -14,10 +14,21 @@ import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { researchPapers, getPapersByArea } from "@/lib/research-data";
 
 export default function Research() {
   const [selectedArea, setSelectedArea] = useState("all");
+  const [isAtTop, setIsAtTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsAtTop(window.scrollY < 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const researchAreas = [
     { id: "all", name: "All Research", color: "purple" },
@@ -27,78 +38,7 @@ export default function Research() {
     { id: "signal-processing", name: "Signal Processing", color: "pink" },
   ];
 
-  const researchPapers = [
-    {
-      id: 1,
-      title: "Early Detection of Parkinson's Disease Using Voice Analysis and Machine Learning",
-      authors: ["Cameron Brady", "Dr. Sarah Chen", "Dr. Michael Rodriguez"],
-      abstract: "This study presents a novel approach to early Parkinson's disease detection using voice pattern analysis and machine learning algorithms. Our model achieved 94.9% accuracy in detecting early-stage Parkinson's from voice recordings.",
-      journal: "Journal of Medical AI",
-      year: 2024,
-      doi: "10.1000/example.2024.001",
-      area: "neurology",
-      featured: true,
-      citations: 12,
-      impact: "High",
-      keywords: ["Parkinson's Disease", "Voice Analysis", "Machine Learning", "Early Detection"]
-    },
-    {
-      id: 2,
-      title: "Neural Signal Processing for Brain-Computer Interface Applications",
-      authors: ["Cameron Brady", "Dr. Emily Watson"],
-      abstract: "Advanced signal processing techniques for neural data analysis in brain-computer interface applications. Includes real-time processing algorithms and feature extraction methods.",
-      journal: "IEEE Transactions on Neural Systems",
-      year: 2023,
-      doi: "10.1000/example.2023.002",
-      area: "signal-processing",
-      featured: true,
-      citations: 8,
-      impact: "Medium",
-      keywords: ["Brain-Computer Interface", "Signal Processing", "Neural Networks", "Real-time Analysis"]
-    },
-    {
-      id: 3,
-      title: "AI-Powered Healthcare Analytics: A Comprehensive Framework",
-      authors: ["Cameron Brady", "Dr. James Wilson", "Dr. Lisa Thompson"],
-      abstract: "A comprehensive framework for implementing AI-powered analytics in healthcare settings, including data preprocessing, model training, and deployment strategies.",
-      journal: "Healthcare Informatics Research",
-      year: 2023,
-      doi: "10.1000/example.2023.003",
-      area: "healthcare",
-      featured: false,
-      citations: 15,
-      impact: "High",
-      keywords: ["Healthcare Analytics", "AI Framework", "Data Processing", "Clinical Applications"]
-    },
-    {
-      id: 4,
-      title: "Deep Learning Approaches for Biomedical Data Analysis",
-      authors: ["Cameron Brady"],
-      abstract: "Exploration of deep learning architectures specifically designed for biomedical data analysis, including convolutional neural networks and recurrent neural networks.",
-      journal: "Computational Biology",
-      year: 2023,
-      doi: "10.1000/example.2023.004",
-      area: "ai-ml",
-      featured: false,
-      citations: 6,
-      impact: "Medium",
-      keywords: ["Deep Learning", "Biomedical Data", "Neural Networks", "Data Analysis"]
-    },
-    {
-      id: 5,
-      title: "Real-time Neural Data Processing Pipeline",
-      authors: ["Cameron Brady", "Dr. Robert Kim"],
-      abstract: "Development of a real-time processing pipeline for neural data streams, enabling immediate analysis and response in clinical and research settings.",
-      journal: "Neural Engineering",
-      year: 2022,
-      doi: "10.1000/example.2022.005",
-      area: "signal-processing",
-      featured: false,
-      citations: 10,
-      impact: "Medium",
-      keywords: ["Real-time Processing", "Neural Data", "Pipeline", "Clinical Applications"]
-    }
-  ];
+  const filteredPapers = getPapersByArea(selectedArea);
 
   const methodologies = [
     {
@@ -139,9 +79,7 @@ export default function Research() {
     }
   ];
 
-  const filteredPapers = selectedArea === "all" 
-    ? researchPapers 
-    : researchPapers.filter(paper => paper.area === selectedArea);
+
 
   return (
     <div className="relative min-h-screen">
@@ -169,6 +107,24 @@ export default function Research() {
                 with a focus on neurological disorders and brain-computer interfaces.
               </p>
             </GlassCard>
+
+            {/* Scroll Indicator - Smooth transition */}
+            <div 
+              className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
+                isAtTop 
+                  ? 'opacity-100 translate-y-0 animate-bounce' 
+                  : 'opacity-0 translate-y-4 pointer-events-none'
+              }`}
+            >
+              <div className="flex flex-col items-center text-white/60 hover:text-white/80 transition-colors cursor-pointer group">
+                <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">
+                  Scroll to explore
+                </span>
+                <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
+                  <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -249,6 +205,13 @@ export default function Research() {
 
                     {/* Action Buttons */}
                     <div className="flex flex-col gap-2 lg:w-48">
+                      <NeuralButton 
+                        variant="primary" 
+                        size="sm"
+                        onClick={() => window.location.href = `/research/${paper.id}`}
+                      >
+                        View Details
+                      </NeuralButton>
                       <NeuralButton 
                         variant="accent" 
                         size="sm"

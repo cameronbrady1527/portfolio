@@ -3,19 +3,25 @@
 // About page for Cameron Brady's portfolio
 // Features personal background, education, skills, and experience
 //
-// Sections:
-// - Hero section with personal introduction
-// - Education and background
-// - Skills and technologies
-// - Experience timeline
-// - Neural background integration
 
 import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
+import { StyledLink } from "@/components/StyledLink";
+import { useState, useEffect } from "react";
 
 export default function About() {
+  const [isAtTop, setIsAtTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsAtTop(window.scrollY < 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   return (
     <div className="relative min-h-screen">
       {/* Header */}
@@ -38,10 +44,28 @@ export default function About() {
                 Bridging Neuroscience and Computer Science
               </p>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                Interdisciplinary researcher and developer passionate about leveraging 
-                machine learning to understand and treat neurological disorders.
+                To sum me up succinctly would be to say that I love to help people and I love to solve problems
+                [I will add more here later...]
               </p>
             </GlassCard>
+
+            {/* Scroll Indicator - Smooth transition */}
+            <div 
+              className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
+                isAtTop 
+                  ? 'opacity-100 translate-y-0 animate-bounce' 
+                  : 'opacity-0 translate-y-4 pointer-events-none'
+              }`}
+            >
+              <div className="flex flex-col items-center text-white/60 hover:text-white/80 transition-colors cursor-pointer group">
+                <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">
+                  Scroll to explore
+                </span>
+                <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
+                  <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -58,13 +82,13 @@ export default function About() {
                 <div className="space-y-4">
                   <div className="border-l-4 border-purple-400 pl-4">
                     <h4 className="font-semibold text-white">Cornell University</h4>
-                    <p className="text-gray-300">Computer Science, B.S.</p>
+                    <p className="text-gray-300">Interdisciplinary CS, B.S.</p>
                     <p className="text-sm text-gray-400">2020 - 2024</p>
                   </div>
                   <div className="border-l-4 border-blue-400 pl-4">
                     <h4 className="font-semibold text-white">Neuroscience Research</h4>
                     <p className="text-gray-300">Independent Study & Research</p>
-                    <p className="text-sm text-gray-400">2022 - 2024</p>
+                    <p className="text-sm text-gray-400">2022 - Present</p>
                   </div>
                 </div>
               </GlassCard>
@@ -112,15 +136,21 @@ export default function About() {
                     </div>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-300">TypeScript/JavaScript</span>
+                    <span className="text-gray-300">TypeScript/JS</span>
                     <div className="w-24 bg-gray-700 rounded-full h-2">
                       <div className="bg-blue-400 h-2 rounded-full" style={{width: '90%'}}></div>
                     </div>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-300">SQL</span>
+                    <span className="text-gray-300">Java</span>
                     <div className="w-24 bg-gray-700 rounded-full h-2">
                       <div className="bg-green-400 h-2 rounded-full" style={{width: '85%'}}></div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">SQL</span>
+                    <div className="w-24 bg-gray-700 rounded-full h-2">
+                      <div className="bg-orange-400 h-2 rounded-full" style={{width: '85%'}}></div>
                     </div>
                   </div>
                 </div>
@@ -132,19 +162,25 @@ export default function About() {
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">React/Next.js</span>
                     <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-purple-400 h-2 rounded-full" style={{width: '92%'}}></div>
+                      <div className="bg-purple-400 h-2 rounded-full" style={{width: '90%'}}></div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">PostgreSQL</span>
+                    <div className="w-24 bg-gray-700 rounded-full h-2">
+                      <div className="bg-blue-400 h-2 rounded-full" style={{width: '90%'}}></div>
                     </div>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">PyTorch/TensorFlow</span>
                     <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-blue-400 h-2 rounded-full" style={{width: '88%'}}></div>
+                      <div className="bg-green-400 h-2 rounded-full" style={{width: '90%'}}></div>
                     </div>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Docker/AWS</span>
                     <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-green-400 h-2 rounded-full" style={{width: '80%'}}></div>
+                      <div className="bg-orange-400 h-2 rounded-full" style={{width: '80%'}}></div>
                     </div>
                   </div>
                 </div>
@@ -194,13 +230,15 @@ export default function About() {
                   <div className="ml-16">
                     <GlassCard>
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold text-purple-300">Research Assistant</h3>
-                        <span className="text-sm text-gray-400">2023 - 2024</span>
+                        <h3 className="text-xl font-bold text-purple-300">Software Developer</h3>
+                        <span className="text-sm text-gray-400">2025 - Present</span>
                       </div>
-                      <p className="text-gray-300 mb-2">Cornell University</p>
+                      <p className="text-gray-300 mb-2"><StyledLink href="https://www.useastral.dev" variant="button" external>Astral AI</StyledLink> <strong>[Startup]</strong></p>
                       <p className="text-gray-400">
-                        Developed ML models for early detection of neurological disorders, 
-                        achieving 94.9% accuracy in Parkinson's detection.
+                        -  Developing a full-stack web application for AI-generated article creation via source aggregation.
+                      </p>
+                      <p className="text-gray-400">
+                        -  Rebuilding <StyledLink href="https://www.klavis.ai" variant="default" external>Klavis.AI</StyledLink> MCP integrations and servers to improve our platform's performance and accessibility.
                       </p>
                     </GlassCard>
                   </div>
@@ -211,13 +249,37 @@ export default function About() {
                   <div className="ml-16">
                     <GlassCard>
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold text-purple-300">Full-Stack Developer</h3>
-                        <span className="text-sm text-gray-400">2022 - 2023</span>
+                        <h3 className="text-xl font-bold text-purple-300">Nonprofit Consultant</h3>
+                        <span className="text-sm text-gray-400">2024 - 2025</span>
                       </div>
-                      <p className="text-gray-300 mb-2">Freelance & Academic Projects</p>
+                      <p className="text-gray-300 mb-2">Community Mindfulness Project</p>
                       <p className="text-gray-400">
-                        Built web applications and data processing pipelines for healthcare 
-                        and nonprofit organizations.
+                        -  Developed industry-competitive, data-driven, and open-source nonprofit data collection and analysis tools, leveraging financial records from over 1.8 million of American 501(c)3 organizations.
+                        <StyledLink href="https://github.com/cameronbrady1527/nonprofit-revenue-scraper" variant="github" external>
+                          View on GitHub
+                        </StyledLink>
+                      </p>
+                      <p className="text-gray-400">
+                        -  Spearheading the creation of a digital board handbook and new SOPs, whilst advising on strategic program development and board governance best practices.
+                      </p>
+                    </GlassCard>
+                  </div>
+                </div>
+
+                <div className="relative flex items-start">
+                  <div className="absolute left-6 w-4 h-4 bg-blue-400 rounded-full -translate-x-2"></div>
+                  <div className="ml-16">
+                    <GlassCard>
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-xl font-bold text-purple-300">Head Teaching Assistant</h3>
+                        <span className="text-sm text-gray-400">2022 - 2024</span>
+                      </div>
+                      <p className="text-gray-300 mb-2">Cornell Dyson School of Applied Economics and Management</p>
+                      <p className="text-gray-400">
+                        -  Served as Head TA for Farm Business Management, leading five TAs by establishing standardized, tech-friendly workflows for lessons, grading, and office hours.
+                      </p>
+                      <p className="text-gray-400">
+                        -  Acted as a communication bridge between course administration, students, and peer TAs.
                       </p>
                     </GlassCard>
                   </div>
@@ -228,13 +290,15 @@ export default function About() {
                   <div className="ml-16">
                     <GlassCard>
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold text-purple-300">Teaching Assistant</h3>
-                        <span className="text-sm text-gray-400">2021 - 2022</span>
+                        <h3 className="text-xl font-bold text-purple-300">CEO & Co-Founder</h3>
+                        <span className="text-sm text-gray-400">2019 - 2024</span>
                       </div>
-                      <p className="text-gray-300 mb-2">Cornell University</p>
+                      <p className="text-gray-300 mb-2">The Clover Project, Inc.</p>
                       <p className="text-gray-400">
-                        Assisted in teaching computer science courses and mentored 
-                        students in programming and algorithms.
+                        -  Co-founded a mission-driven nonprofit to combat food insecurity by cultivating and distributing produce, managing a team of six directors and over 250 volunteers.
+                      </p>
+                      <p className="text-gray-400">
+                        -  Implemented a comprehensive database system to track inventory, donations, and volunteer hours, streamlining operations and improving efficiency.
                       </p>
                     </GlassCard>
                   </div>
@@ -252,7 +316,7 @@ export default function About() {
                 Ready to Collaborate?
               </h2>
               <p className="text-lg text-gray-300 mb-8">
-                Let's work together on innovative projects that make a real impact.
+                Let's work together on innovative projects that improve lives.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <NeuralButton 
