@@ -15,7 +15,6 @@ interface ScramblingNameProps {
   text: string;
   className?: string;
   typewriterSpeed?: number;
-  scrambleSpeed?: number;
 }
 
 /**
@@ -28,8 +27,7 @@ interface ScramblingNameProps {
 export function ScramblingName({ 
   text, 
   className = "", 
-  typewriterSpeed = 100,
-  scrambleSpeed = 50 
+  typewriterSpeed = 100
 }: ScramblingNameProps) {
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
@@ -68,7 +66,7 @@ export function ScramblingName({
         return text[index];
       })
       .join("");
-  }, [text, scrambleState, scrambleLetters]);
+  }, [text, scrambleState, scrambleLetters, isMounted]);
 
   // Typewriter effect on load
   useEffect(() => {

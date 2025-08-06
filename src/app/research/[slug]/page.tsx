@@ -6,7 +6,7 @@ import React from 'react';
 import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
-import { StyledLink } from "@/components/StyledLink";
+
 import { getPaperById } from "@/lib/research-data";
 import { notFound } from 'next/navigation';
 
@@ -16,10 +16,31 @@ interface ResearchPageProps {
   }>;
 }
 
-export default async function ResearchPage({ params }: ResearchPageProps) {
-  const { slug } = await params;
-  const paperId = parseInt(slug);
-  const paper = getPaperById(paperId);
+export default function ResearchPage({ params }: ResearchPageProps) {
+  const [paper, setPaper] = React.useState<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const loadPaper = async () => {
+      const { slug } = await params;
+      const paperId = parseInt(slug);
+      const paperData = getPaperById(paperId);
+      setPaper(paperData);
+      setLoading(false);
+    };
+    loadPaper();
+  }, [params]);
+
+  if (loading) {
+    return (
+      <div className="relative min-h-screen">
+        <Header />
+        <main className="pt-16 flex items-center justify-center">
+          <div className="text-white">Loading...</div>
+        </main>
+      </div>
+    );
+  }
 
   if (!paper) {
     notFound();
@@ -32,6 +53,7 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
     'signal-processing': 'pink'
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const areaColor = areaColors[paper.area as keyof typeof areaColors] || 'purple';
 
   return (
@@ -66,7 +88,7 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
 
               {/* Keywords */}
               <div className="flex flex-wrap justify-center gap-2 mb-6">
-                {paper.keywords.map((keyword) => (
+                {paper.keywords.map((keyword: string) => (
                   <span 
                     key={keyword}
                     className="px-3 py-1 bg-gray-700/50 text-gray-300 rounded-full text-sm border border-gray-600/50"
@@ -159,7 +181,7 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
                 <GlassCard>
                   <h3 className="text-2xl font-bold mb-4 text-green-300">Key Results</h3>
                   <ul className="space-y-3">
-                    {paper.content.results.map((result, index) => (
+                    {paper.content.results.map((result: string, index: number) => (
                       <li key={index} className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-gray-300">{result}</span>
@@ -190,7 +212,7 @@ export default async function ResearchPage({ params }: ResearchPageProps) {
                 Interested in This Research?
               </h2>
               <p className="text-lg text-gray-300 mb-8">
-                Let's discuss potential collaborations or explore related research opportunities.
+                Let&apos;s discuss potential collaborations or explore related research opportunities.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <NeuralButton 

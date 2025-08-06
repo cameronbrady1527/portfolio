@@ -50,7 +50,7 @@ export default function Home() {
               Machine Learning Researcher | Computational Neuroscience Enthusiast | Future Neurosurgeon | Full Stack Engineer
               </p>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                Passionate about leveraging machine learning and AI to advance computational neuroscience and develop early detection systems for neurological disorders. Currently working on Parkinson's disease detection through vocal biomarkers while building the foundation for my medical career. My ultimate goal is to become a neurosurgeon who bridges the gap between cutting-edge AI research and clinical practice.
+                Passionate about leveraging machine learning and AI to advance computational neuroscience and develop early detection systems for neurological disorders. Currently working on Parkinson&apos;s disease detection through vocal biomarkers while building the foundation for my medical career. My ultimate goal is to become a neurosurgeon who bridges the gap between cutting-edge AI research and clinical practice.
               </p>
             </GlassCard>
 
@@ -118,9 +118,9 @@ export default function Home() {
 
               {/* Project Card 2 */}
               <GlassCard interactive className="text-center">
-                <h3 className="text-xl font-bold mb-3 text-purple-300">Parkinson's Disease Detection</h3>
+                <h3 className="text-xl font-bold mb-3 text-purple-300">Parkinson&apos;s Disease Detection</h3>
                 <p className="text-gray-300 mb-4">
-                  Advanced machine learning framework for Parkinson's disease identification utilizing vocal biomarkers with streamlined data processing
+                  Advanced machine learning framework for Parkinson&apos;s disease identification utilizing vocal biomarkers with streamlined data processing
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center mb-4">
                   <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">Python</span>

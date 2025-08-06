@@ -12,6 +12,7 @@
 
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { NeuralButton } from "./NeuralButton";
 import { ScramblingName } from "./ScramblingName";
 
@@ -69,7 +70,7 @@ export function Header({ className = "" }: HeaderProps) {
         <div className="flex justify-between items-center h-16">
           {/* Logo/Brand */}
           <div className="flex items-center">
-            <a 
+            <Link 
               href="/" 
               className="flex items-center space-x-3 text-xl font-bold text-white hover:text-purple-300 transition-colors duration-200"
             >
@@ -81,9 +82,8 @@ export function Header({ className = "" }: HeaderProps) {
                 text="Cameron Brady"
                 className="text-xl font-bold text-white hover:text-purple-300 transition-colors duration-200"
                 typewriterSpeed={120}
-                scrambleSpeed={60}
               />
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -91,7 +91,7 @@ export function Header({ className = "" }: HeaderProps) {
             {navItems.map((item) => {
               const active = isActive(item.href);
               return (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className={`
@@ -111,7 +111,7 @@ export function Header({ className = "" }: HeaderProps) {
                   {active && (
                     <span className="absolute -top-1 -right-2 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></span>
                   )}
-                </a>
+                </Link>
               );
             })}
             <NeuralButton 
@@ -163,7 +163,7 @@ export function Header({ className = "" }: HeaderProps) {
               {navItems.map((item) => {
                 const active = isActive(item.href);
                 return (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     className={`
@@ -181,7 +181,7 @@ export function Header({ className = "" }: HeaderProps) {
                         <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></span>
                       )}
                     </span>
-                  </a>
+                  </Link>
                 );
               })}
               <div className="px-3 py-2">

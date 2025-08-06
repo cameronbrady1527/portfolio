@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const body = await request.json();
     
     // Simulate processing
@@ -11,7 +12,7 @@ export async function POST(request: NextRequest) {
       success: true, 
       message: "Message sent successfully!" 
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, message: "Failed to send message" },
       { status: 500 }

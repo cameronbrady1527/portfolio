@@ -16,7 +16,7 @@ import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
 import { TechnologyDropdown } from "@/components/TechnologyDropdown";
 import { useState, useEffect, useRef } from "react";
-import { projects, getProjectsByCategory, getAllTechnologies, getProjectsByFilters } from "@/lib/projects-data";
+import { getAllTechnologies, getProjectsByFilters } from "@/lib/projects-data";
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -139,7 +139,7 @@ export default function Projects() {
                <p className="text-lg text-gray-300 max-w-3xl mx-auto">
                  A collection of projects spanning AI/ML, neuroscience, web development, 
                  research, and automation - each designed to solve real problems and push the 
-                 boundaries of what's possible. Guided by the idea that there is always a way
+                 boundaries of what&apos;s possible. Guided by the idea that there is always a way
                  to solve a problem.
                  
                </p>
@@ -335,7 +335,7 @@ export default function Projects() {
                 Interested in Collaboration?
               </h2>
               <p className="text-lg text-gray-300 mb-8">
-                Let's work together on your next innovative project.
+                Let&apos;s work together on your next innovative project.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <NeuralButton 

@@ -117,11 +117,11 @@ export default function Contact() {
                 />
               </h1>
               <p className="text-xl sm:text-2xl text-purple-300 font-medium mb-6">
-                Let's Build Something Amazing Together
+                Let&apos;s Build Something Amazing Together
               </p>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                Whether you're interested in collaboration, have a project in mind, 
-                or just want to connect, I'd love to hear from you.
+                Whether you&apos;re interested in collaboration, have a project in mind, 
+                or just want to connect, I&apos;d love to hear from you.
               </p>
             </GlassCard>
 
@@ -227,7 +227,7 @@ export default function Contact() {
                     {/* Submit Status */}
                     {submitStatus === "success" && (
                       <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-lg">
-                        <p className="text-green-300">Thank you! Your message has been sent successfully. I'll get back to you within 24 hours.</p>
+                        <p className="text-green-300">Thank you! Your message has been sent successfully. I&apos;ll get back to you within 24 hours.</p>
                       </div>
                     )}
 
@@ -242,7 +242,7 @@ export default function Contact() {
                       size="lg"
                       className="w-full"
                       disabled={isSubmitting}
-                      onClick={() => handleSubmit(new Event('submit') as any)}
+                      onClick={() => handleSubmit(new Event('submit') as unknown as React.FormEvent)}
                     >
                       {isSubmitting ? "Sending..." : "Send Message"}
                     </NeuralButton>
@@ -342,7 +342,7 @@ export default function Contact() {
                 </h3>
                 <p className="text-gray-300">
                   I specialize in AI/ML applications, healthcare technology, web development, and research projects. 
-                  I'm particularly interested in projects that combine multiple disciplines and have real-world impact.
+                  I&apos;m particularly interested in projects that combine multiple disciplines and have real-world impact.
                 </p>
               </GlassCard>
 
@@ -351,18 +351,18 @@ export default function Contact() {
                   Do you take on freelance work?
                 </h3>
                 <p className="text-gray-300">
-                  Yes! I'm available for freelance projects, consulting, and collaboration opportunities. 
+                  Yes! I&apos;m available for freelance projects, consulting, and collaboration opportunities. 
                   I prefer projects that align with my expertise in AI, healthcare, and full-stack development.
                 </p>
               </GlassCard>
 
               <GlassCard>
                 <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  What's your typical project timeline?
+                  What&apos;s your typical project timeline?
                 </h3>
                 <p className="text-gray-300">
                   Project timelines vary based on scope and complexity. Small projects might take 1-2 weeks, 
-                  while larger applications can span 1-4 months. I'll provide a detailed timeline during our initial discussion.
+                  while larger applications can span 1-4 months. I&apos;ll provide a detailed timeline during our initial discussion.
                 </p>
               </GlassCard>
 
@@ -378,12 +378,12 @@ export default function Contact() {
 
               <GlassCard>
                 <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  What's your background in computational neuroscience?
+                  What&apos;s your background in computational neuroscience?
                 </h3>
                 <p className="text-gray-300">
-                  I'm passionate about leveraging machine learning and AI to advance computational neuroscience. 
-                  My current research focuses on Parkinson's disease detection through vocal biomarkers, achieving 94.9% precision. 
-                  I'm building the foundation for my future career as a neurosurgeon who bridges AI research with clinical practice.
+                  I&apos;m passionate about leveraging machine learning and AI to advance computational neuroscience. 
+                  My current research focuses on Parkinson&apos;s disease detection through vocal biomarkers, achieving 94.9% precision. 
+                  I&apos;m building the foundation for my future career as a neurosurgeon who bridges AI research with clinical practice.
                 </p>
               </GlassCard>
 
@@ -392,8 +392,8 @@ export default function Contact() {
                   Do you work on healthcare technology projects?
                 </h3>
                 <p className="text-gray-300">
-                  Yes! Healthcare technology is my primary focus. For example, I've developed early detection systems for neurological disorders, 
-                  including my Parkinson's disease detection project using vocal biomarkers. I'm particularly interested in projects 
+                  Yes! Healthcare technology is my primary focus. For example, I&apos;ve developed early detection systems for neurological disorders, 
+                  including my Parkinson&apos;s disease detection project using vocal biomarkers. I&apos;m particularly interested in projects 
                   that can improve patient outcomes and advance medical diagnostics through AI and machine learning.
                 </p>
               </GlassCard>
@@ -411,12 +411,12 @@ export default function Contact() {
 
               <GlassCard>
                 <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  What's your experience with AI and machine learning?
+                  What&apos;s your experience with AI and machine learning?
                 </h3>
                 <p className="text-gray-300">
                   I work extensively with AI/ML technologies including Python, Scikit-learn, PyTorch, and various data science tools. 
                   My projects include AI-powered content generation platforms, healthcare diagnostics, and research applications. 
-                  I'm currently working at Astral AI, developing AI-powered web applications and data scraping automations.
+                  I&apos;m currently working at Astral AI, developing AI-powered web applications and data scraping automations.
                 </p>
               </GlassCard>
             </div>

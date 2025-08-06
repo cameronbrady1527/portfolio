@@ -15,10 +15,10 @@ import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
 import { useState, useEffect } from "react";
-import { researchPapers, getPapersByArea } from "@/lib/research-data";
+import { getPapersByArea } from "@/lib/research-data";
 
 export default function Research() {
-  const [selectedArea, setSelectedArea] = useState("all");
+  const [selectedArea] = useState("all");
   const [isAtTop, setIsAtTop] = useState(true);
 
   useEffect(() => {
@@ -30,6 +30,7 @@ export default function Research() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const researchAreas = [
     { id: "all", name: "All Research", color: "purple" },
     { id: "neurology", name: "Neurology", color: "blue" },
@@ -38,6 +39,7 @@ export default function Research() {
     { id: "signal-processing", name: "Signal Processing", color: "pink" },
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const filteredPapers = getPapersByArea(selectedArea);
 
   const methodologies = [
@@ -140,16 +142,16 @@ export default function Research() {
                   Research Journey in Progress
                 </h2>
                 <p className="text-lg text-gray-300 leading-relaxed">
-                  I'm currently in the early stages of my research career, actively developing 
-                  projects and building the foundation for future academic work. While I haven't 
-                  published formal research papers yet, I'm deeply engaged in:
+                                  I&apos;m currently in the early stages of my research career, actively developing
+                projects and building the foundation for future academic work. While I haven&apos;t
+                published formal research papers yet, I&apos;m deeply engaged in:
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                   <div className="text-left space-y-3">
                     <h3 className="text-xl font-semibold text-purple-300">Current Focus</h3>
                     <ul className="space-y-2 text-gray-300">
-                      <li>• Parkinson's Disease Detection Project</li>
+                      <li>• Parkinson&apos;s Disease Detection Project</li>
                       <li>• Machine Learning for Healthcare Applications</li>
                       <li>• Vocal Biomarker Analysis</li>
                       <li>• Building Research Skills & Knowledge</li>
@@ -169,7 +171,7 @@ export default function Research() {
                 
                 <div className="mt-8 p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
                   <p className="text-purple-300 font-medium">
-                    I'm actively seeking research collaborations and opportunities to contribute 
+                    I&apos;m actively seeking research collaborations and opportunities to contribute 
                     to the field of AI-powered healthcare diagnostics.
                   </p>
                 </div>
@@ -195,11 +197,11 @@ export default function Research() {
                     </div>
                     
                     <h3 className="text-xl font-bold mb-2 text-purple-300 group-hover:text-purple-200 transition-colors">
-                      Parkinson's Disease Detection Using Vocal Biomarkers
+                      Parkinson&apos;s Disease Detection Using Vocal Biomarkers
                     </h3>
                     
                     <p className="text-gray-300 mb-4">
-                      Advanced machine learning framework for Parkinson's disease identification utilizing vocal biomarkers with streamlined data processing, automated model development, and comprehensive performance assessment. Achieves 94.9% precision through intelligent feature selection leveraging Random Forest importance metrics.
+                      Advanced machine learning framework for Parkinson&apos;s disease identification utilizing vocal biomarkers with streamlined data processing, automated model development, and comprehensive performance assessment. Achieves 94.9% precision through intelligent feature selection leveraging Random Forest importance metrics.
                     </p>
                     
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -240,12 +242,12 @@ export default function Research() {
                     
                     <p className="text-gray-300 mb-4">
                       Exploring various approaches to early detection of neurological disorders 
-                      including Alzheimer's, dementia, and other cognitive impairments using 
+                      including Alzheimer&apos;s, dementia, and other cognitive impairments using 
                       machine learning and AI techniques.
                     </p>
                     
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {["Alzheimer's Detection", "Cognitive Assessment", "AI Diagnostics", "Early Intervention"].map((keyword) => (
+                      {["Alzheimer&apos;s Detection", "Cognitive Assessment", "AI Diagnostics", "Early Intervention"].map((keyword) => (
                         <span key={keyword} className="px-2 py-1 bg-gray-700/50 text-gray-300 rounded text-sm">
                           {keyword}
                         </span>
@@ -286,8 +288,8 @@ export default function Research() {
                   Focus on neurological disorders, brain-computer interfaces, and neural signal processing
                 </p>
                 <div className="space-y-2 text-sm text-gray-400">
-                  <div>• Parkinson's Disease Detection</div>
-                  <div>• Alzheimer's Research</div>
+                                  <div>• Parkinson&apos;s Disease Detection</div>
+                <div>• Alzheimer&apos;s Research</div>
                   <div>• Neural Signal Analysis</div>
                 </div>
               </GlassCard>
@@ -389,7 +391,7 @@ export default function Research() {
                 Interested in Research Collaboration?
               </h2>
               <p className="text-lg text-gray-300 mb-8">
-                Let's explore new frontiers in AI and neuroscience together.
+                Let&apos;s explore new frontiers in AI and neuroscience together.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <NeuralButton 

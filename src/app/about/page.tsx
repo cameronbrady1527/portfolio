@@ -182,7 +182,7 @@ export default function About() {
                   </div>
                   <div className="mt-4 p-3 bg-purple-500/10 border border-purple-500/20 rounded-lg">
                     <p className="text-sm text-purple-300">
-                      Currently developing my first research project focused on Parkinson's disease detection using vocal biomarkers, achieving 94.9% precision. Seeking opportunities to collaborate and contribute to the field.
+                      Currently developing my first research project focused on Parkinson&apos;s disease detection using vocal biomarkers, achieving 94.9% precision. Seeking opportunities to collaborate and contribute to the field.
                     </p>
                   </div>
                 </div>
@@ -380,7 +380,7 @@ export default function About() {
                 Ready to Collaborate?
               </h2>
               <p className="text-lg text-gray-300 mb-8">
-                Let's work together on innovative projects that improve lives through AI and medical technology.
+                Let&apos;s work together on innovative projects that improve lives through AI and medical technology.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <NeuralButton 

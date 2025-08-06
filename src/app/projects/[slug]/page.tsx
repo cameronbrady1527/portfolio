@@ -6,7 +6,7 @@ import React from 'react';
 import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
-import { StyledLink } from "@/components/StyledLink";
+
 import { getProjectById } from "@/lib/projects-data";
 import { notFound } from 'next/navigation';
 
@@ -16,10 +16,31 @@ interface ProjectPageProps {
   }>;
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { slug } = await params;
-  const projectId = parseInt(slug);
-  const project = getProjectById(projectId);
+export default function ProjectPage({ params }: ProjectPageProps) {
+  const [project, setProject] = React.useState<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const loadProject = async () => {
+      const { slug } = await params;
+      const projectId = parseInt(slug);
+      const projectData = getProjectById(projectId);
+      setProject(projectData);
+      setLoading(false);
+    };
+    loadProject();
+  }, [params]);
+
+  if (loading) {
+    return (
+      <div className="relative min-h-screen">
+        <Header />
+        <main className="pt-16 flex items-center justify-center">
+          <div className="text-white">Loading...</div>
+        </main>
+      </div>
+    );
+  }
 
   if (!project) {
     notFound();
@@ -32,6 +53,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     'automation': 'pink'
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const categoryColor = categoryColors[project.category as keyof typeof categoryColors] || 'purple';
 
   return (
@@ -61,7 +83,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               
               {/* Technologies */}
               <div className="flex flex-wrap justify-center gap-2 mb-6">
-                {project.technologies.map((tech) => (
+                {project.technologies.map((tech: string) => (
                   <span 
                     key={tech}
                     className="px-3 py-1 bg-gray-700/50 text-gray-300 rounded-full text-sm border border-gray-600/50"
@@ -111,7 +133,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {Object.entries(project.stats).map(([key, value]) => (
                 <GlassCard key={key} className="text-center">
-                  <div className="text-3xl font-bold text-purple-300 mb-2">{value}</div>
+                  <div className="text-3xl font-bold text-purple-300 mb-2">{String(value)}</div>
                   <div className="text-gray-300 capitalize">{key}</div>
                 </GlassCard>
               ))}
@@ -150,7 +172,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <GlassCard>
                   <h3 className="text-2xl font-bold mb-4 text-orange-300">Challenges</h3>
                   <ul className="space-y-3">
-                    {project.content.challenges.map((challenge, index) => (
+                    {project.content.challenges.map((challenge: string, index: number) => (
                       <li key={index} className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-gray-300">{challenge}</span>
@@ -162,7 +184,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <GlassCard>
                   <h3 className="text-2xl font-bold mb-4 text-green-300">Solutions</h3>
                   <ul className="space-y-3">
-                    {project.content.solutions.map((solution, index) => (
+                    {project.content.solutions.map((solution: string, index: number) => (
                       <li key={index} className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-gray-300">{solution}</span>
@@ -177,7 +199,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <GlassCard>
                   <h3 className="text-2xl font-bold mb-4 text-blue-300">Results</h3>
                   <ul className="space-y-3">
-                    {project.content.results.map((result, index) => (
+                    {project.content.results.map((result: string, index: number) => (
                       <li key={index} className="flex items-start space-x-3">
                         <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-gray-300">{result}</span>
@@ -198,7 +220,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 Interested in This Project?
               </h2>
               <p className="text-lg text-gray-300 mb-8">
-                Let's discuss how we can collaborate on similar projects or explore new opportunities.
+                Let&apos;s discuss how we can collaborate on similar projects or explore new opportunities.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <NeuralButton 
