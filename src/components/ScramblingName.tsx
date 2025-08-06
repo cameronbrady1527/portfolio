@@ -36,9 +36,21 @@ export function ScramblingName({
   const [isHovering, setIsHovering] = useState(false);
   const [scrambleState, setScrambleState] = useState<{ [key: number]: number }>({});
   const [hasStartedAnimation, setHasStartedAnimation] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Ensure we're mounted before using client-side APIs
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Letters for scrambling effect (A-Z, a-z, and 0-9)
   const scrambleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+  // Seeded random number generator for consistent but random-looking behavior
+  const seededRandom = (seed: number) => {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  };
 
   // Memoized scrambling function
   const getScrambledText = useCallback(() => {
@@ -48,7 +60,10 @@ export function ScramblingName({
         if (char === " ") return " ";
         const iterations = scrambleState[index] || 0;
         if (iterations < 2) {
-          return scrambleLetters[Math.floor(Math.random() * scrambleLetters.length)];
+          // Use Date.now() only after mounting to avoid hydration issues
+          const randomSeed = isMounted ? Date.now() + index * 1000 + iterations * 100 : index * 1000 + iterations * 100;
+          const letterIndex = Math.floor(seededRandom(randomSeed) * scrambleLetters.length);
+          return scrambleLetters[letterIndex];
         }
         return text[index];
       })
@@ -97,15 +112,15 @@ export function ScramblingName({
         
         iteration++;
         
-        if (iteration >= 2) {
+        if (iteration >= 3) {
           clearInterval(scrambleInterval);
           
-          // Move to next letter after 0.1ms
+          // Move to next letter after a short delay
           setTimeout(() => {
             processLetter(letterIndex + 1);
-          }, 0.1);
+          }, 50);
         }
-      }, 100); // 100ms per iteration
+      }, 80); // Faster iteration for more dynamic effect
     };
 
     // Start with the first letter

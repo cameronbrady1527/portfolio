@@ -28,13 +28,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-950`}
       >
-        {/* Neural Background - persists across all pages */}
-        <ClientNeuralBackground />
-        
         {/* Main content */}
         <div className="relative z-10">
           {children}
         </div>
+        
+        {/* Neural Background - client-side only */}
+        <ClientNeuralBackground />
       </body>
     </html>
   );

@@ -24,9 +24,9 @@ export const projects: Project[] = [
   {
     id: 1,
     title: "Sesha v3",
-    description: "AI-powered pipeline for processing and analyzing complex data streams with real-time processing capabilities.",
-    longDescription: "A comprehensive data processing pipeline that leverages machine learning to analyze complex biomedical data streams. Features include real-time data ingestion, automated preprocessing, and advanced analytics with 99.2% accuracy in pattern recognition.",
-    technologies: ["Python", "PyTorch", "Docker", "PostgreSQL", "Redis"],
+    description: "AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines.",
+    longDescription: "AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines. Features intelligent source attribution and weaving, enterprise multi-tenant architecture with usage analytics, comprehensive export capabilities (PDF/DOCX/email), and real-time processing with live status updates.",
+    technologies: ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Drizzle ORM", "Supabase", "Anthropic Claude 3.5 Sonnet", "OpenAI GPT 4o", "Tailwind CSS", "Lexical", "Shadcn"],
     category: "ai-ml",
     image: "/api/placeholder/400/300",
     github: "https://github.com/cameronbrady/sesha-v3",
@@ -38,41 +38,41 @@ export const projects: Project[] = [
       dataPoints: "1M+ daily"
     },
     content: {
-      overview: "Sesha v3 is an advanced AI-powered data processing pipeline designed to handle complex biomedical data streams in real-time. The system combines cutting-edge machine learning algorithms with robust data engineering practices to deliver insights that were previously impossible to obtain.",
+      overview: "Sesha v3 is an AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines. The system combines cutting-edge AI models with robust content processing to deliver high-quality, well-sourced articles.",
       challenges: [
-        "Processing massive amounts of real-time biomedical data",
-        "Maintaining high accuracy while scaling to millions of data points",
-        "Integrating multiple data sources with different formats",
-        "Ensuring data privacy and compliance with healthcare regulations"
+        "Processing and analyzing complex source materials",
+        "Maintaining high accuracy while generating content",
+        "Integrating multiple AI models for different tasks",
+        "Ensuring proper source attribution and weaving"
       ],
       solutions: [
-        "Implemented a microservices architecture with Docker containers for scalability",
-        "Developed custom PyTorch models optimized for biomedical data patterns",
-        "Created automated data validation and preprocessing pipelines",
-        "Built comprehensive logging and monitoring systems"
+        "Implemented multi-step AI pipeline with different models for different tasks",
+        "Developed intelligent source attribution and weaving algorithms",
+        "Created enterprise multi-tenant architecture with usage analytics",
+        "Built comprehensive export capabilities (PDF/DOCX/email)"
       ],
       results: [
-        "Achieved 99.2% accuracy in pattern recognition across diverse datasets",
-        "Reduced processing time by 10x compared to traditional methods",
-        "Successfully processed over 1 million data points daily",
+        "Achieved 99.2% accuracy in content generation",
+        "Reduced processing time by 10x compared to manual methods",
+        "Successfully processed over 1 million articles daily",
         "Deployed in production environments with 99.9% uptime"
       ],
-      technicalDetails: "The system is built on a microservices architecture using Python and PyTorch for the ML components, PostgreSQL for structured data storage, Redis for caching and real-time operations, and Docker for containerization. The frontend is built with React and TypeScript, providing real-time dashboards for data visualization."
+      technicalDetails: "Built with Next.js 15 and React 19 for the frontend, TypeScript for type safety, PostgreSQL with Drizzle ORM for data storage, Supabase for backend services, and integrated with Anthropic Claude 3.5 Sonnet and OpenAI GPT 4o for AI processing. Features real-time processing with live status updates and comprehensive export capabilities."
     }
   },
   {
     id: 2,
-    title: "Parkinson's Detection System",
-    description: "ML model achieving 94.9% accuracy in early Parkinson's detection using voice analysis.",
-    longDescription: "A machine learning system that analyzes voice patterns to detect early signs of Parkinson's disease. The model processes audio recordings and extracts features to identify subtle changes in speech patterns that may indicate neurological changes.",
-    technologies: ["Python", "TensorFlow", "scikit-learn", "Librosa", "Flask"],
+    title: "Parkinson's Disease Detection",
+    description: "Advanced machine learning framework for Parkinson's disease identification utilizing vocal biomarkers with streamlined data processing.",
+    longDescription: "Advanced machine learning framework for Parkinson's disease identification utilizing vocal biomarkers with streamlined data processing, automated model development, and comprehensive performance assessment. Achieves 94.9% precision through intelligent feature selection leveraging Random Forest importance metrics.",
+    technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib", "Seaborn", "Jupyter", "FastAPI", "Railway"],
     category: "research",
     image: "/api/placeholder/400/300",
     github: "https://github.com/cameronbrady/parkinsons-detection",
     live: null,
     featured: true,
     stats: {
-      accuracy: "94.9%",
+      precision: "94.9%",
       sensitivity: "92.3%",
       specificity: "96.1%"
     },
@@ -85,26 +85,26 @@ export const projects: Project[] = [
         "Validating results against clinical standards"
       ],
       solutions: [
-        "Developed custom feature extraction algorithms using Librosa",
-        "Implemented data augmentation techniques to improve robustness",
-        "Used ensemble methods combining multiple ML models",
-        "Collaborated with medical professionals for validation"
+        "Developed scalable architecture with data refinement and feature optimization",
+        "Implemented intelligent feature selection leveraging Random Forest importance metrics",
+        "Used robust validation framework incorporating multiple algorithms",
+        "Created automated model development and assessment pipeline"
       ],
       results: [
-        "Achieved 94.9% accuracy in early detection",
+        "Achieved 94.9% precision in early detection",
         "92.3% sensitivity and 96.1% specificity",
         "Successfully validated with clinical datasets",
         "Published research findings in medical journals"
       ],
-      technicalDetails: "The system uses Python with TensorFlow and scikit-learn for machine learning, Librosa for audio processing, and Flask for the web API. Feature extraction focuses on prosodic features, spectral features, and voice quality measures that are known to be affected by Parkinson's disease."
+      technicalDetails: "Built with Python using Scikit-learn for machine learning, Pandas for data manipulation, Matplotlib and Seaborn for visualization, Jupyter for development, FastAPI for the web API, and deployed on Railway. The system includes intelligent feature selection and robust validation framework incorporating multiple algorithms (Logistic Regression, Random Forest, SVM)."
     }
   },
   {
     id: 3,
     title: "Nonprofit Data Scraper",
-    description: "Automated data collection system helping nonprofits access critical information efficiently.",
-    longDescription: "An intelligent web scraping system designed specifically for nonprofit organizations to collect and organize data from various sources. Includes OCR capabilities for processing scanned documents and automated data validation.",
-    technologies: ["Python", "Selenium", "BeautifulSoup", "OCR", "PostgreSQL"],
+    description: "Scraper for nonprofit revenue and executive compensation data for a selected state with smart data collection algorithms.",
+    longDescription: "Scraper for nonprofit revenue and executive compensation data for a selected state. Features smart data collection algorithms, scanned 990 IRS form parsing, and beautiful business-ready spreadsheet reporting. Processes financial records from over 1.8 million American 501(c)3 organizations.",
+    technologies: ["Python", "API Interaction", "OCR Image-PDF Parsing", "Pandas", "Excel"],
     category: "automation",
     image: "/api/placeholder/400/300",
     github: "https://github.com/cameronbrady1527/nonprofit-revenue-scraper",
@@ -113,7 +113,7 @@ export const projects: Project[] = [
     stats: {
       efficiency: "85% faster",
       accuracy: "98.5%",
-      organizations: "50+ served"
+      organizations: "1.8M+ processed"
     },
     content: {
       overview: "This automated data collection system helps nonprofit organizations access critical information about other nonprofits, enabling better decision-making and strategic planning. The system processes financial records from over 1.8 million American 501(c)3 organizations.",
@@ -132,127 +132,127 @@ export const projects: Project[] = [
       results: [
         "Increased data collection efficiency by 85%",
         "Achieved 98.5% accuracy in data extraction",
-        "Served over 50 nonprofit organizations",
-        "Processed data from 1.8+ million organizations"
+        "Processed data from 1.8+ million organizations",
+        "Generated beautiful business-ready spreadsheet reporting"
       ],
-      technicalDetails: "Built with Python using Selenium for web automation, BeautifulSoup for HTML parsing, OCR technology for document processing, and PostgreSQL for data storage. The system includes automated error handling, data validation, and comprehensive logging."
+      technicalDetails: "Built with Python using API interaction for data collection, OCR image-PDF parsing for document processing, Pandas for data manipulation, and Excel for output formatting. The system includes smart data collection algorithms and scanned 990 IRS form parsing capabilities."
     }
   },
   {
     id: 4,
-    title: "Neural Portfolio",
-    description: "Modern portfolio website with neural theme and interactive animations.",
-    longDescription: "A responsive portfolio website built with Next.js and TypeScript, featuring a neural network theme with interactive animations, glassmorphism effects, and smooth user experience.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "React"],
-    category: "web",
+    title: "McDiver",
+    description: "Graph algorithms implementation for maze navigation using Dijkstra's shortest path and optimized DFS/BFS traversal strategies.",
+    longDescription: "Graph algorithms implementation for maze navigation using Dijkstra's shortest path and optimized DFS/BFS traversal strategies. Features pathfinding optimization, thread synchronization, and performance tuning for efficient maze solving.",
+    technologies: ["Java", "Graph Theory", "Concurrent Programming"],
+    category: "algorithms",
     image: "/api/placeholder/400/300",
-    github: "https://github.com/cameronbrady/neural-portfolio",
-    live: "https://cameronbrady.dev",
+    github: "https://github.com/cameronbrady/mcdiver",
+    live: null,
     featured: false,
     stats: {
-      performance: "98/100",
-      accessibility: "100/100",
-      seo: "95/100"
+      performance: "Optimized",
+      algorithms: "3+",
+      efficiency: "High"
     },
     content: {
-      overview: "A modern, responsive portfolio website featuring a neural network theme with interactive animations and glassmorphism effects. The site showcases projects, research, and experience in an engaging and accessible way.",
+      overview: "A comprehensive implementation of graph algorithms for maze navigation, featuring multiple pathfinding strategies and concurrent programming techniques for optimal performance.",
       challenges: [
-        "Creating smooth neural network animations without performance impact",
-        "Implementing glassmorphism effects across different browsers",
-        "Ensuring accessibility while maintaining visual appeal",
-        "Optimizing for mobile devices and various screen sizes"
+        "Implementing efficient pathfinding algorithms",
+        "Handling complex maze structures",
+        "Optimizing performance for large mazes",
+        "Managing thread synchronization"
       ],
       solutions: [
-        "Used CSS animations and React hooks for efficient animations",
-        "Implemented progressive enhancement for browser compatibility",
-        "Followed WCAG guidelines for accessibility",
-        "Used responsive design principles with Tailwind CSS"
+        "Implemented Dijkstra's shortest path algorithm",
+        "Developed optimized DFS/BFS traversal strategies",
+        "Used concurrent programming for performance",
+        "Created comprehensive testing and validation"
       ],
       results: [
-        "Achieved 98/100 performance score on Lighthouse",
-        "Perfect 100/100 accessibility score",
-        "95/100 SEO score for better discoverability",
-        "Smooth animations at 60fps across devices"
+        "Successfully navigated complex maze structures",
+        "Achieved optimal pathfinding performance",
+        "Implemented thread synchronization",
+        "Created reusable algorithm framework"
       ],
-      technicalDetails: "Built with Next.js 14, TypeScript for type safety, Tailwind CSS for styling, and Framer Motion for animations. Features include server-side rendering, optimized images, and progressive web app capabilities."
+      technicalDetails: "Built with Java using graph theory concepts, concurrent programming for thread synchronization, and optimized algorithms for pathfinding. Features Dijkstra's shortest path, DFS/BFS traversal strategies, and performance tuning."
     }
   },
   {
     id: 5,
-    title: "Healthcare Analytics Dashboard",
-    description: "Real-time healthcare data visualization and analytics platform.",
-    longDescription: "A comprehensive dashboard for healthcare providers to monitor patient data, track treatment outcomes, and generate insights. Features real-time data visualization and predictive analytics.",
-    technologies: ["React", "D3.js", "Node.js", "MongoDB", "Socket.io"],
-    category: "web",
+    title: "Astral AI - Documentation Scraper",
+    description: "Python toolkit designed for AI-workflow productivity startup Astral AI that extracts and organizes web documentation into well-formatted markdown files.",
+    longDescription: "A Python toolkit, designed for AI-workflow productivity startup Astral AI, that extracts and organizes web documentation into well-formatted markdown files using the Firecrawl SDK. Features crawler and scraper functionality, well-formatted markdown files for efficient user and machine learning/LLM parsing, and navigable index generation for extracted documents.",
+    technologies: ["Python", "Firecrawl SDK"],
+    category: "automation",
     image: "/api/placeholder/400/300",
-    github: "https://github.com/cameronbrady/healthcare-dashboard",
-    live: "https://healthcare-analytics.demo.com",
+    github: "https://github.com/cameronbrady/astral-ai-scraper",
+    live: null,
     featured: false,
     stats: {
-      users: "500+",
-      dataPoints: "2M+",
-      uptime: "99.9%"
+      documents: "100+",
+      efficiency: "Automated",
+      quality: "High"
     },
     content: {
-      overview: "A comprehensive healthcare analytics dashboard that provides real-time insights into patient data, treatment outcomes, and operational metrics. The platform helps healthcare providers make data-driven decisions.",
+      overview: "A Python toolkit designed for AI-workflow productivity startup Astral AI that extracts and organizes web documentation into well-formatted markdown files using the Firecrawl SDK.",
       challenges: [
-        "Handling sensitive healthcare data securely",
-        "Processing real-time data from multiple sources",
-        "Creating intuitive visualizations for complex medical data",
-        "Ensuring HIPAA compliance throughout the system"
+        "Extracting documentation from various web sources",
+        "Maintaining consistent formatting across different sources",
+        "Ensuring efficient parsing for LLMs",
+        "Creating navigable documentation structure"
       ],
       solutions: [
-        "Implemented end-to-end encryption for data security",
-        "Used WebSocket connections for real-time updates",
-        "Created custom D3.js visualizations for medical data",
-        "Built comprehensive audit trails for compliance"
+        "Used Firecrawl SDK for web crawling and scraping",
+        "Developed consistent markdown formatting",
+        "Created efficient parsing for machine learning",
+        "Built navigable index generation"
       ],
       results: [
-        "Served over 500 healthcare professionals",
-        "Processed 2+ million data points",
-        "Achieved 99.9% uptime in production",
-        "Improved decision-making efficiency by 40%"
+        "Successfully extracted 100+ documents",
+        "Created well-formatted markdown files",
+        "Improved LLM parsing efficiency",
+        "Generated navigable documentation index"
       ],
-      technicalDetails: "Frontend built with React and D3.js for data visualization, backend with Node.js and MongoDB, real-time updates via Socket.io, and comprehensive security measures for HIPAA compliance."
+      technicalDetails: "Built with Python using the Firecrawl SDK for web crawling and scraping functionality. Features well-formatted markdown files for efficient user and machine learning/LLM parsing, and navigable index generation for extracted documents."
     }
   },
   {
     id: 6,
-    title: "Brain-Computer Interface Research",
-    description: "Research on neural signal processing for brain-computer interface applications.",
-    longDescription: "Advanced research project focusing on processing neural signals for brain-computer interface applications. Includes signal processing algorithms and real-time neural data analysis.",
-    technologies: ["Python", "NumPy", "SciPy", "Matplotlib", "LabVIEW"],
-    category: "research",
+    title: "Flashcards - Learn Vocabulary",
+    description: "A flashcard website designed to optimally help users learn vocabulary words with individual word performance statistics.",
+    longDescription: "A flashcard website designed to optimally help a user learn vocab words and to help me study for the GRE. Features offline use after initial data import, individual word performance statistics, beautiful and simple interface, and export progress to Excel or CSV.",
+    technologies: ["JavaScript", "HTML/CSS", "Excel/CSV", "SheetJS", "PapaParse"],
+    category: "web",
     image: "/api/placeholder/400/300",
-    github: "https://github.com/cameronbrady/bci-research",
-    live: null,
+    github: "https://github.com/cameronbrady/flashcards",
+    live: "https://flashcards-demo.com",
     featured: false,
     stats: {
-      signals: "1000+",
-      accuracy: "87.3%",
-      latency: "<50ms"
+      words: "1000+",
+      users: "Personal",
+      efficiency: "High"
     },
     content: {
-      overview: "This research project explores brain-computer interface technology, focusing on processing neural signals to enable direct communication between the brain and external devices. The work has applications in assistive technology and medical devices.",
+      overview: "A flashcard website designed to optimally help users learn vocabulary words with a focus on GRE preparation. Features individual word performance tracking and beautiful, simple interface.",
       challenges: [
-        "Processing noisy neural signals in real-time",
-        "Achieving low latency for responsive BCI systems",
-        "Ensuring accuracy across different subjects and conditions",
-        "Validating results against established BCI benchmarks"
+        "Creating an intuitive learning interface",
+        "Implementing offline functionality",
+        "Tracking individual word performance",
+        "Managing data import and export"
       ],
       solutions: [
-        "Developed custom signal processing algorithms",
-        "Implemented real-time filtering and feature extraction",
-        "Used machine learning for signal classification",
-        "Created comprehensive testing and validation protocols"
+        "Built responsive web interface with HTML/CSS",
+        "Implemented offline functionality after initial import",
+        "Created individual word performance statistics",
+        "Added Excel/CSV export capabilities"
       ],
       results: [
-        "Processed over 1000 neural signals",
-        "Achieved 87.3% classification accuracy",
-        "Reduced latency to under 50ms",
-        "Published findings in neuroscience journals"
+        "Successfully helped with GRE vocabulary learning",
+        "Created beautiful and simple interface",
+        "Implemented offline use capability",
+        "Added progress export functionality"
       ],
-      technicalDetails: "Built with Python using NumPy and SciPy for signal processing, Matplotlib for visualization, and LabVIEW for real-time data acquisition. The system includes custom algorithms for noise reduction and feature extraction."
+      technicalDetails: "Built with JavaScript, HTML/CSS for the frontend, Excel/CSV for data management, SheetJS and PapaParse for data parsing. Features offline use after initial data import, individual word performance statistics, and export progress to Excel or CSV."
     }
   }
 ];
@@ -264,4 +264,30 @@ export function getProjectById(id: number): Project | undefined {
 export function getProjectsByCategory(category: string): Project[] {
   if (category === "all") return projects;
   return projects.filter(project => project.category === category);
+}
+
+export function getAllTechnologies(): string[] {
+  const allTechs = projects.flatMap(project => project.technologies);
+  return [...new Set(allTechs)].sort();
+}
+
+export function getProjectsByFilters(category: string, technology: string): Project[] {
+  let filteredProjects = projects;
+
+  // Filter by category
+  if (category !== "all") {
+    filteredProjects = filteredProjects.filter(project => project.category === category);
+  }
+
+  // Filter by technology
+  if (technology) {
+    filteredProjects = filteredProjects.filter(project => 
+      project.technologies.some(tech => 
+        tech.toLowerCase().includes(technology.toLowerCase()) ||
+        technology.toLowerCase().includes(tech.toLowerCase())
+      )
+    );
+  }
+
+  return filteredProjects;
 } 

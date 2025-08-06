@@ -33,10 +33,11 @@ export function generateNetwork(
     const baseX = (col + 0.5) / COLS;
     const baseY = (row + 0.5) / actualRows;
     
-    // Add controlled jitter for natural randomness
+    // Add controlled jitter for natural randomness using deterministic seed
     const jitterRange = 0.15;
-    const jitterX = (Math.random() - 0.5) * jitterRange;
-    const jitterY = (Math.random() - 0.5) * jitterRange;
+    const seed = (i * 9301 + 49297) % 233280; // Simple deterministic seed
+    const jitterX = ((seed / 233280) - 0.5) * jitterRange;
+    const jitterY = (((seed * 9301 + 49297) % 233280) / 233280 - 0.5) * jitterRange;
     
     // Apply jitter with some constraints to prevent clustering
     let finalX = baseX + jitterX;
@@ -70,14 +71,24 @@ export function generateNetwork(
     const targets = new Set<number>();
     const minConnections = performanceMode === 'minimal' ? 1 : 2;
     
+    // Use deterministic seed for edge generation
+    let seed = (i * 9301 + 49297) % 233280;
+    
     while (targets.size < minConnections) {
-      const t = Math.floor(Math.random() * TOTAL_NODES);
+      seed = (seed * 9301 + 49297) % 233280;
+      const t = Math.floor((seed / 233280) * TOTAL_NODES);
       if (t !== i) targets.add(t);
     }
     
-    while (targets.size < maxConnections && Math.random() > 0.4) {
-      const t = Math.floor(Math.random() * TOTAL_NODES);
-      if (t !== i) targets.add(t);
+    while (targets.size < maxConnections) {
+      seed = (seed * 9301 + 49297) % 233280;
+      const randomValue = seed / 233280;
+      if (randomValue > 0.4) {
+        const t = Math.floor(randomValue * TOTAL_NODES);
+        if (t !== i) targets.add(t);
+      } else {
+        break;
+      }
     }
     
     for (const t of targets) {

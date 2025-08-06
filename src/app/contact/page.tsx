@@ -15,6 +15,7 @@ import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
 import { useState, useEffect } from "react";
+import { Github, Linkedin } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -63,19 +64,19 @@ export default function Contact() {
 
   const contactInfo = [
     {
-      icon: "📧",
+      icon: "Email",
       title: "Email",
-      value: "cameronbrady1527@gmail.com",
-      link: "mailto:cameronbrady1527@gmail.com"
+      value: "cab495@cornell.edu",
+      link: "mailto:cab495@cornell.edu"
     },
     {
-      icon: "📍",
+      icon: "Location",
       title: "Location",
       value: "Hopewell Junction, NY / Remote",
       link: null
     },
     {
-      icon: "⏰",
+      icon: "Response",
       title: "Response Time",
       value: "Within 24 hours",
       link: null
@@ -86,13 +87,13 @@ export default function Contact() {
     {
       name: "GitHub",
       url: "https://github.com/cameronbrady1527",
-      icon: "🐙",
+      icon: "GitHub",
       color: "hover:text-gray-300"
     },
     {
       name: "LinkedIn",
-      url: "https://www.linkedin.com/in/cameron-brady-5770431b5",
-      icon: "💼",
+      url: "https://www.linkedin.com/in/cameron-brady-5770431b5/",
+      icon: "LinkedIn",
       color: "hover:text-blue-400"
     },
   ];
@@ -166,7 +167,7 @@ export default function Contact() {
                           onChange={handleInputChange}
                           required
                           className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                          placeholder="Your name"
+                          placeholder="Cameron Brady"
                         />
                       </div>
                       <div>
@@ -181,7 +182,7 @@ export default function Contact() {
                           onChange={handleInputChange}
                           required
                           className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                          placeholder="your.email@example.com"
+                          placeholder="cab495@cornell.edu"
                         />
                       </div>
                     </div>
@@ -257,9 +258,9 @@ export default function Contact() {
                 <div className="space-y-6 mb-8">
                   {contactInfo.map((info, index) => (
                     <GlassCard key={index} className="flex items-center space-x-4">
-                      <div className="text-2xl">{info.icon}</div>
+                      <div className="text-2xl font-bold text-purple-300">{info.icon}</div>
                       <div className="flex-1">
-                        <h3 className="font-semibold text-white">{info.title}</h3>
+                        {/* <h3 className="font-semibold text-white">{info.title}</h3> */}
                         {info.link ? (
                           <a 
                             href={info.link}
@@ -287,7 +288,11 @@ export default function Contact() {
                         rel="noopener noreferrer"
                         className="flex items-center space-x-3 p-4 bg-gray-800/50 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700/50 transition-all group"
                       >
-                        <span className="text-xl">{social.icon}</span>
+                        {social.name === "GitHub" ? (
+                          <Github className="w-6 h-6 text-gray-300 group-hover:text-white transition-colors" />
+                        ) : social.name === "LinkedIn" ? (
+                          <Linkedin className="w-6 h-6 text-gray-300 group-hover:text-blue-400 transition-colors" />
+                        ) : null}
                         <span className={`font-medium ${social.color}`}>{social.name}</span>
                       </a>
                     ))}
@@ -304,17 +309,17 @@ export default function Contact() {
             <GlassCard>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                 <div>
-                  <div className="text-4xl mb-4">⚡</div>
+                  <div className="text-4xl mb-4 font-bold text-purple-300">Quick</div>
                   <h3 className="text-xl font-bold text-white mb-2">Quick Response</h3>
                   <p className="text-gray-300">I typically respond within 24 hours</p>
                 </div>
                 <div>
-                  <div className="text-4xl mb-4">🌍</div>
+                  <div className="text-4xl mb-4 font-bold text-blue-300">Remote</div>
                   <h3 className="text-xl font-bold text-white mb-2">Remote Available</h3>
                   <p className="text-gray-300">Open to remote collaboration worldwide</p>
                 </div>
                 <div>
-                  <div className="text-4xl mb-4">🤝</div>
+                  <div className="text-4xl mb-4 font-bold text-green-300">Open</div>
                   <h3 className="text-xl font-bold text-white mb-2">Open to Discuss</h3>
                   <p className="text-gray-300">Always interested in new opportunities</p>
                 </div>
@@ -356,8 +361,8 @@ export default function Contact() {
                   What's your typical project timeline?
                 </h3>
                 <p className="text-gray-300">
-                  Project timelines vary based on scope and complexity. Small projects might take 2-4 weeks, 
-                  while larger applications can span 2-6 months. I'll provide a detailed timeline during our initial discussion.
+                  Project timelines vary based on scope and complexity. Small projects might take 1-2 weeks, 
+                  while larger applications can span 1-4 months. I'll provide a detailed timeline during our initial discussion.
                 </p>
               </GlassCard>
 
@@ -368,6 +373,50 @@ export default function Contact() {
                 <p className="text-gray-300">
                   Absolutely! I enjoy speaking about AI in healthcare, machine learning applications, 
                   and the intersection of neuroscience and computer science. Feel free to reach out for conference or event opportunities.
+                </p>
+              </GlassCard>
+
+              <GlassCard>
+                <h3 className="text-lg font-bold text-purple-300 mb-2">
+                  What's your background in computational neuroscience?
+                </h3>
+                <p className="text-gray-300">
+                  I'm passionate about leveraging machine learning and AI to advance computational neuroscience. 
+                  My current research focuses on Parkinson's disease detection through vocal biomarkers, achieving 94.9% precision. 
+                  I'm building the foundation for my future career as a neurosurgeon who bridges AI research with clinical practice.
+                </p>
+              </GlassCard>
+
+              <GlassCard>
+                <h3 className="text-lg font-bold text-purple-300 mb-2">
+                  Do you work on healthcare technology projects?
+                </h3>
+                <p className="text-gray-300">
+                  Yes! Healthcare technology is my primary focus. For example, I've developed early detection systems for neurological disorders, 
+                  including my Parkinson's disease detection project using vocal biomarkers. I'm particularly interested in projects 
+                  that can improve patient outcomes and advance medical diagnostics through AI and machine learning.
+                </p>
+              </GlassCard>
+
+              <GlassCard>
+                <h3 className="text-lg font-bold text-purple-300 mb-2">
+                  Are you available for nonprofit consulting?
+                </h3>
+                <p className="text-gray-300">
+                  Absolutely! I have experience as a nonprofit consultant, having worked with the Community Mindfulness Project 
+                  where I developed data-driven tools for nonprofit analysis. I can help with strategic program development, 
+                  board governance, and technical solutions for nonprofit organizations.
+                </p>
+              </GlassCard>
+
+              <GlassCard>
+                <h3 className="text-lg font-bold text-purple-300 mb-2">
+                  What's your experience with AI and machine learning?
+                </h3>
+                <p className="text-gray-300">
+                  I work extensively with AI/ML technologies including Python, Scikit-learn, PyTorch, and various data science tools. 
+                  My projects include AI-powered content generation platforms, healthcare diagnostics, and research applications. 
+                  I'm currently working at Astral AI, developing AI-powered web applications and data scraping automations.
                 </p>
               </GlassCard>
             </div>

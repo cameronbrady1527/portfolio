@@ -41,18 +41,16 @@ export default function Home() {
             <GlassCard className="mb-8">
               <h1 className="text-4xl sm:text-6xl font-extrabold mb-4 tracking-tight drop-shadow-lg">
                 <TypewriterText 
-                  text="Where Neuroscience Meets Code" 
+                  text="Hi there! I'm Cameron Brady" 
                   speed={80}
                   className="text-white"
                 />
               </h1>
               <p className="text-xl sm:text-2xl text-purple-300 font-medium mb-6">
-                Building AI systems to decode and protect the brain
+              Machine Learning Researcher | Computational Neuroscience Enthusiast | Future Neurosurgeon | Full Stack Engineer
               </p>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                Interdisciplinary CS graduate from Cornell, developing ML solutions 
-                for neurological disorders and creating full-stack applications 
-                that make real-world impact.
+                Passionate about leveraging machine learning and AI to advance computational neuroscience and develop early detection systems for neurological disorders. Currently working on Parkinson's disease detection through vocal biomarkers while building the foundation for my medical career. My ultimate goal is to become a neurosurgeon who bridges the gap between cutting-edge AI research and clinical practice.
               </p>
             </GlassCard>
 
@@ -68,9 +66,9 @@ export default function Home() {
               <NeuralButton 
                 variant="secondary" 
                 size="lg"
-                onClick={() => window.location.href = '/research'}
+                onClick={() => window.location.href = '/about'}
               >
-                See Research
+                About Me
               </NeuralButton>
             </div>
 
@@ -106,12 +104,12 @@ export default function Home() {
               <GlassCard interactive className="text-center">
                 <h3 className="text-xl font-bold mb-3 text-purple-300">Sesha v3</h3>
                 <p className="text-gray-300 mb-4">
-                  Generative AI pipeline and web application for article creation and source aggregation
+                  AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center mb-4">
-                  <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">TypeScript</span>
-                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">Full-Stack</span>
-                  <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">AI</span>
+                  <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">Next.js 15</span>
+                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">React 19</span>
+                  <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">TypeScript</span>
                 </div>
                 <NeuralButton variant="accent" size="sm">
                   View Project
@@ -120,14 +118,14 @@ export default function Home() {
 
               {/* Project Card 2 */}
               <GlassCard interactive className="text-center">
-                <h3 className="text-xl font-bold mb-3 text-purple-300">Parkinson's Detection</h3>
+                <h3 className="text-xl font-bold mb-3 text-purple-300">Parkinson's Disease Detection</h3>
                 <p className="text-gray-300 mb-4">
-                  ML model achieving 94.9% accuracy in early Parkinson's detection using vocal measurements
+                  Advanced machine learning framework for Parkinson's disease identification utilizing vocal biomarkers with streamlined data processing
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center mb-4">
-                  <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">Healthcare</span>
-                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">ML</span>
-                  <span className="px-2 py-1 bg-orange-500/20 text-orange-300 rounded text-sm">Research</span>
+                  <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">Python</span>
+                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">Scikit-learn</span>
+                  <span className="px-2 py-1 bg-orange-500/20 text-orange-300 rounded text-sm">94.9% Precision</span>
                 </div>
                 <NeuralButton variant="accent" size="sm">
                   View Project
@@ -136,14 +134,14 @@ export default function Home() {
 
               {/* Project Card 3 */}
               <GlassCard interactive className="text-center">
-                <h3 className="text-xl font-bold mb-3 text-purple-300">Nonprofit Scraper</h3>
+                <h3 className="text-xl font-bold mb-3 text-purple-300">Nonprofit Data Scraper</h3>
                 <p className="text-gray-300 mb-4">
-                  Automated OCR and data collection system helping nonprofits access critical, comparative information
+                  Scraper for nonprofit revenue and executive compensation data for a selected state with smart data collection algorithms
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center mb-4">
-                  <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">Web Scraping</span>
+                  <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">Python</span>
                   <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">OCR</span>
-                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">Python</span>
+                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">Pandas</span>
                 </div>
                 <NeuralButton variant="accent" size="sm">
                   View Project
@@ -165,9 +163,9 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                   <div className="relative group">
                     <div className="text-3xl font-bold text-orange-400 mb-2 cursor-pointer group-hover:text-orange-300 group-hover:drop-shadow-[0_0_8px_rgba(251,146,60,0.5)] transition-all duration-300">
-                      8+
+                      5+
                     </div>
-                    <div className="text-gray-300">Technologies Mastered</div>
+                    <div className="text-gray-300">Programming Languages</div>
                     <div className="text-xs text-gray-500 mt-1">↗</div>
                     
                     {/* Code editor popup */}
@@ -184,10 +182,10 @@ export default function Home() {
                         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`const technologies = [
   "Python",        // ML/AI & Backend
-  "React/Next.js", // Frontend & Full-Stack
+  "JavaScript",    // Frontend & Full-Stack
   "TypeScript",    // Type Safety & DX
-  "PostgreSQL",    // Database & Data
-  "PyTorch",       // Deep Learning
+  "Java",          // Backend & Algorithms
+  "HTML/CSS",      // Web Development
 ];`}
                         </pre>
                       </div>
@@ -195,7 +193,7 @@ export default function Home() {
                   </div>
                   <div className="relative group">
                     <div className="text-3xl font-bold text-purple-400 mb-2 cursor-pointer group-hover:text-purple-300 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.5)] transition-all duration-300">
-                      6+
+                      4+
                     </div>
                     <div className="text-gray-300">Years Experience</div>
                     <div className="text-xs text-gray-500 mt-1">↗</div>
@@ -214,19 +212,19 @@ export default function Home() {
                         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`## Professional Journey
 
-• Full-Stack Development: 5+ years
-• Research & Academia: 4+ years
-• Machine Learning: 3+ years  
-• Teaching & Mentoring: 3+ year
+• Full-Stack Development: 3+ years
+• Research & Academia: 2+ years
+• Machine Learning: 2+ years  
+• Teaching & Mentoring: 2+ years
 
-Total: 6+ years of technical growth`}
+Total: 4+ years of technical growth`}
                         </pre>
                       </div>
                     </div>
                   </div>
                   <div className="relative group">
                     <div className="text-3xl font-bold text-green-400 mb-2 cursor-pointer group-hover:text-green-300 group-hover:drop-shadow-[0_0_8px_rgba(74,222,128,0.5)] transition-all duration-300">
-                      15+
+                      6+
                     </div>
                     <div className="text-gray-300">Projects Completed</div>
                     <div className="text-xs text-gray-500 mt-1">↗</div>
@@ -245,14 +243,14 @@ Total: 6+ years of technical growth`}
                         <pre className="text-xs text-slate-300 font-mono leading-relaxed">
 {`## Project Categories
 
-• Research & Academic: 10 projects
-• AI/ML Applications: 8 projects
-• Data Analysis Tools: 5 projects
-• Full-Stack Web Apps: 4 projects
-• Automation Scripts: 2 projects
+• AI/ML Applications: 3 projects
+• Full-Stack Web Apps: 2 projects
+• Data Analysis Tools: 1 project
+• Automation Scripts: 1 project
 
 Featured: Sesha v3, Parkinson's Detection,
-         Nonprofit Scraper`}
+         Nonprofit Scraper, McDiver, 
+         Astral AI, Flashcards`}
                         </pre>
                       </div>
                     </div>

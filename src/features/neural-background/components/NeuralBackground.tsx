@@ -16,6 +16,19 @@ export function NeuralBackground() {
   const { performanceMode, dimensions, network, svgRef } = useResponsiveNetwork();
   const { signals, ripplingNodes, addSignal, setNodeCount } = useNetworkAnimation(performanceMode);
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
+  const [autoFireCounter, setAutoFireCounter] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Ensure we're mounted before using client-side APIs
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  
+  // Seeded random number generator for consistent but random-looking behavior
+  const seededRandom = (seed: number) => {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  };
 
   // Set node count for auto-animation
   useEffect(() => {
@@ -31,34 +44,59 @@ export function NeuralBackground() {
 
   // Initial burst of signals (very minimal now)
   useEffect(() => {
+    if (!isMounted) return;
+    
     const initialSignals = performanceMode === 'minimal' ? 0 : performanceMode === 'reduced' ? 0 : 1;
     
     for (let i = 0; i < initialSignals; i++) {
       setTimeout(() => {
-        const randomNode = Math.floor(Math.random() * network.nodes.length);
-        handleNodeClick(randomNode);
+        // Use Date.now() only after mounting to avoid hydration issues
+        const randomSeed = Date.now() + i * 1000;
+        const nodeIndex = Math.floor(seededRandom(randomSeed) * network.nodes.length);
+        handleNodeClick(nodeIndex);
       }, i * 2000);
     }
-  }, [performanceMode, network.nodes.length, handleNodeClick]);
+  }, [performanceMode, network.nodes.length, handleNodeClick, isMounted]);
 
   // Auto-firing interval
   useEffect(() => {
+    if (!isMounted) return;
+    
     const constants = getConstants(performanceMode);
     
     const interval = setInterval(() => {
       const signalsToCreate = Math.min(constants.MAX_AUTO_SIGNALS, constants.MAX_SIGNALS - signals.length);
       for (let i = 0; i < signalsToCreate; i++) {
         setTimeout(() => {
-          const randomNode = Math.floor(Math.random() * network.nodes.length);
-          handleNodeClick(randomNode);
+          // Use Date.now() only after mounting to avoid hydration issues
+          const randomSeed = Date.now() + autoFireCounter + i * 1000;
+          const nodeIndex = Math.floor(seededRandom(randomSeed) * network.nodes.length);
+          handleNodeClick(nodeIndex);
         }, i * 600);
       }
+      setAutoFireCounter(prev => prev + signalsToCreate);
     }, constants.AUTO_FIRE_INTERVAL);
     
     return () => clearInterval(interval);
-  }, [network, signals.length, performanceMode, handleNodeClick]);
+  }, [network, signals.length, performanceMode, handleNodeClick, autoFireCounter, isMounted]);
 
   const constants = getConstants(performanceMode);
+
+  // Don't render if we don't have a network yet
+  if (network.nodes.length === 0 || dimensions.width === 0 || dimensions.height === 0) {
+    return (
+      <div className="fixed inset-0 w-full h-full z-0 opacity-80 blur-[0.1px]">
+        <svg
+          ref={svgRef}
+          className="w-full h-full select-none"
+          aria-hidden="true"
+          viewBox="0 0 1440 900"
+          style={{ height: "100vh" }}
+          onMouseDown={(e) => e.preventDefault()}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 w-full h-full z-0 opacity-80 blur-[0.1px]">

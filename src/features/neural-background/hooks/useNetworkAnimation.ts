@@ -10,13 +10,24 @@ export function useNetworkAnimation(performanceMode: PerformanceMode) {
   const [ripplingNodes, setRipplingNodes] = useState<Set<number>>(new Set());
   const animationRef = useRef<number | undefined>(undefined);
   const nodeCountRef = useRef(0);
+  const autoAnimateCounterRef = useRef(0);
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Ensure we're mounted before using client-side APIs
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  
+  // Seeded random number generator for consistent but random-looking behavior
+  const seededRandom = (seed: number) => {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  };
 
   const constants = getConstants(performanceMode);
 
   // Simplified ripple trigger - no queue needed
   const triggerRipple = useCallback((nodeId: number) => {
-    console.log('Triggering ripple for node:', nodeId);
-    
     setRipplingNodes(prev => new Set([...prev, nodeId]));
     
     setTimeout(() => {
@@ -44,8 +55,6 @@ export function useNetworkAnimation(performanceMode: PerformanceMode) {
         // Check for completed signals
         const completed = updated.filter(s => s.progress >= 0.95);
         if (completed.length > 0) {
-          console.log('Signals completed:', completed.length);
-          
           // Trigger ripples for all completed signals immediately
           completed.forEach(signal => {
             triggerRipple(signal.to);
@@ -72,22 +81,28 @@ export function useNetworkAnimation(performanceMode: PerformanceMode) {
 
   // Auto-animate nodes periodically (independent of signals)
   useEffect(() => {
-    if (nodeCountRef.current === 0) return;
+    if (nodeCountRef.current === 0 || !isMounted) return;
 
     const autoAnimateInterval = setInterval(() => {
       // Auto-animate nodes periodically, regardless of signal state
-      const randomNode = Math.floor(Math.random() * nodeCountRef.current);
-      triggerRipple(randomNode);
+      const randomSeed = Date.now() + autoAnimateCounterRef.current;
+      const nodeIndex = Math.floor(seededRandom(randomSeed) * nodeCountRef.current);
+      triggerRipple(nodeIndex);
+      autoAnimateCounterRef.current++;
     }, constants.AUTO_FIRE_INTERVAL); // Use the same interval as signals
 
     return () => clearInterval(autoAnimateInterval);
-  }, [constants.AUTO_FIRE_INTERVAL, triggerRipple]);
+  }, [constants.AUTO_FIRE_INTERVAL, triggerRipple, isMounted]);
 
   const addSignal = (from: number, to: number) => {
     if (signals.length >= constants.MAX_SIGNALS) return;
     
+    // Use Date.now() for ID generation only after mounting to avoid hydration issues
+    const randomSeed = isMounted ? Date.now() + signals.length * 1000 + from * 100 + to : signals.length * 1000 + from * 100 + to;
+    const randomSuffix = Math.floor(seededRandom(randomSeed) * 10000);
+    const signalId = `signal-${from}-${to}-${signals.length}-${randomSuffix}`;
     const newSignal: Signal = { 
-      id: `${Date.now()}-${Math.random()}`, 
+      id: signalId, 
       from, 
       to, 
       progress: 0 

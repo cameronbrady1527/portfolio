@@ -40,12 +40,17 @@ export default function About() {
                   className="text-white"
                 />
               </h1>
-              <p className="text-xl sm:text-2xl text-purple-300 font-medium mb-6">
-                Bridging Neuroscience and Computer Science
-              </p>
-              <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                To sum me up succinctly would be to say that I love to help people and I love to solve problems
-                [I will add more here later...]
+              {/* <p className="text-xl sm:text-2xl text-purple-300 font-medium mb-6">
+                Fullstack Software Developer | Machine Learning Researcher | Nonprofit Consultant
+              </p> */}
+              <br />
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                I am a computational neuroscience enthusiast and machine learning researcher with a 
+                  human-centered focus on advancing our understanding of the brain through AI and statistical learning. 
+                You can also consider me a full-stack software developer and nonprofit consultant!  
+                I am currently building the technical foundation for my future career as a neurosurgeon and 
+                  research-driven student/employee, where I plan to bridge cutting-edge AI research with clinical 
+                  practice to improve patient outcomes and advance neurological medicine.
               </p>
             </GlassCard>
 
@@ -69,6 +74,68 @@ export default function About() {
           </div>
         </section>
 
+        {/* Vision & Mission Section */}
+        <section className="py-16 px-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">
+              Vision & Mission
+            </h2>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <GlassCard>
+                <h3 className="text-2xl font-bold mb-4 text-purple-300">My Mission</h3>
+                <div className="space-y-4">
+                  <p className="text-gray-300 leading-relaxed">
+                    I am dedicated to developing early-detection and prevention systems for neurological disorders.
+                    This dedication is fueled by my compulsion to do fundamentally positive work for others and the world.
+                    My diverse skillset and interests, matched with an obsession for machine learning and systems thinking,
+                    and met with a deep resolve to find the best solution, will allow me to do just that.
+                  </p>
+                  <p className="text-gray-300 leading-relaxed">
+                    Currently, I am working at <StyledLink href="https://www.useastral.dev" variant="default" external>Astral AI</StyledLink>, 
+                    gaining valuable experience in AI development while building the foundation for my 
+                    medical research career through AI-powered web applications and data scraping automations.
+                  </p>
+                </div>
+              </GlassCard>
+
+              <GlassCard>
+                <h3 className="text-2xl font-bold mb-4 text-purple-300">Long-term Goals</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
+                    <span className="text-gray-300">Graduate studies in CS with ML/Neuroscience focus</span>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
+                    <span className="text-gray-300">Medical school to become a neurosurgeon</span>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2"></div>
+                    <span className="text-gray-300">Early-detection and prevention systems for neurological disorders</span>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2"></div>
+                    <span className="text-gray-300">Research-driven medical and clinical practice</span>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2"></div>
+                    <span className="text-gray-300">Accessible healthcare for underserved communities</span>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
+                    <span className="text-gray-300">Teaching novel neural computing concepts to students</span>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
+                    <span className="text-gray-300">Full-scale brain mapping and neurological development simulation</span>
+                  </div>
+                </div>
+              </GlassCard>
+            </div>
+          </div>
+        </section>
+
         {/* Background Section */}
         <section className="py-16 px-8">
           <div className="max-w-4xl mx-auto">
@@ -82,12 +149,13 @@ export default function About() {
                 <div className="space-y-4">
                   <div className="border-l-4 border-purple-400 pl-4">
                     <h4 className="font-semibold text-white">Cornell University</h4>
-                    <p className="text-gray-300">Interdisciplinary CS, B.S.</p>
+                    <p className="text-gray-300">Interdisciplinary Studies, B.S.</p>
+                    <p className="text-sm text-gray-400">Computer Science, Applied Economics and Management, Agricultural Studies</p>
                     <p className="text-sm text-gray-400">2020 - 2024</p>
                   </div>
                   <div className="border-l-4 border-blue-400 pl-4">
-                    <h4 className="font-semibold text-white">Neuroscience Research</h4>
-                    <p className="text-gray-300">Independent Study & Research</p>
+                    <h4 className="font-semibold text-white">Self-Directed Learning</h4>
+                    <p className="text-gray-300">Machine Learning & Neuroscience</p>
                     <p className="text-sm text-gray-400">2022 - Present</p>
                   </div>
                 </div>
@@ -110,7 +178,12 @@ export default function About() {
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                    <span className="text-gray-300">Data Pipeline Optimization</span>
+                    <span className="text-gray-300">Early Detection Systems</span>
+                  </div>
+                  <div className="mt-4 p-3 bg-purple-500/10 border border-purple-500/20 rounded-lg">
+                    <p className="text-sm text-purple-300">
+                      Currently developing my first research project focused on Parkinson's disease detection using vocal biomarkers, achieving 94.9% precision. Seeking opportunities to collaborate and contribute to the field.
+                    </p>
                   </div>
                 </div>
               </GlassCard>
@@ -128,85 +201,73 @@ export default function About() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <GlassCard>
                 <h3 className="text-xl font-bold mb-4 text-purple-300">Programming Languages</h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Python</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-purple-400 h-2 rounded-full" style={{width: '95%'}}></div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">TypeScript/JS</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-blue-400 h-2 rounded-full" style={{width: '90%'}}></div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Java</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-green-400 h-2 rounded-full" style={{width: '85%'}}></div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">SQL</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-orange-400 h-2 rounded-full" style={{width: '85%'}}></div>
-                    </div>
-                  </div>
+                <div className="space-y-3">
+                  {["Python", "JavaScript", "TypeScript", "Java", "HTML/CSS", "SQL"].map((skill) => (
+                    <button
+                      key={skill}
+                      onClick={() => {
+                        const params = new URLSearchParams();
+                        params.set('tech', skill);
+                        window.location.href = `/projects?${params.toString()}`;
+                      }}
+                      className="w-full text-left p-3 rounded-lg bg-gray-800/30 hover:bg-gray-700/50 border border-gray-600/50 hover:border-purple-400/50 transition-all duration-300 group"
+                    >
+                      <span className="text-gray-300 group-hover:text-purple-300 transition-colors font-medium">
+                        {skill}
+                      </span>
+                      <div className="text-xs text-gray-400 mt-1 group-hover:text-purple-400/70 transition-colors">
+                        Click to view projects →
+                      </div>
+                    </button>
+                  ))}
                 </div>
               </GlassCard>
 
               <GlassCard>
                 <h3 className="text-xl font-bold mb-4 text-purple-300">Frameworks & Tools</h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">React/Next.js</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-purple-400 h-2 rounded-full" style={{width: '90%'}}></div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">PostgreSQL</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-blue-400 h-2 rounded-full" style={{width: '90%'}}></div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">PyTorch/TensorFlow</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-green-400 h-2 rounded-full" style={{width: '90%'}}></div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Docker/AWS</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-orange-400 h-2 rounded-full" style={{width: '80%'}}></div>
-                    </div>
-                  </div>
+                <div className="space-y-3">
+                  {["React", "Node.js", "Next.js", "Spring Boot", "Git", "PostgreSQL"].map((skill) => (
+                    <button
+                      key={skill}
+                      onClick={() => {
+                        const params = new URLSearchParams();
+                        params.set('tech', skill);
+                        window.location.href = `/projects?${params.toString()}`;
+                      }}
+                      className="w-full text-left p-3 rounded-lg bg-gray-800/30 hover:bg-gray-700/50 border border-gray-600/50 hover:border-blue-400/50 transition-all duration-300 group"
+                    >
+                      <span className="text-gray-300 group-hover:text-blue-300 transition-colors font-medium">
+                        {skill}
+                      </span>
+                      <div className="text-xs text-gray-400 mt-1 group-hover:text-blue-400/70 transition-colors">
+                        Click to view projects →
+                      </div>
+                    </button>
+                  ))}
                 </div>
               </GlassCard>
 
               <GlassCard>
-                <h3 className="text-xl font-bold mb-4 text-purple-300">Research & Analysis</h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Statistical Analysis</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-purple-400 h-2 rounded-full" style={{width: '90%'}}></div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Data Visualization</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-blue-400 h-2 rounded-full" style={{width: '85%'}}></div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Research Design</span>
-                    <div className="w-24 bg-gray-700 rounded-full h-2">
-                      <div className="bg-green-400 h-2 rounded-full" style={{width: '82%'}}></div>
-                    </div>
-                  </div>
+                <h3 className="text-xl font-bold mb-4 text-purple-300">ML & AI Tools</h3>
+                <div className="space-y-3">
+                  {["Scikit-learn", "PyTorch", "Pandas", "Matplotlib", "Seaborn", "Jupyter"].map((skill) => (
+                    <button
+                      key={skill}
+                      onClick={() => {
+                        const params = new URLSearchParams();
+                        params.set('tech', skill);
+                        window.location.href = `/projects?${params.toString()}`;
+                      }}
+                      className="w-full text-left p-3 rounded-lg bg-gray-800/30 hover:bg-gray-700/50 border border-gray-600/50 hover:border-green-400/50 transition-all duration-300 group"
+                    >
+                      <span className="text-gray-300 group-hover:text-green-300 transition-colors font-medium">
+                        {skill}
+                      </span>
+                      <div className="text-xs text-gray-400 mt-1 group-hover:text-green-400/70 transition-colors">
+                        Click to view projects →
+                      </div>
+                    </button>
+                  ))}
                 </div>
               </GlassCard>
             </div>
@@ -233,12 +294,15 @@ export default function About() {
                         <h3 className="text-xl font-bold text-purple-300">Software Developer</h3>
                         <span className="text-sm text-gray-400">2025 - Present</span>
                       </div>
-                      <p className="text-gray-300 mb-2"><StyledLink href="https://www.useastral.dev" variant="button" external>Astral AI</StyledLink> <strong>[Startup]</strong></p>
+                      <p className="text-gray-300 mb-2"><StyledLink href="https://www.useastral.dev" variant="default" external>Astral AI</StyledLink> <strong>[AI Startup]</strong></p>
                       <p className="text-gray-400">
-                        -  Developing a full-stack web application for AI-generated article creation via source aggregation.
+                        -  Developing AI-powered web applications and data scraping automations for clients
                       </p>
                       <p className="text-gray-400">
-                        -  Rebuilding <StyledLink href="https://www.klavis.ai" variant="default" external>Klavis.AI</StyledLink> MCP integrations and servers to improve our platform's performance and accessibility.
+                        -  Building full-stack solutions and gaining valuable experience in AI development
+                      </p>
+                      <p className="text-gray-400">
+                        -  Working towards increased responsibility and equity in the company
                       </p>
                     </GlassCard>
                   </div>
@@ -316,7 +380,7 @@ export default function About() {
                 Ready to Collaborate?
               </h2>
               <p className="text-lg text-gray-300 mb-8">
-                Let's work together on innovative projects that improve lives.
+                Let's work together on innovative projects that improve lives through AI and medical technology.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <NeuralButton 
