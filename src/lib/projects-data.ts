@@ -1,24 +1,4 @@
-export interface Project {
-  id: number;
-  title: string;
-  description: string;
-  longDescription: string;
-  technologies: string[];
-  category: string;
-  image: string;
-  github: string;
-  live: string | null;
-  featured: boolean;
-  stats: Record<string, string>;
-  content?: {
-    overview: string;
-    challenges: string[];
-    solutions: string[];
-    results: string[];
-    technicalDetails: string;
-    screenshots?: string[];
-  };
-}
+import { Project } from "@/types/data-types";
 
 export const projects: Project[] = [
   {

@@ -1,25 +1,4 @@
-export interface ResearchPaper {
-  id: number;
-  title: string;
-  authors: string[];
-  abstract: string;
-  journal: string;
-  year: number;
-  doi: string;
-  area: string;
-  featured: boolean;
-  citations: number;
-  impact: string;
-  keywords: string[];
-  content?: {
-    fullAbstract: string;
-    methodology: string;
-    results: string[];
-    conclusions: string;
-    figures?: string[];
-    data?: string;
-  };
-}
+import { ResearchPaper } from "@/types/data-types";
 
 export const researchPapers: ResearchPaper[] = [
   // Research papers will be added here as they are published
