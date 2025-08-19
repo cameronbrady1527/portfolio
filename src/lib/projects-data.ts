@@ -45,12 +45,65 @@ export const projects: Project[] = [
   },
   {
     id: 2,
+    title: "Astral Aggregator",
+    description: "A news source aggregator that detects and reports changes to particular website sitemaps.",
+    longDescription: "A comprehensive web content discovery and monitoring system that automatically discovers, processes, and tracks URLs from various websites using multiple detection methods including sitemaps, AI-powered analysis, and intelligent crawling.",
+    technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib", "Seaborn", "Jupyter", "FastAPI", "Railway"],
+    category: "research",
+    // image: "web-crawler.png",
+    // <a href="https://www.flaticon.com/free-icons/crawler" title="crawler icons">Crawler icons created by Freepik - Flaticon</a>
+    image: "",
+    github: "https://github.com/cameronbrady/parkinsons-detection",
+    live: null,
+    featured: true,
+    stats: {
+      "Content Discovery": "100,000+ per site",
+      "Sites Supported": "Unlimited & Any",
+      "Pagination Support": "6000+ pages",
+      "Resolved URL Removal": "95%",
+    },
+    content: {
+      overview: "The URL Aggregator is designed to solve the challenge of discovering and monitoring content across websites, notably news sources, that may not have comprehensive sitemaps, may not immediately update their sitemaps, or may have content spread across multiple pages that go undetected by sitemap and page crawlers. It combines traditional web crawling techniques (using our own sitemap crawler and Firecrawl's /map and /crawl methods) with LLM-powered analysis to identify the most valuable content discovery hubs on any website. These content discovery hubs are crawled frequently to detect changes to content based on computed baselines. It looks for new or deleted pages and updated content on a page.",
+      challenges: [
+        "Discovering comprehensive content across websites with limited or no sitemaps",
+        "Handling massive pagination systems with thousands of pages efficiently",
+        "Eliminating duplicate URLs across multiple discovery methods",
+        "Identifying the most valuable content discovery hubs from large URL sets",
+        "Managing memory and performance when processing sites with 10,000+ URLs",
+        "Ensuring respectful web crawling with proper rate limiting and concurrency control"
+      ],
+      solutions: [
+        "Implemented multi-source discovery combining sitemaps, Firecrawl mapping, and intelligent crawling",
+        "Developed intelligent pagination detection with multiple strategies and configurable batch processing",
+        "Created advanced URL deduplication with normalization, resolution, and cross-method duplicate elimination",
+        "Built AI-powered analysis pipeline using OpenAI GPT-5 with well-engineered prompts to identify content discovery hubs",
+        "Designed asynchronous architecture with configurable batch sizes and memory management",
+        "Implemented sophisticated rate limiting with concurrent batch processing and respectful crawling policies"
+      ],
+      results: [
+        "Achieved comprehensive content discovery with 2,000-100,000+ URLs per site",
+        "Successfully processed paginated sites with up to 6000+ pages while maintaining performance",
+        "Eliminated 95%+ duplicate URLs through intelligent deduplication algorithms",
+        "Identified top 5 content discovery hubs with 90%+ accuracy using AI analysis",
+        "Reduced memory usage by 60% through intelligent batching and async processing",
+        "Maintained 2-5x processing speed improvement with pagination support enabled"
+      ],
+      technicalDetails: `Built with Python using FastAPI for the RESTful API backend, OpenAI GPT-5 for AI-powered URL analysis and content discovery, 
+              Firecrawl SDK for intelligent web crawling and site mapping, Pydantic for robust data validation and serialization, and asynchronous 
+              HTTP processing with aiohttp and httpx for high-performance web scraping. The system features intelligent pagination detection with multiple crawling strategies, 
+              advanced URL deduplication algorithms, comprehensive content extraction capabilities, and flexible export options including JSON and Excel formats. 
+              Core architecture includes a modular service layer with intelligent orchestration, AI-powered content discovery hubs identification, and sophisticated 
+              pagination handling that can process sites with hundrededs of thousands of pages while maintaining respectful rate limiting and memory management.`
+    }
+  },
+  {
+    id: 3,
     title: "Parkinson's Disease Detection",
     description: "Advanced machine learning framework for Parkinson's disease identification utilizing vocal biomarkers with streamlined data processing.",
     longDescription: "Advanced machine learning framework for Parkinson's disease identification utilizing vocal biomarkers with streamlined data processing, automated model development, and comprehensive performance assessment. Achieves 94.9% precision through intelligent feature selection leveraging Random Forest importance metrics.",
     technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib", "Seaborn", "Jupyter", "FastAPI", "Railway"],
     category: "research",
-    image: "/api/placeholder/400/300",
+    image: "",
     github: "https://github.com/cameronbrady/parkinsons-detection",
     live: null,
     featured: true,
@@ -83,13 +136,13 @@ export const projects: Project[] = [
     }
   },
   {
-    id: 3,
+    id: 4,
     title: "Nonprofit Data Scraper",
     description: "Scraper for nonprofit revenue and executive compensation data for a selected state with smart data collection algorithms.",
     longDescription: "Scraper for nonprofit revenue and executive compensation data for a selected state. Features smart data collection algorithms, scanned 990 IRS form parsing, and beautiful business-ready spreadsheet reporting. Processes financial records from over 1.8 million American 501(c)3 organizations.",
     technologies: ["Python", "API Interaction", "OCR Image-PDF Parsing", "Pandas", "Excel"],
     category: "automation",
-    image: "/api/placeholder/400/300",
+    image: "",
     github: "https://github.com/cameronbrady1527/nonprofit-revenue-scraper",
     live: null,
     featured: true,
@@ -122,52 +175,13 @@ export const projects: Project[] = [
     }
   },
   {
-    id: 4,
-    title: "McDiver",
-    description: "Graph algorithms implementation for maze navigation using Dijkstra's shortest path and optimized DFS/BFS traversal strategies.",
-    longDescription: "Graph algorithms implementation for maze navigation using Dijkstra's shortest path and optimized DFS/BFS traversal strategies. Features pathfinding optimization, thread synchronization, and performance tuning for efficient maze solving.",
-    technologies: ["Java", "Graph Theory", "Concurrent Programming"],
-    category: "algorithms",
-    image: "/api/placeholder/400/300",
-    github: "https://github.com/cameronbrady/mcdiver",
-    live: null,
-    featured: false,
-    stats: {
-      performance: "Optimized",
-      algorithms: "3+",
-      efficiency: "High"
-    },
-    content: {
-      overview: "A comprehensive implementation of graph algorithms for maze navigation, featuring multiple pathfinding strategies and concurrent programming techniques for optimal performance.",
-      challenges: [
-        "Implementing efficient pathfinding algorithms",
-        "Handling complex maze structures",
-        "Optimizing performance for large mazes",
-        "Managing thread synchronization"
-      ],
-      solutions: [
-        "Implemented Dijkstra's shortest path algorithm",
-        "Developed optimized DFS/BFS traversal strategies",
-        "Used concurrent programming for performance",
-        "Created comprehensive testing and validation"
-      ],
-      results: [
-        "Successfully navigated complex maze structures",
-        "Achieved optimal pathfinding performance",
-        "Implemented thread synchronization",
-        "Created reusable algorithm framework"
-      ],
-      technicalDetails: "Built with Java using graph theory concepts, concurrent programming for thread synchronization, and optimized algorithms for pathfinding. Features Dijkstra's shortest path, DFS/BFS traversal strategies, and performance tuning."
-    }
-  },
-  {
     id: 5,
-    title: "Astral AI - Documentation Scraper",
+    title: "Documentation Scraper",
     description: "Python toolkit designed for AI-workflow productivity startup Astral AI that extracts and organizes web documentation into well-formatted markdown files.",
     longDescription: "A Python toolkit, designed for AI-workflow productivity startup Astral AI, that extracts and organizes web documentation into well-formatted markdown files using the Firecrawl SDK. Features crawler and scraper functionality, well-formatted markdown files for efficient user and machine learning/LLM parsing, and navigable index generation for extracted documents.",
     technologies: ["Python", "Firecrawl SDK"],
     category: "automation",
-    image: "/api/placeholder/400/300",
+    image: "",
     github: "https://github.com/cameronbrady/astral-ai-scraper",
     live: null,
     featured: false,
@@ -201,12 +215,12 @@ export const projects: Project[] = [
   },
   {
     id: 6,
-    title: "Flashcards - Learn Vocabulary",
+    title: "Vocab Flashcards",
     description: "A flashcard website designed to optimally help users learn vocabulary words with individual word performance statistics.",
     longDescription: "A flashcard website designed to optimally help a user learn vocab words and to help me study for the GRE. Features offline use after initial data import, individual word performance statistics, beautiful and simple interface, and export progress to Excel or CSV.",
     technologies: ["JavaScript", "HTML/CSS", "Excel/CSV", "SheetJS", "PapaParse"],
     category: "web",
-    image: "/api/placeholder/400/300",
+    image: "",
     github: "https://github.com/cameronbrady/flashcards",
     live: "https://flashcards-demo.com",
     featured: false,
@@ -236,6 +250,45 @@ export const projects: Project[] = [
         "Added progress export functionality"
       ],
       technicalDetails: "Built with JavaScript, HTML/CSS for the frontend, Excel/CSV for data management, SheetJS and PapaParse for data parsing. Features offline use after initial data import, individual word performance statistics, and export progress to Excel or CSV."
+    }
+  },
+  {
+    id: 7,
+    title: "McDiver Graph Challenge",
+    description: "Graph algorithms implementation for maze navigation using Dijkstra's shortest path and optimized DFS/BFS traversal strategies.",
+    longDescription: "Graph algorithms implementation for maze navigation using Dijkstra's shortest path and optimized DFS/BFS traversal strategies. Features pathfinding optimization, thread synchronization, and performance tuning for efficient maze solving.",
+    technologies: ["Java", "Graph Theory", "Concurrent Programming"],
+    category: "algorithms",
+    image: "",
+    github: "https://github.com/cameronbrady/mcdiver",
+    live: null,
+    featured: false,
+    stats: {
+      performance: "Optimized",
+      algorithms: "3+",
+      efficiency: "High"
+    },
+    content: {
+      overview: "A comprehensive implementation of graph algorithms for maze navigation, featuring multiple pathfinding strategies and concurrent programming techniques for optimal performance.",
+      challenges: [
+        "Implementing efficient pathfinding algorithms",
+        "Handling complex maze structures",
+        "Optimizing performance for large mazes",
+        "Managing thread synchronization"
+      ],
+      solutions: [
+        "Implemented Dijkstra's shortest path algorithm",
+        "Developed optimized DFS/BFS traversal strategies",
+        "Used concurrent programming for performance",
+        "Created comprehensive testing and validation"
+      ],
+      results: [
+        "Successfully navigated complex maze structures",
+        "Achieved optimal pathfinding performance",
+        "Implemented thread synchronization",
+        "Created reusable algorithm framework"
+      ],
+      technicalDetails: "Built with Java using graph theory concepts, concurrent programming for thread synchronization, and optimized algorithms for pathfinding. Features Dijkstra's shortest path, DFS/BFS traversal strategies, and performance tuning."
     }
   }
 ];
