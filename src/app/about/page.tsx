@@ -116,6 +116,10 @@ export default function About() {
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-orange-400 rounded-full mt-2"></div>
+                    <span className="text-gray-300">Creating highly-reliable prevention methods for Alzhiemer's Disease</span>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2"></div>
                     <span className="text-gray-300">Research-driven medical and clinical practice</span>
                   </div>
                   <div className="flex items-start space-x-3">
@@ -278,7 +282,7 @@ export default function About() {
         <section className="py-16 px-8">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">
-              Experience Timeline
+              Work Experience Timeline
             </h2>
             
             <div className="relative">
@@ -287,51 +291,58 @@ export default function About() {
               
               <div className="space-y-8">
                 <div className="relative flex items-start">
-                  <div className="absolute left-6 w-4 h-4 bg-purple-400 rounded-full -translate-x-2"></div>
+                  {/* <div className="absolute left-6 w-4 h-4 bg-purple-400 rounded-full -translate-x-2"></div> */}
                   <div className="ml-16">
                     <GlassCard>
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold text-purple-300">Software Developer</h3>
+                        <h3 className="text-xl font-bold text-purple-300">Full-Stack Software Developer</h3>
                         <span className="text-sm text-gray-400">2025 - Present</span>
                       </div>
-                      <p className="text-gray-300 mb-2"><StyledLink href="https://www.useastral.dev" variant="default" external>Astral AI</StyledLink> <strong>[AI Startup]</strong></p>
+                      <p className="text-gray-300 mb-2"><StyledLink href="https://www.useastral.dev" variant="default" external>Astral AI</StyledLink> <strong>[AI Startup]</strong>, <i>Founding Engineering Team</i></p>
                       <p className="text-gray-400">
-                        -  Developing AI-powered web applications and data scraping automations for clients
+                        -  Building full-stack AI-powered web applications and web crawling automations for clients 
+                        (see <StyledLink href="/projects/1" variant="default">sesha-v3</StyledLink> or <StyledLink href="/projects/2" variant="default">astral-aggregator</StyledLink>).
                       </p>
-                      <p className="text-gray-400">
-                        -  Building full-stack solutions and gaining valuable experience in AI development
+                      <p className="text-gray-400 pt-1">
+                        -  Co-developing Astral, a platform optimizing the building and deployment of intelligent solutions to complex 
+                          business problems, with implementation and AI-workflow complexity abstracted by the use of natural language.
                       </p>
-                      <p className="text-gray-400">
-                        -  Working towards increased responsibility and equity in the company
+                      <p className="text-gray-400 pt-1">
+                        -  Collaboratively pushing the boundaries of software development, establishing best practices and workflows with artificial intelligence models 
+                        (check out <StyledLink href="https://github.com/astral-ai-labs" variant="github" external>astral-ai-labs</StyledLink> on GitHub).
                       </p>
                     </GlassCard>
                   </div>
                 </div>
 
                 <div className="relative flex items-start">
-                  <div className="absolute left-6 w-4 h-4 bg-blue-400 rounded-full -translate-x-2"></div>
+                  {/* <div className="absolute left-6 w-4 h-4 bg-blue-400 rounded-full -translate-x-2"></div> */}
                   <div className="ml-16">
                     <GlassCard>
                       <div className="flex justify-between items-start mb-2">
                         <h3 className="text-xl font-bold text-purple-300">Nonprofit Consultant</h3>
-                        <span className="text-sm text-gray-400">2024 - 2025</span>
+                        <span className="text-sm text-gray-400">2024 - Present</span>
                       </div>
-                      <p className="text-gray-300 mb-2">Community Mindfulness Project</p>
+                      <p className="text-gray-300 mb-2">Community Mindfulness Project, <i>Independent Consultant</i></p>
                       <p className="text-gray-400">
-                        -  Developed industry-competitive, data-driven, and open-source nonprofit data collection and analysis tools, leveraging financial records from over 1.8 million of American 501(c)3 organizations.
-                        <StyledLink href="https://github.com/cameronbrady1527/nonprofit-revenue-scraper" variant="github" external>
-                          View on GitHub
-                        </StyledLink>
+                        -  Developed industry-competitive, data-driven, and open-source nonprofit data collection and analysis tools, 
+                           leveraging financial records from over 1.8 million of American 501(c)3 organizations 
+                           (see <StyledLink href="/projects/4" variant="default">nonprofit-data-scraper</StyledLink>).
                       </p>
-                      <p className="text-gray-400">
-                        -  Spearheading the creation of a digital board handbook and new SOPs, whilst advising on strategic program development and board governance best practices.
+                      <p className="text-gray-400 pt-2">
+                        -  Spearheading the creation of a digital board handbook and new SOPs, whilst advising on strategic program 
+                           development and board governance best practices, streamlining repetitive practices.
+                      </p>
+                      <p className="text-gray-400 pt-2">
+                        -  Produced significant overhaul to executive compensation and budget deliberations, resulting in a major time reduction 
+                           in compensation data research from months to merely days.
                       </p>
                     </GlassCard>
                   </div>
                 </div>
 
                 <div className="relative flex items-start">
-                  <div className="absolute left-6 w-4 h-4 bg-blue-400 rounded-full -translate-x-2"></div>
+                  {/* <div className="absolute left-6 w-4 h-4 bg-blue-400 rounded-full -translate-x-2"></div> */}
                   <div className="ml-16">
                     <GlassCard>
                       <div className="flex justify-between items-start mb-2">
@@ -340,29 +351,38 @@ export default function About() {
                       </div>
                       <p className="text-gray-300 mb-2">Cornell Dyson School of Applied Economics and Management</p>
                       <p className="text-gray-400">
-                        -  Served as Head TA for Farm Business Management, leading five TAs by establishing standardized, tech-friendly workflows for lessons, grading, and office hours.
+                        -  Served as Head TA for Farm Business Management, leading five TAs by establishing standardized, 
+                           tech-friendly workflows for lessons, grading, and office hours.
                       </p>
-                      <p className="text-gray-400">
-                        -  Acted as a communication bridge between course administration, students, and peer TAs.
+                      <p className="text-gray-400 pt-2">
+                        -  Acted as a first point of contact for professors, course administrators, TAs, and students.
                       </p>
                     </GlassCard>
                   </div>
                 </div>
 
                 <div className="relative flex items-start">
-                  <div className="absolute left-6 w-4 h-4 bg-green-400 rounded-full -translate-x-2"></div>
+                  {/* <div className="absolute left-6 w-4 h-4 bg-green-400 rounded-full -translate-x-2"></div> */}
                   <div className="ml-16">
                     <GlassCard>
                       <div className="flex justify-between items-start mb-2">
                         <h3 className="text-xl font-bold text-purple-300">CEO & Co-Founder</h3>
-                        <span className="text-sm text-gray-400">2019 - 2024</span>
+                        <span className="text-sm text-gray-400">2019 - Present</span>
                       </div>
                       <p className="text-gray-300 mb-2">The Clover Project, Inc.</p>
                       <p className="text-gray-400">
-                        -  Co-founded a mission-driven nonprofit to combat food insecurity by cultivating and distributing produce, managing a team of six directors and over 250 volunteers.
+                        -  Co-founded a mission-driven nonprofit to combat food insecurity by cultivating and distributing produce, 
+                        managing a team of six directors and over 250 volunteers.
                       </p>
-                      <p className="text-gray-400">
-                        -  Implemented a comprehensive database system to track inventory, donations, and volunteer hours, streamlining operations and improving efficiency.
+                      <p className="text-gray-400 pt-2">
+                        -  Implemented a comprehensive database and volunteer management system to track inventory, donations, and volunteer hours, 
+                           streamlining operations and improving efficiency.
+                      </p>
+                      <p className="text-gray-400 pt-2">
+                        -  Maintaining an advisory role whilst redesigning our website and planning expansion efforts into other territories outside of Hyde Park, NY.
+                      </p>
+                      <p className="text-gray-400 pt-4">
+                        <i>* See <StyledLink href="https://www.poughkeepsiejournal.com/story/news/local/2019/09/12/arlington-students-project-combating-hunger-dutchess-help/2164033001" variant="default" external>this local news article</StyledLink> to see our founding story... or our roots!</i>
                       </p>
                     </GlassCard>
                   </div>
