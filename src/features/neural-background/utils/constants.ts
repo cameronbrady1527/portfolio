@@ -9,31 +9,31 @@ export function getConstants(performanceMode: PerformanceMode) {
   switch (performanceMode) {
     case 'minimal':
       return {
-        NODE_COUNT: 20,
-        EDGE_COUNT: 40,
-        MAX_SIGNALS: 0,
+        NODE_COUNT: 15,
+        EDGE_COUNT: 45,
+        MAX_SIGNALS: 4,
         ANIMATION_SPEED: 0.015,
         RIPPLE_DURATION: 1200,
-        NODE_RADIUS: 14,
-        SIGNAL_RADIUS: 8,
-        AUTO_FIRE_INTERVAL: 8000, // Increased from 5000ms
-        MAX_AUTO_SIGNALS: 0,
-        USE_FILTERS: false,
-        USE_THINKING_GLOW: false,
+        NODE_RADIUS: 10,
+        SIGNAL_RADIUS: 6,
+        AUTO_FIRE_INTERVAL: 5000,
+        MAX_AUTO_SIGNALS: 1,
+        USE_FILTERS: true,
+        USE_THINKING_GLOW: true,
         USE_SIGNAL_TEXT: false
       };
     case 'reduced':
       return {
-        NODE_COUNT: 36,
-        EDGE_COUNT: 72,
-        MAX_SIGNALS: 1,
-        ANIMATION_SPEED: 0.02,
-        RIPPLE_DURATION: 1500,
-        NODE_RADIUS: 16,
+        NODE_COUNT: 20,
+        EDGE_COUNT: 40,
+        MAX_SIGNALS: 4,
+        ANIMATION_SPEED: 0.025,
+        RIPPLE_DURATION: 1200,
+        NODE_RADIUS: 14,
         SIGNAL_RADIUS: 10,
-        AUTO_FIRE_INTERVAL: 6000, // Increased from 4000ms
+        AUTO_FIRE_INTERVAL: 3000,
         MAX_AUTO_SIGNALS: 1,
-        USE_FILTERS: false,
+        USE_FILTERS: true,
         USE_THINKING_GLOW: true,
         USE_SIGNAL_TEXT: false
       };
