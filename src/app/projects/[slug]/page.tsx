@@ -130,7 +130,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               Key Metrics
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {Object.entries(project.stats).map(([key, value]) => (
                 <GlassCard key={key} className="text-center">
                   <div className="text-3xl font-bold text-purple-300 mb-2">{String(value)}</div>
@@ -171,26 +171,28 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
                 <GlassCard>
                   <h3 className="text-2xl font-bold mb-4 text-orange-300">Challenges</h3>
-                  <ul className="space-y-3">
+                  <ol className="space-y-3">
                     {project.content.challenges.map((challenge: string, index: number) => (
                       <li key={index} className="flex items-start space-x-3">
-                        <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
+                        <div className="w-4 text-orange-400 flex-shrink-0">{index + 1}.</div>
+                        {/* <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div> */}
                         <span className="text-gray-300">{challenge}</span>
                       </li>
                     ))}
-                  </ul>
+                  </ol>
                 </GlassCard>
 
                 <GlassCard>
                   <h3 className="text-2xl font-bold mb-4 text-green-300">Solutions</h3>
-                  <ul className="space-y-3">
+                  <ol className="space-y-3">
                     {project.content.solutions.map((solution: string, index: number) => (
                       <li key={index} className="flex items-start space-x-3">
-                        <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                        <div className="w-4 text-green-400 flex-shrink-0">{index + 1}.</div>
+                        {/* <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div> */}
                         <span className="text-gray-300">{solution}</span>
                       </li>
                     ))}
-                  </ul>
+                  </ol>
                 </GlassCard>
               </div>
 
