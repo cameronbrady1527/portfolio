@@ -24,16 +24,16 @@ export function getConstants(performanceMode: PerformanceMode) {
       };
     case 'reduced':
       return {
-        NODE_COUNT: 20,
-        EDGE_COUNT: 40,
-        MAX_SIGNALS: 4,
+        NODE_COUNT: 15,
+        EDGE_COUNT: 45,
+        MAX_SIGNALS: 0,
         ANIMATION_SPEED: 0.025,
         RIPPLE_DURATION: 1200,
         NODE_RADIUS: 14,
-        SIGNAL_RADIUS: 10,
+        SIGNAL_RADIUS: 0,
         AUTO_FIRE_INTERVAL: 3000,
-        MAX_AUTO_SIGNALS: 1,
-        USE_FILTERS: true,
+        MAX_AUTO_SIGNALS: 0,
+        USE_FILTERS: false,
         USE_THINKING_GLOW: true,
         USE_SIGNAL_TEXT: false
       };

@@ -37,17 +37,20 @@ export function NeuralBackground() {
   }, [network.nodes.length, setNodeCount]);
 
   const handleNodeClick = useCallback((nodeId: number) => {
+    // Only create signals in full performance mode
+    if (performanceMode !== 'full') return;
+    
     const outgoing = network.edges.filter(e => e.from === nodeId);
     if (outgoing.length === 0) return;
     const edge = outgoing[Math.floor(Math.random() * outgoing.length)];
     addSignal(edge.from, edge.to);
-  }, [network.edges, addSignal]);
+  }, [network.edges, addSignal, performanceMode]);
 
-  // Initial burst of signals (very minimal now)
+  // Initial burst of signals (only in full mode)
   useEffect(() => {
-    if (!isMounted) return;
+    if (!isMounted || performanceMode !== 'full') return;
     
-    const initialSignals = performanceMode === 'minimal' ? 0 : performanceMode === 'reduced' ? 0 : 1;
+    const initialSignals = 1;
     
     for (let i = 0; i < initialSignals; i++) {
       setTimeout(() => {
@@ -59,9 +62,9 @@ export function NeuralBackground() {
     }
   }, [performanceMode, network.nodes.length, handleNodeClick, isMounted]);
 
-  // Auto-firing interval
+  // Auto-firing interval (only in full mode)
   useEffect(() => {
-    if (!isMounted) return;
+    if (!isMounted || performanceMode !== 'full') return;
     
     const constants = getConstants(performanceMode);
     
@@ -135,7 +138,9 @@ export function NeuralBackground() {
 
         <NetworkGlow dimensions={dimensions} performanceMode={performanceMode} />
         <NetworkEdges edges={network.edges} nodes={network.nodes} dimensions={dimensions} performanceMode={performanceMode} />
-        <NetworkSignals signals={signals} nodes={network.nodes} dimensions={dimensions} performanceMode={performanceMode} />
+        {performanceMode === 'full' && (
+          <NetworkSignals signals={signals} nodes={network.nodes} dimensions={dimensions} performanceMode={performanceMode} />
+        )}
         <NetworkNodes
           nodes={network.nodes}
           dimensions={dimensions}
