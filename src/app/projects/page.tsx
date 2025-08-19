@@ -15,6 +15,7 @@ import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
 import { TechnologyDropdown } from "@/components/TechnologyDropdown";
+import { ProjectImageFallback } from "@/components/ProjectImageFallback";
 import { useState, useEffect, useRef } from "react";
 import { getAllTechnologies, getProjectsByFilters } from "@/lib/projects-data";
 
@@ -244,9 +245,17 @@ export default function Projects() {
                   className="group cursor-pointer hover:scale-105 transition-transform duration-300"
                   onClick={() => window.location.href = `/projects/${project.id}`}
                 >
-                  {/* Project Image Placeholder */}
-                  <div className="w-full h-48 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg mb-4 flex items-center justify-center">
-                    <div className="text-4xl text-purple-300/50">📊</div>
+                  {/* Project Image */}
+                  <div className="w-full h-48 bg-gradient-to-br from-amber-200/30 to-orange-200/30 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                    {project.image && project.image.trim() !== "" ? (
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-contain p-4"
+                      />
+                    ) : (
+                      <ProjectImageFallback title={project.title} />
+                    )}
                   </div>
 
                   {/* Featured Badge */}
@@ -282,7 +291,7 @@ export default function Projects() {
                   </div>
 
                   {/* Stats */}
-                  <div className="grid grid-cols-3 gap-2 mb-4 text-xs">
+                  <div className="grid grid-cols-2 gap-4 mb-4 text-xs">
                     {Object.entries(project.stats).map(([key, value]) => (
                       <div key={key} className="text-center">
                         <div className="font-bold text-purple-300">{value}</div>
