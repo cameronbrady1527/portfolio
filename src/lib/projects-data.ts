@@ -4,38 +4,41 @@ export const projects: Project[] = [
   {
     id: 1,
     title: "Sesha v3",
-    description: "AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines.",
-    longDescription: "AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines. Features intelligent source attribution and weaving, enterprise multi-tenant architecture with usage analytics, comprehensive export capabilities (PDF/DOCX/email), and real-time processing with live status updates.",
+    description: "AI-powered article generation platform that aggregates and processes multiple sources to produce structured articles with customizable presets and export capabilities.",
+    longDescription: "AI-powered article generation platform that aggregates and transforms source materials into professional articles through well-crafted, multi-step AI pipelines. Features intelligent source attribution and weaving, reliable plagiarism handling, rich text content styling, enterprise multi-tenant architecture with usage analytics, comprehensive export capabilities (PDF/DOCX/email), and real-time processing with live status updates in a modern dashboard.",
     technologies: ["Next.js 15", "React 19", "TypeScript", "PostgreSQL", "Drizzle ORM", "Supabase", "Anthropic Claude 3.5 Sonnet", "OpenAI GPT 4o", "Tailwind CSS", "Lexical", "Shadcn"],
     category: "ai-ml",
-    image: "/api/placeholder/400/300",
-    github: "https://github.com/cameronbrady/sesha-v3",
-    live: "https://sesha-demo.com",
+    image: "/seshalogowithtext.svg",
+    github: "https://github.com/cameronbrady1527/sesha-v3",
+    live: "https://sesha-v3.vercel.app/",
     featured: true,
     stats: {
-      accuracy: "99.2%",
-      processingSpeed: "10x faster",
-      dataPoints: "1M+ daily"
+      "Article Generation": "5 minutes",
+      "Plagiarism Allowed": "0%",
+      "Source Verified": "100%",
+      "Source Attribution": "Every Line"
     },
     content: {
-      overview: "Sesha v3 is an AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines. The system combines cutting-edge AI models with robust content processing to deliver high-quality, well-sourced articles.",
+      overview: "Sesha v3 is an AI-powered content generation platform that transforms source materials into professional articles through multi-step, well-crafted prompt engineered AI pipelines. The system combines cutting-edge large-language models (LLM) with robust content processing to deliver high-quality, well-sourced articles.",
       challenges: [
-        "Processing and analyzing complex source materials",
+        "Processing and analyzing diverse source materials (raw text content, article links)",
         "Maintaining high accuracy while generating content",
+        "Avoiding plagiarism while maintaining accuracy",
         "Integrating multiple AI models for different tasks",
         "Ensuring proper source attribution and weaving"
       ],
       solutions: [
         "Implemented multi-step AI pipeline with different models for different tasks",
         "Developed intelligent source attribution and weaving algorithms",
+        "Supplemented article creation pipelines with plagiarism checks and handling",
         "Created enterprise multi-tenant architecture with usage analytics",
-        "Built comprehensive export capabilities (PDF/DOCX/email)"
+        "Built comprehensive export capabilities (pdf, docx, email)"
       ],
       results: [
-        "Achieved 99.2% accuracy in content generation",
-        "Reduced processing time by 10x compared to manual methods",
-        "Successfully processed over 1 million articles daily",
-        "Deployed in production environments with 99.9% uptime"
+        "Achieved 5 minute article generation from up to 6 sources, significantly reducing time until first draft creation",
+        "Successfully mimicked professional formatting and organization management for newsroom integration",
+        "Optimized performance with support for parallel article generation",
+        "Maintains high journalism standards with zero tolerance for plagiarism and ensuring every line is source referenced"
       ],
       technicalDetails: "Built with Next.js 15 and React 19 for the frontend, TypeScript for type safety, PostgreSQL with Drizzle ORM for data storage, Supabase for backend services, and integrated with Anthropic Claude 3.5 Sonnet and OpenAI GPT 4o for AI processing. Features real-time processing with live status updates and comprehensive export capabilities."
     }
