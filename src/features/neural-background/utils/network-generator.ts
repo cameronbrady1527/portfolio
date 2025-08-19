@@ -9,10 +9,12 @@ export function generateNetwork(
   height: number, 
   performanceMode: PerformanceMode
 ): NetworkData {
+  // performanceMode = 'minimal';
   const constants = getConstants(performanceMode);
   
   // Calculate grid layout to cover the full screen
-  const COLS = performanceMode === 'minimal' ? 5 : performanceMode === 'reduced' ? 6 : 7;
+  // const COLS = performanceMode === 'reduced' ? 5 : 7;
+  const COLS = performanceMode === 'minimal' ? 3 : performanceMode === 'reduced' ? 6 : 7;
   
   // Calculate rows based on screen height and aspect ratio
   const aspectRatio = width / height;
@@ -34,7 +36,7 @@ export function generateNetwork(
     const baseY = (row + 0.5) / actualRows;
     
     // Add controlled jitter for natural randomness using deterministic seed
-    const jitterRange = 0.15;
+    const jitterRange = 0.2;
     const seed = (i * 9301 + 49297) % 233280; // Simple deterministic seed
     const jitterX = ((seed / 233280) - 0.5) * jitterRange;
     const jitterY = (((seed * 9301 + 49297) % 233280) / 233280 - 0.5) * jitterRange;
@@ -65,10 +67,12 @@ export function generateNetwork(
   
   // Generate edges
   const edges: Edge[] = [];
-  const maxConnections = performanceMode === 'minimal' ? 2 : performanceMode === 'reduced' ? 3 : 4;
+  // const maxConnections = performanceMode === 'reduced' ? 10 : 4;
+  const maxConnections = performanceMode === 'minimal' ? 2 : performanceMode === 'reduced' ? 3 : 100;
   
   for (let i = 0; i < TOTAL_NODES; i++) {
     const targets = new Set<number>();
+    // const minConnections = 1;
     const minConnections = performanceMode === 'minimal' ? 1 : 2;
     
     // Use deterministic seed for edge generation

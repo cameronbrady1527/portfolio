@@ -13,6 +13,7 @@ import { NetworkSignals } from './NetworkSignals';
 import { NetworkGlow } from './NetworkGlow';
 
 export function NeuralBackground() {
+  // Hooks -----
   const { performanceMode, dimensions, network, svgRef } = useResponsiveNetwork();
   const { signals, ripplingNodes, addSignal, setNodeCount } = useNetworkAnimation(performanceMode);
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
