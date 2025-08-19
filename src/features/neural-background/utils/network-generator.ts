@@ -14,7 +14,7 @@ export function generateNetwork(
   
   // Calculate grid layout to cover the full screen
   // const COLS = performanceMode === 'reduced' ? 5 : 7;
-  const COLS = performanceMode === 'minimal' ? 3 : performanceMode === 'reduced' ? 6 : 7;
+  const COLS = performanceMode === 'minimal' ? 3 : performanceMode === 'reduced' ? 5 : 6;
   
   // Calculate rows based on screen height and aspect ratio
   const aspectRatio = width / height;
@@ -68,7 +68,7 @@ export function generateNetwork(
   // Generate edges
   const edges: Edge[] = [];
   // const maxConnections = performanceMode === 'reduced' ? 10 : 4;
-  const maxConnections = performanceMode === 'minimal' ? 2 : performanceMode === 'reduced' ? 3 : 100;
+  const maxConnections = performanceMode === 'minimal' ? 2 : performanceMode === 'reduced' ? 3 : 4;
   
   for (let i = 0; i < TOTAL_NODES; i++) {
     const targets = new Set<number>();

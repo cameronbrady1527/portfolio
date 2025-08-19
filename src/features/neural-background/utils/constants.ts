@@ -40,8 +40,8 @@ export function getConstants(performanceMode: PerformanceMode) {
     case 'full':
     default:
       return {
-        NODE_COUNT: 56,
-        EDGE_COUNT: 140,
+        NODE_COUNT: 60,
+        EDGE_COUNT: 120,
         MAX_SIGNALS: 2,
         ANIMATION_SPEED: 0.025,
         RIPPLE_DURATION: 1800,
