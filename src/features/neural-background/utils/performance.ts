@@ -23,12 +23,12 @@ export function detectDeviceCapabilities(): PerformanceMode {
   // Check for reduced motion preference
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
-  // Check for low-end devices (CPU cores)
-  const isLowEnd = navigator.hardwareConcurrency <= 4;
+  // Check for low-end devices (CPU cores) - be more conservative
+  const isLowEnd = !navigator.hardwareConcurrency || navigator.hardwareConcurrency <= 8;
   
-  // Check for low memory devices (rough estimate)
+  // Check for low memory devices (rough estimate) - be more conservative
   const extendedNavigator = navigator as ExtendedNavigator;
-  const isLowMemory = extendedNavigator.deviceMemory ? extendedNavigator.deviceMemory <= 4 : false;
+  const isLowMemory = extendedNavigator.deviceMemory ? extendedNavigator.deviceMemory <= 8 : true; // Default to true if unknown
   
   // Check for slow connection
   const isSlowConnection = extendedNavigator.connection ? 
