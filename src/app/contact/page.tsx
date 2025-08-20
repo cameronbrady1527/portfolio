@@ -1,32 +1,42 @@
 "use client";
-// contact/page.tsx
-// Contact page for Cameron Brady's portfolio
-// Features contact form, contact information, and social media links
-//
-// Sections:
-// - Hero section with contact overview
-// - Contact form with validation
-// - Contact information
-// - Social media links
-// - Neural background integration
 
 import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
-import { useState, useEffect } from "react";
-import { Github, Linkedin } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Github, Linkedin, AlertCircle, CheckCircle, Loader2, Send } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  CelebrationEffect,
+  FormField,
+  useContactForm,
+  contactInfo,
+  socialLinks,
+  subjectOptions
+} from "@/features/contact";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [isAtTop, setIsAtTop] = useState(true);
+  const statusMessageRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const {
+    formData,
+    isSubmitting,
+    submitStatus,
+    errors,
+    validationStatus,
+    isTyping,
+    showParticles,
+    emailSuggestions,
+    showSuggestions,
+    handleInputChange,
+    handleBlur,
+    handleSubmit,
+    selectEmailSuggestion,
+    hasErrors
+  } = useContactForm();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,69 +47,23 @@ export default function Contact() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Simulate success/error
-    const success = Math.random() > 0.3; // 70% success rate for demo
-    setSubmitStatus(success ? "success" : "error");
-    setIsSubmitting(false);
-    
-    if (success) {
-      setFormData({ name: "", email: "", subject: "", message: "" });
+  // Auto-scroll to status message when submission completes
+  useEffect(() => {
+    if (submitStatus !== 'idle' && statusMessageRef.current) {
+      setTimeout(() => {
+        statusMessageRef.current?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'nearest' 
+        });
+      }, 100);
     }
-  };
-
-  const contactInfo = [
-    {
-      icon: "Email",
-      title: "Email",
-      value: "cab495@cornell.edu",
-      link: "mailto:cab495@cornell.edu"
-    },
-    {
-      icon: "Location",
-      title: "Location",
-      value: "Hopewell Junction, NY / Remote",
-      link: null
-    },
-    {
-      icon: "Response",
-      title: "Response Time",
-      value: "Within 24 hours",
-      link: null
-    }
-  ];
-
-  const socialLinks = [
-    {
-      name: "GitHub",
-      url: "https://github.com/cameronbrady1527",
-      icon: "GitHub",
-      color: "hover:text-gray-300"
-    },
-    {
-      name: "LinkedIn",
-      url: "https://www.linkedin.com/in/cameron-brady-5770431b5/",
-      icon: "LinkedIn",
-      color: "hover:text-blue-400"
-    },
-  ];
+  }, [submitStatus]);
 
   return (
     <div className="relative min-h-screen">
+      {/* Celebration Effect */}
+      <CelebrationEffect showParticles={showParticles} />
+      
       {/* Header */}
       <Header />
       
@@ -125,7 +89,7 @@ export default function Contact() {
               </p>
             </GlassCard>
 
-            {/* Scroll Indicator - Smooth transition */}
+            {/* Scroll Indicator */}
             <div 
               className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
                 isAtTop 
@@ -152,99 +116,183 @@ export default function Contact() {
               {/* Contact Form */}
               <div>
                 <h2 className="text-3xl font-bold mb-8 text-white">Send a Message</h2>
+                
                 <GlassCard>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                          Name *
-                        </label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                          placeholder="Cameron Brady"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                          Email *
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                          placeholder="cab495@cornell.edu"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                        Subject *
-                      </label>
-                      <select
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
+                      <FormField
+                        type="text"
+                        name="name"
+                        label="Name"
+                        value={formData.name}
+                        error={errors.name}
+                        isRequired
+                        validationStatus={validationStatus.name}
+                        isTyping={isTyping.name}
                         onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                      >
-                        <option value="">Select a subject</option>
-                        <option value="project-collaboration">Project Collaboration</option>
-                        <option value="research-opportunity">Research Opportunity</option>
-                        <option value="consulting">Consulting</option>
-                        <option value="speaking-engagement">Speaking Engagement</option>
-                        <option value="general-inquiry">General Inquiry</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                        Message *
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
+                        onBlur={handleBlur}
+                        placeholder="Your full name"
+                      />
+                      
+                      <FormField
+                        type="email"
+                        name="email"
+                        label="Email"
+                        value={formData.email}
+                        error={errors.email}
+                        isRequired
+                        validationStatus={validationStatus.email}
+                        isTyping={isTyping.email}
                         onChange={handleInputChange}
-                        required
-                        rows={6}
-                        className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none"
-                        placeholder="Tell me about your project, idea, or how I can help..."
+                        onBlur={handleBlur}
+                        placeholder="your.email@example.com"
+                        suggestions={emailSuggestions}
+                        showSuggestions={showSuggestions}
+                        onSelectSuggestion={selectEmailSuggestion}
                       />
                     </div>
 
-                    {/* Submit Status */}
-                    {submitStatus === "success" && (
-                      <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-lg">
-                        <p className="text-green-300">Thank you! Your message has been sent successfully. I&apos;ll get back to you within 24 hours.</p>
-                      </div>
-                    )}
+                    <FormField
+                      type="select"
+                      name="subject"
+                      label="Subject"
+                      value={formData.subject}
+                      error={errors.subject}
+                      isRequired
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      options={subjectOptions}
+                    />
 
-                    {submitStatus === "error" && (
-                      <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-lg">
-                        <p className="text-red-300">Oops! Something went wrong. Please try again or reach out via email.</p>
-                      </div>
-                    )}
+                    <FormField
+                      type="textarea"
+                      name="message"
+                      label="Message"
+                      value={formData.message}
+                      error={errors.message}
+                      isRequired
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      placeholder="Tell me about your project, idea, or how I can help..."
+                      rows={6}
+                      maxLength={5000}
+                      showCharacterCount
+                    />
+
+                    {/* Submit Status */}
+                    <div ref={statusMessageRef}>
+                      <AnimatePresence>
+                        {submitStatus === "success" && (
+                          <motion.div 
+                            className="relative p-6 bg-gradient-to-r from-green-500/20 via-green-400/20 to-emerald-500/20 border border-green-500/30 rounded-lg overflow-hidden"
+                            initial={{ scale: 0.8, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: -10 }}
+                            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+                          >
+                            <motion.div 
+                              className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-emerald-400/10"
+                              animate={{ opacity: [0.5, 1, 0.5] }}
+                              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                            />
+                            
+                            <div className="relative flex items-center">
+                              <div className="relative mr-4">
+                                <motion.div
+                                  initial={{ scale: 0, rotate: -90 }}
+                                  animate={{ scale: 1, rotate: 0 }}
+                                  transition={{ 
+                                    delay: 0.3, 
+                                    type: "spring", 
+                                    damping: 18, 
+                                    stiffness: 250,
+                                    duration: 0.6
+                                  }}
+                                >
+                                  <CheckCircle className="w-8 h-8 text-green-400" />
+                                </motion.div>
+                                
+                                {[...Array(3)].map((_, i) => (
+                                  <motion.div
+                                    key={i}
+                                    className="absolute -inset-2 bg-green-400/15 rounded-full"
+                                    initial={{ scale: 0, opacity: 0 }}
+                                    animate={{ 
+                                      scale: [0, 1.8, 2.2], 
+                                      opacity: [0, 0.6, 0.3, 0] 
+                                    }}
+                                    transition={{ 
+                                      duration: 2.5, 
+                                      delay: 0.5 + (i * 0.4), 
+                                      repeat: Infinity, 
+                                      ease: [0.4, 0, 0.2, 1],
+                                      repeatDelay: 1
+                                    }}
+                                  />
+                                ))}
+                              </div>
+                              
+                              <motion.p 
+                                className="text-green-300 font-medium text-lg leading-relaxed"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ 
+                                  delay: 0.6, 
+                                  duration: 0.8,
+                                  ease: [0.25, 0.46, 0.45, 0.94]
+                                }}
+                              >
+                                Thank you! Your message has been sent successfully. I&apos;ll get back to you within 24 hours.
+                              </motion.p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {submitStatus === "error" && (
+                        <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-lg animate-in slide-in-from-bottom duration-500">
+                          <div className="flex items-center">
+                            <AlertCircle className="w-5 h-5 text-red-400 mr-2 animate-in zoom-in duration-300 delay-200" />
+                            <p className="text-red-300 font-medium">
+                              Oops! Something went wrong. Please try again or reach out via email directly.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {submitStatus === "rate-limited" && (
+                        <div className="p-4 bg-yellow-500/20 border border-yellow-500/30 rounded-lg animate-in slide-in-from-bottom duration-500">
+                          <div className="flex items-center">
+                            <AlertCircle className="w-5 h-5 text-yellow-400 mr-2 animate-in zoom-in duration-300 delay-200" />
+                            <p className="text-yellow-300 font-medium">
+                              You&apos;ve reached the message limit. Please wait 15 minutes before sending another message.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
 
                     <NeuralButton
                       variant="primary"
                       size="lg"
-                      className="w-full"
-                      disabled={isSubmitting}
-                      onClick={() => handleSubmit(new Event('submit') as unknown as React.FormEvent)}
+                      className={`w-full transition-all duration-300 ${
+                        isSubmitting ? 'scale-98 opacity-90' : 'hover:scale-105'
+                      }`}
+                      disabled={isSubmitting || hasErrors}
                     >
-                      {isSubmitting ? "Sending..." : "Send Message"}
+                      <div className="flex items-center justify-center space-x-2">
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-5 h-5 animate-spin" />
+                            <span>Sending...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-5 h-5" />
+                            <span>Send Message</span>
+                          </>
+                        )}
+                      </div>
                     </NeuralButton>
                   </form>
                 </GlassCard>
@@ -254,13 +302,11 @@ export default function Contact() {
               <div>
                 <h2 className="text-3xl font-bold mb-8 text-white">Contact Information</h2>
                 
-                {/* Contact Details */}
                 <div className="space-y-6 mb-8">
                   {contactInfo.map((info, index) => (
                     <GlassCard key={index} className="flex items-center space-x-4">
                       <div className="text-2xl font-bold text-purple-300">{info.icon}</div>
                       <div className="flex-1">
-                        {/* <h3 className="font-semibold text-white">{info.title}</h3> */}
                         {info.link ? (
                           <a 
                             href={info.link}
@@ -276,7 +322,6 @@ export default function Contact() {
                   ))}
                 </div>
 
-                {/* Social Links */}
                 <div>
                   <h3 className="text-xl font-bold mb-4 text-white">Connect With Me</h3>
                   <div className="grid grid-cols-2 gap-4">
