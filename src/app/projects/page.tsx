@@ -10,6 +10,8 @@
 // - Detailed project cards
 // - Neural background integration
 
+import Image from "next/image";
+
 import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
@@ -248,10 +250,12 @@ export default function Projects() {
                   {/* Project Image */}
                   <div className="w-full h-48 bg-gradient-to-br from-amber-200/30 to-orange-200/30 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
                     {project.image && project.image.trim() !== "" ? (
-                      <img 
+                      <Image 
                         src={project.image} 
                         alt={project.title}
                         className="w-full h-full object-contain p-4"
+                        height={48}
+                        width={100}
                       />
                     ) : (
                       <ProjectImageFallback title={project.title} />
