@@ -116,7 +116,7 @@ export default function About() {
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-orange-400 rounded-full mt-2"></div>
-                    <span className="text-gray-300">Creating highly-reliable prevention methods for Alzhiemer's Disease</span>
+                    <span className="text-gray-300">Creating highly-reliable prevention methods for Alzhiemer&apos;s Disease</span>
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-orange-400 rounded-full mt-2"></div>
