@@ -4,20 +4,24 @@ import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
-import { useState, useEffect, useRef } from "react";
-import { Github, Linkedin, AlertCircle, CheckCircle, Loader2, Send } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { Github, Linkedin, AlertCircle, CheckCircle, Loader2, Send, Mail, MapPin, Clock, Copy, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CelebrationEffect,
   FormField,
+  FAQAccordion,
   useContactForm,
   contactInfo,
   socialLinks,
-  subjectOptions
+  subjectOptions,
+  faqData
 } from "@/features/contact";
+import { ScrollIndicator } from "@/components/ui";
 
 export default function Contact() {
   const [isAtTop, setIsAtTop] = useState(true);
+  const [copiedItem, setCopiedItem] = useState<string | null>(null);
   const statusMessageRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -38,13 +42,38 @@ export default function Contact() {
     hasErrors
   } = useContactForm();
 
-  useEffect(() => {
+  // Throttled scroll handler for better performance
+  const throttledScroll = useCallback(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      setIsAtTop(window.scrollY < 100);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsAtTop(window.scrollY < 100);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+    
+    return handleScroll;
+  }, []);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  useEffect(() => {
+    const scrollHandler = throttledScroll();
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+    return () => window.removeEventListener('scroll', scrollHandler);
+  }, [throttledScroll]);
+
+  // Copy to clipboard functionality
+  const copyToClipboard = useCallback(async (text: string, itemId: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedItem(itemId);
+      setTimeout(() => setCopiedItem(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   }, []);
 
   // Auto-scroll to status message when submission completes
@@ -90,22 +119,7 @@ export default function Contact() {
             </GlassCard>
 
             {/* Scroll Indicator */}
-            <div 
-              className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
-                isAtTop 
-                  ? 'opacity-100 translate-y-0 animate-bounce' 
-                  : 'opacity-0 translate-y-4 pointer-events-none'
-              }`}
-            >
-              <div className="flex flex-col items-center text-white/60 hover:text-white/80 transition-colors cursor-pointer group">
-                <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">
-                  Scroll to explore
-                </span>
-                <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
-                  <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-                </div>
-              </div>
-            </div>
+            <ScrollIndicator isVisible={isAtTop} />
           </div>
         </section>
 
@@ -303,43 +317,102 @@ export default function Contact() {
                 <h2 className="text-3xl font-bold mb-8 text-white">Contact Information</h2>
                 
                 <div className="space-y-6 mb-8">
-                  {contactInfo.map((info, index) => (
-                    <GlassCard key={index} className="flex items-center space-x-4">
-                      <div className="text-2xl font-bold text-purple-300">{info.icon}</div>
-                      <div className="flex-1">
-                        {info.link ? (
-                          <a 
-                            href={info.link}
-                            className="text-purple-300 hover:text-purple-200 transition-colors"
-                          >
-                            {info.value}
-                          </a>
-                        ) : (
-                          <p className="text-gray-300">{info.value}</p>
-                        )}
+                  {contactInfo.map((info, index) => {
+                    const IconComponent = info.icon === 'Mail' ? Mail : info.icon === 'MapPin' ? MapPin : Clock;
+                    
+                    return (
+                      <div key={index} className="group">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-4 flex-1">
+                            <div className="flex-shrink-0">
+                              <IconComponent className="w-6 h-6 text-purple-400" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-sm font-medium text-gray-400 mb-1">{info.title}</h3>
+                              {info.link ? (
+                                <a 
+                                  href={info.link}
+                                  className="text-purple-300 hover:text-purple-200 transition-colors text-lg font-medium block truncate"
+                                >
+                                  {info.value}
+                                </a>
+                              ) : (
+                                <p className="text-gray-200 text-lg font-medium">{info.value}</p>
+                              )}
+                              {info.priority && (
+                                <span className="inline-block mt-1 px-2 py-1 text-xs bg-purple-500/20 text-purple-300 rounded-full">
+                                  {info.priority}
+                                </span>
+                              )}
+                              {info.estimate && (
+                                <p className="text-sm text-gray-400 mt-1">{info.estimate}</p>
+                              )}
+                              {info.availability && (
+                                <p className="text-sm text-green-400 mt-1">{info.availability}</p>
+                              )}
+                            </div>
+                          </div>
+                          
+                          {info.copyable && (
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => copyToClipboard(info.value, `contact-${index}`)}
+                              className="flex-shrink-0 p-2 rounded-lg bg-gray-700/50 hover:bg-gray-600/50 transition-colors group-hover:opacity-100 opacity-60"
+                              aria-label={`Copy ${info.title}`}
+                            >
+                              <AnimatePresence mode="wait">
+                                {copiedItem === `contact-${index}` ? (
+                                  <motion.div
+                                    key="check"
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    exit={{ scale: 0 }}
+                                    transition={{ duration: 0.15 }}
+                                  >
+                                    <Check className="w-4 h-4 text-green-400" />
+                                  </motion.div>
+                                ) : (
+                                  <motion.div
+                                    key="copy"
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    exit={{ scale: 0 }}
+                                    transition={{ duration: 0.15 }}
+                                  >
+                                    <Copy className="w-4 h-4 text-gray-400" />
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </motion.button>
+                          )}
+                        </div>
                       </div>
-                    </GlassCard>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold mb-4 text-white">Connect With Me</h3>
                   <div className="grid grid-cols-2 gap-4">
                     {socialLinks.map((social, index) => (
-                      <a
+                      <motion.a
                         key={index}
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center space-x-3 p-4 bg-gray-800/50 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700/50 transition-all group"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="flex items-center space-x-3 p-4 bg-gray-800/50 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700/50 focus:bg-gray-700/50 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all group"
+                        aria-label={`Visit my ${social.name} profile`}
                       >
                         {social.name === "GitHub" ? (
-                          <Github className="w-6 h-6 text-gray-300 group-hover:text-white transition-colors" />
+                          <Github className="w-6 h-6 text-gray-300 group-hover:text-white group-focus:text-white transition-colors" />
                         ) : social.name === "LinkedIn" ? (
-                          <Linkedin className="w-6 h-6 text-gray-300 group-hover:text-blue-400 transition-colors" />
+                          <Linkedin className="w-6 h-6 text-gray-300 group-hover:text-blue-400 group-focus:text-blue-400 transition-colors" />
                         ) : null}
                         <span className={`font-medium ${social.color}`}>{social.name}</span>
-                      </a>
+                      </motion.a>
                     ))}
                   </div>
                 </div>
@@ -376,95 +449,22 @@ export default function Contact() {
         {/* FAQ Section */}
         <section className="py-16 px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12 text-white">
-              Frequently Asked Questions
-            </h2>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">
+                Have questions? Find answers to the most common inquiries about my work, availability, and expertise.
+              </p>
+            </motion.div>
             
-            <div className="space-y-6">
-              <GlassCard>
-                <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  What types of projects do you work on?
-                </h3>
-                <p className="text-gray-300">
-                  I specialize in AI/ML applications, healthcare technology, web development, and research projects. 
-                  I&apos;m particularly interested in projects that combine multiple disciplines and have real-world impact.
-                </p>
-              </GlassCard>
-
-              <GlassCard>
-                <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  Do you take on freelance work?
-                </h3>
-                <p className="text-gray-300">
-                  Yes! I&apos;m available for freelance projects, consulting, and collaboration opportunities. 
-                  I prefer projects that align with my expertise in AI, healthcare, and full-stack development.
-                </p>
-              </GlassCard>
-
-              <GlassCard>
-                <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  What&apos;s your typical project timeline?
-                </h3>
-                <p className="text-gray-300">
-                  Project timelines vary based on scope and complexity. Small projects might take 1-2 weeks, 
-                  while larger applications can span 1-4 months. I&apos;ll provide a detailed timeline during our initial discussion.
-                </p>
-              </GlassCard>
-
-              <GlassCard>
-                <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  Are you available for speaking engagements?
-                </h3>
-                <p className="text-gray-300">
-                  Absolutely! I enjoy speaking about AI in healthcare, machine learning applications, 
-                  and the intersection of neuroscience and computer science. Feel free to reach out for conference or event opportunities.
-                </p>
-              </GlassCard>
-
-              <GlassCard>
-                <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  What&apos;s your background in computational neuroscience?
-                </h3>
-                <p className="text-gray-300">
-                  I&apos;m passionate about leveraging machine learning and AI to advance computational neuroscience. 
-                  My current research focuses on Parkinson&apos;s disease detection through vocal biomarkers, achieving 94.9% precision. 
-                  I&apos;m building the foundation for my future career as a neurosurgeon who bridges AI research with clinical practice.
-                </p>
-              </GlassCard>
-
-              <GlassCard>
-                <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  Do you work on healthcare technology projects?
-                </h3>
-                <p className="text-gray-300">
-                  Yes! Healthcare technology is my primary focus. For example, I&apos;ve developed early detection systems for neurological disorders, 
-                  including my Parkinson&apos;s disease detection project using vocal biomarkers. I&apos;m particularly interested in projects 
-                  that can improve patient outcomes and advance medical diagnostics through AI and machine learning.
-                </p>
-              </GlassCard>
-
-              <GlassCard>
-                <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  Are you available for nonprofit consulting?
-                </h3>
-                <p className="text-gray-300">
-                  Absolutely! I have experience as a nonprofit consultant, having worked with the Community Mindfulness Project 
-                  where I developed data-driven tools for nonprofit analysis. I can help with strategic program development, 
-                  board governance, and technical solutions for nonprofit organizations.
-                </p>
-              </GlassCard>
-
-              <GlassCard>
-                <h3 className="text-lg font-bold text-purple-300 mb-2">
-                  What&apos;s your experience with AI and machine learning?
-                </h3>
-                <p className="text-gray-300">
-                  I work extensively with AI/ML technologies including Python, Scikit-learn, PyTorch, and various data science tools. 
-                  My projects include AI-powered content generation platforms, healthcare diagnostics, and research applications. 
-                  I&apos;m currently working at Astral AI, developing AI-powered web applications and data scraping automations.
-                </p>
-              </GlassCard>
-            </div>
+            <FAQAccordion faqs={faqData} />
           </div>
         </section>
       </main>

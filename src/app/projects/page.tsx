@@ -10,14 +10,14 @@
 // - Detailed project cards
 // - Neural background integration
 
-import Image from "next/image";
 
 import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
 import { TechnologyDropdown } from "@/components/TechnologyDropdown";
-import { ProjectImageFallback } from "@/components/ProjectImageFallback";
+import { ProjectCard } from "@/components/ui/ProjectCard";
+import { ScrollIndicator } from "@/components/ui/ScrollIndicator";
 import { useState, useEffect, useRef } from "react";
 import { getAllTechnologies, getProjectsByFilters } from "@/lib/projects-data";
 
@@ -152,23 +152,7 @@ export default function Projects() {
                 </p>
              </GlassCard>
 
-                         {/* Scroll Indicator - Smooth transition */}
-             <div 
-               className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
-                 isAtTop 
-                   ? 'opacity-100 translate-y-0 animate-bounce' 
-                   : 'opacity-0 translate-y-4 pointer-events-none'
-               }`}
-             >
-               <div className="flex flex-col items-center text-white/60 hover:text-white/80 transition-colors cursor-pointer group">
-                 <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">
-                   Scroll to explore
-                 </span>
-                 <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
-                   <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-                 </div>
-               </div>
-             </div>
+             <ScrollIndicator isVisible={isAtTop} />
 
 
           </div>
@@ -241,91 +225,21 @@ export default function Projects() {
             {/* Projects Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
-                <GlassCard 
-                  key={project.id} 
-                  interactive 
-                  className="group cursor-pointer hover:scale-105 transition-transform duration-300"
+                <ProjectCard 
+                  key={project.id}
+                  title={project.title}
+                  description={project.description}
+                  technologies={project.technologies}
+                  github={project.github}
+                  link={project.live || undefined}
+                  featured={project.featured}
+                  image={project.image}
+                  metrics={Object.entries(project.stats).map(([key, value]) => ({
+                    label: key.charAt(0).toUpperCase() + key.slice(1),
+                    value: value
+                  }))}
                   onClick={() => window.location.href = `/projects/${project.id}`}
-                >
-                  {/* Project Image */}
-                  <div className="w-full h-48 bg-gradient-to-br from-amber-200/30 to-orange-200/30 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                    {project.image && project.image.trim() !== "" ? (
-                      <Image 
-                        src={project.image} 
-                        alt={project.title}
-                        className="w-full h-full object-contain p-4"
-                        height={48}
-                        width={100}
-                      />
-                    ) : (
-                      <ProjectImageFallback title={project.title} />
-                    )}
-                  </div>
-
-                  {/* Featured Badge */}
-                  {project.featured && (
-                    <div className="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      Featured
-                    </div>
-                  )}
-
-                  {/* Project Info */}
-                  <h3 className="text-xl font-bold mb-2 text-purple-300 group-hover:text-purple-200 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-300 mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span 
-                        key={tech}
-                        className="px-2 py-1 bg-gray-700/50 text-gray-300 rounded text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="px-2 py-1 bg-gray-700/50 text-gray-400 rounded text-sm">
-                        +{project.technologies.length - 3} more
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Stats */}
-                  <div className="grid grid-cols-2 gap-4 mb-4 text-xs">
-                    {Object.entries(project.stats).map(([key, value]) => (
-                      <div key={key} className="text-center">
-                        <div className="font-bold text-purple-300">{value}</div>
-                        <div className="text-gray-400 capitalize">{key}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
-                    <NeuralButton 
-                      variant="accent" 
-                      size="sm"
-                      className="flex-1"
-                      onClick={() => window.open(project.github, '_blank')}
-                    >
-                      View Code
-                    </NeuralButton>
-                    {project.live && (
-                      <NeuralButton 
-                        variant="secondary" 
-                        size="sm"
-                        className="flex-1"
-                        onClick={() => window.open(project.live!, '_blank')}
-                      >
-                        Live Demo
-                      </NeuralButton>
-                    )}
-                  </div>
-                </GlassCard>
+                />
               ))}
             </div>
 

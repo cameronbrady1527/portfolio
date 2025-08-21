@@ -6,6 +6,9 @@ import React from 'react';
 import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
+import { StatCard } from "@/components/ui/StatCard";
+import { InfoCard } from "@/components/ui/InfoCard";
+import { BarChart3, FileText, Settings, AlertTriangle, CheckCircle, Trophy } from "lucide-react";
 
 import { getProjectById } from "@/lib/projects-data";
 import { notFound } from 'next/navigation';
@@ -132,10 +135,14 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {Object.entries(project.stats).map(([key, value]) => (
-                <GlassCard key={key} className="text-center">
-                  <div className="text-3xl font-bold text-purple-300 mb-2">{String(value)}</div>
-                  <div className="text-gray-300 capitalize">{key}</div>
-                </GlassCard>
+                <StatCard
+                  key={key}
+                  label={key.charAt(0).toUpperCase() + key.slice(1)}
+                  value={String(value)}
+                  description={`Project ${key}`}
+                  icon={BarChart3}
+                  color="purple"
+                />
               ))}
             </div>
           </div>
@@ -151,64 +158,57 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Overview */}
-                <GlassCard>
-                  <h3 className="text-2xl font-bold mb-4 text-purple-300">Overview</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    {project.content.overview}
-                  </p>
-                </GlassCard>
+                <InfoCard
+                  icon={FileText}
+                  title="Overview"
+                  value="Project Overview"
+                  description={project.content.overview}
+                  priority="High Priority"
+                  category="Project"
+                />
 
                 {/* Technical Details */}
-                <GlassCard>
-                  <h3 className="text-2xl font-bold mb-4 text-purple-300">Technical Details</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    {project.content.technicalDetails}
-                  </p>
-                </GlassCard>
+                <InfoCard
+                  icon={Settings}
+                  title="Technical Details"
+                  value="Implementation Details"
+                  description={project.content.technicalDetails}
+                  priority="High Priority"
+                  category="Technical"
+                />
               </div>
 
               {/* Challenges & Solutions */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-                <GlassCard>
-                  <h3 className="text-2xl font-bold mb-4 text-orange-300">Challenges</h3>
-                  <ol className="space-y-3">
-                    {project.content.challenges.map((challenge: string, index: number) => (
-                      <li key={index} className="flex items-start space-x-3">
-                        <div className="w-4 text-orange-400 flex-shrink-0">{index + 1}.</div>
-                        {/* <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div> */}
-                        <span className="text-gray-300">{challenge}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </GlassCard>
+                <InfoCard
+                  icon={AlertTriangle}
+                  title="Challenges"
+                  value="Development Challenges"
+                  description={`Key challenges: ${project.content.challenges.join(', ')}`}
+                  priority="Medium Priority"
+                  category="Development"
+                />
 
-                <GlassCard>
-                  <h3 className="text-2xl font-bold mb-4 text-green-300">Solutions</h3>
-                  <ol className="space-y-3">
-                    {project.content.solutions.map((solution: string, index: number) => (
-                      <li key={index} className="flex items-start space-x-3">
-                        <div className="w-4 text-green-400 flex-shrink-0">{index + 1}.</div>
-                        {/* <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div> */}
-                        <span className="text-gray-300">{solution}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </GlassCard>
+                <InfoCard
+                  icon={CheckCircle}
+                  title="Solutions"
+                  value="Implemented Solutions"
+                  description={`Solutions: ${project.content.solutions.join(', ')}`}
+                  priority="High Priority"
+                  category="Development"
+                />
               </div>
 
               {/* Results */}
               <div className="mt-8">
-                <GlassCard>
-                  <h3 className="text-2xl font-bold mb-4 text-blue-300">Results</h3>
-                  <ul className="space-y-3">
-                    {project.content.results.map((result: string, index: number) => (
-                      <li key={index} className="flex items-start space-x-3">
-                        <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-300">{result}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </GlassCard>
+                <InfoCard
+                  icon={Trophy}
+                  title="Results"
+                  value="Project Achievements"
+                  description={`Results: ${project.content.results.join(', ')}`}
+                  priority="High Priority"
+                  category="Achievement"
+                />
               </div>
             </div>
           </section>

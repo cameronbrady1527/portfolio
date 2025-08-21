@@ -13,19 +13,35 @@ import { GlassCard } from "@/components/GlassCard";
 import { TypewriterText } from "@/components/TypewriterText";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
-import { useState, useEffect } from "react";
+import { ScrollIndicator, StatCard, ProjectCard } from "@/components/ui";
+import { useState, useEffect, useCallback } from "react";
+import { Code, Brain, Zap } from "lucide-react";
 
 export default function Home() {
   const [isAtTop, setIsAtTop] = useState(true);
 
-  useEffect(() => {
+  // Throttled scroll handler for consistency with other pages
+  const throttledScroll = useCallback(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      setIsAtTop(window.scrollY < 100);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsAtTop(window.scrollY < 100);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    return handleScroll;
   }, []);
+
+  useEffect(() => {
+    const scrollHandler = throttledScroll();
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+    return () => window.removeEventListener('scroll', scrollHandler);
+  }, [throttledScroll]);
 
   return (
     <div className="relative min-h-screen">
@@ -72,23 +88,8 @@ export default function Home() {
               </NeuralButton>
             </div>
 
-            {/* Scroll Indicator - Smooth transition */}
-            <div 
-              className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
-                isAtTop 
-                  ? 'opacity-100 translate-y-0 animate-bounce' 
-                  : 'opacity-0 translate-y-4 pointer-events-none'
-              }`}
-            >
-              <div className="flex flex-col items-center text-white/60 hover:text-white/80 transition-colors cursor-pointer group">
-                <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">
-                  Scroll to explore
-                </span>
-                <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
-                  <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-                </div>
-              </div>
-            </div>
+            {/* Scroll Indicator */}
+            <ScrollIndicator isVisible={isAtTop} />
           </div>
         </section>
 
@@ -100,86 +101,73 @@ export default function Home() {
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Project Card 1 */}
-              <GlassCard interactive className="text-center">
-                <h3 className="text-xl font-bold mb-3 text-purple-300">Sesha v3</h3>
-                <p className="text-gray-300 mb-4">
-                  AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines
-                </p>
-                <div className="flex flex-wrap gap-2 justify-center mb-4">
-                  <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">Next.js 15</span>
-                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">React 19</span>
-                  <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">TypeScript</span>
-                </div>
-                <NeuralButton variant="accent" size="sm">
-                  View Project
-                </NeuralButton>
-              </GlassCard>
+              <ProjectCard
+                title="Sesha v3"
+                description="AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines"
+                technologies={["Next.js 15", "React 19", "TypeScript"]}
+                featured
+                status="completed"
+                date="2024"
+                team="Astral AI"
+                metrics={[
+                  { label: "Processing Speed", value: "10x", color: "text-green-400" },
+                  { label: "Accuracy", value: "95%", color: "text-blue-400" }
+                ]}
+                onClick={() => window.location.href = '/projects/1'}
+              />
 
-              {/* Project Card 2 */}
-              <GlassCard interactive className="text-center">
-                <h3 className="text-xl font-bold mb-3 text-purple-300">Parkinson&apos;s Disease Detection</h3>
-                <p className="text-gray-300 mb-4">
-                  Advanced machine learning framework for Parkinson&apos;s disease identification utilizing vocal biomarkers with streamlined data processing
-                </p>
-                <div className="flex flex-wrap gap-2 justify-center mb-4">
-                  <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">Python</span>
-                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">Scikit-learn</span>
-                  <span className="px-2 py-1 bg-orange-500/20 text-orange-300 rounded text-sm">94.9% Precision</span>
-                </div>
-                <NeuralButton variant="accent" size="sm">
-                  View Project
-                </NeuralButton>
-              </GlassCard>
+              <ProjectCard
+                title="Parkinson's Disease Detection"
+                description="Advanced machine learning framework for Parkinson's disease identification utilizing vocal biomarkers with streamlined data processing"
+                technologies={["Python", "Scikit-learn", "Audio Analysis"]}
+                featured
+                status="completed"
+                date="2024"
+                team="Independent Research"
+                metrics={[
+                  { label: "Precision", value: "94.9%", color: "text-orange-400" },
+                  { label: "Recall", value: "92.1%", color: "text-purple-400" }
+                ]}
+                onClick={() => window.location.href = '/research/1'}
+              />
 
-              {/* Project Card 3 */}
-              <GlassCard interactive className="text-center">
-                <h3 className="text-xl font-bold mb-3 text-purple-300">Nonprofit Data Scraper</h3>
-                <p className="text-gray-300 mb-4">
-                  Scraper for nonprofit revenue and executive compensation data for a selected state with smart data collection algorithms
-                </p>
-                <div className="flex flex-wrap gap-2 justify-center mb-4">
-                  <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">Python</span>
-                  <span className="px-2 py-1 bg-green-500/20 text-green-300 rounded text-sm">OCR</span>
-                  <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">Pandas</span>
-                </div>
-                <NeuralButton variant="accent" size="sm">
-                  View Project
-                </NeuralButton>
-              </GlassCard>
+              <ProjectCard
+                title="Nonprofit Data Scraper"
+                description="Scraper for nonprofit revenue and executive compensation data for a selected state with smart data collection algorithms"
+                technologies={["Python", "OCR", "Pandas"]}
+                status="completed"
+                date="2024"
+                team="CMP Consulting"
+                metrics={[
+                  { label: "Organizations", value: "1.8M+", color: "text-blue-400" },
+                  { label: "Time Saved", value: "90%", color: "text-green-400" }
+                ]}
+                onClick={() => window.location.href = '/projects/4'}
+              />
             </div>
           </div>
         </section>
 
         {/* Quick Stats Section */}
         <section className="py-16 px-8">
-          <div className="max-w-4xl mx-auto relative">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">
+              Quick Stats
+            </h2>
+            
             <div className="relative p-8 sm:p-12 bg-gray-800/80 text-white rounded-2xl shadow-2xl border border-blue-700/40 backdrop-blur-md overflow-visible">
               {/* Blue gradient overlay */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-700/30 via-transparent to-purple-700/20" />
               
-              {/* Content */}
               <div className="relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                  <div className="relative group">
-                    <div className="text-3xl font-bold text-orange-400 mb-2 cursor-pointer group-hover:text-orange-300 group-hover:drop-shadow-[0_0_8px_rgba(251,146,60,0.5)] transition-all duration-300">
-                      5+
-                    </div>
-                    <div className="text-gray-300">Programming Languages</div>
-                    <div className="text-xs text-gray-500 mt-1">↗</div>
-                    
-                    {/* Code editor popup */}
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
-                      <div className="bg-slate-900/95 backdrop-blur-sm border border-slate-600 rounded-lg p-4 shadow-xl min-w-[280px]">
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="flex gap-1">
-                            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                          </div>
-                          <span className="text-xs text-slate-400 font-mono">featured-tech-stack.ts</span>
-                        </div>
-                        <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <StatCard
+                    value="5+"
+                    label="Programming Languages"
+                    icon={Code}
+                    color="orange"
+                    popupContent={
+                      <pre>
 {`const technologies = [
   "Python",        // ML/AI & Backend
   "JavaScript",    // Frontend & Full-Stack
@@ -187,29 +175,17 @@ export default function Home() {
   "Java",          // Backend & Algorithms
   "HTML/CSS",      // Web Development
 ];`}
-                        </pre>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="relative group">
-                    <div className="text-3xl font-bold text-purple-400 mb-2 cursor-pointer group-hover:text-purple-300 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.5)] transition-all duration-300">
-                      4+
-                    </div>
-                    <div className="text-gray-300">Years Experience</div>
-                    <div className="text-xs text-gray-500 mt-1">↗</div>
-                    
-                    {/* Experience popup */}
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
-                      <div className="bg-slate-900/95 backdrop-blur-sm border border-slate-600 rounded-lg p-4 shadow-xl min-w-[280px]">
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="flex gap-1">
-                            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                          </div>
-                          <span className="text-xs text-slate-400 font-mono">experience.md</span>
-                        </div>
-                        <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+                      </pre>
+                    }
+                  />
+                  
+                  <StatCard
+                    value="4+"
+                    label="Years Experience"
+                    icon={Brain}
+                    color="purple"
+                    popupContent={
+                      <pre>
 {`## Professional Journey
 
 • Full-Stack Development: 3+ years
@@ -218,29 +194,18 @@ export default function Home() {
 • Teaching & Mentoring: 2+ years
 
 Total: 4+ years of technical growth`}
-                        </pre>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="relative group">
-                    <div className="text-3xl font-bold text-green-400 mb-2 cursor-pointer group-hover:text-green-300 group-hover:drop-shadow-[0_0_8px_rgba(74,222,128,0.5)] transition-all duration-300">
-                      6+
-                    </div>
-                    <div className="text-gray-300">Projects Completed</div>
-                    <div className="text-xs text-gray-500 mt-1">↗</div>
-                    
-                    {/* Projects popup */}
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
-                      <div className="bg-slate-900/95 backdrop-blur-sm border border-slate-600 rounded-lg p-4 shadow-xl min-w-[280px]">
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="flex gap-1">
-                            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                          </div>
-                          <span className="text-xs text-slate-400 font-mono">project-portfolio.md</span>
-                        </div>
-                        <pre className="text-xs text-slate-300 font-mono leading-relaxed">
+                      </pre>
+                    }
+                  />
+                  
+                  <StatCard
+                    value="6+"
+                    label="Projects Completed"
+                    icon={Zap}
+                    color="green"
+                    onClick={() => window.location.href = '/projects'}
+                    popupContent={
+                      <pre>
 {`## Project Categories
 
 • AI/ML Applications: 3 projects
@@ -251,15 +216,12 @@ Total: 4+ years of technical growth`}
 Featured: Sesha v3, Parkinson's Detection,
          Nonprofit Scraper, McDiver, 
          Astral AI, Flashcards`}
-                        </pre>
-                      </div>
-                    </div>
-                  </div>
+                      </pre>
+                    }
+                  />
                 </div>
               </div>
             </div>
-            
-
           </div>
         </section>
       </main>

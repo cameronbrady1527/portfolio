@@ -6,6 +6,9 @@ import React from 'react';
 import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
+import { StatCard } from "@/components/ui/StatCard";
+import { InfoCard } from "@/components/ui/InfoCard";
+import { Quote, TrendingUp, Calendar, FileText, FlaskConical, BarChart3, CheckCircle } from "lucide-react";
 
 import { getPaperById } from "@/lib/research-data";
 import { notFound } from 'next/navigation';
@@ -134,18 +137,27 @@ export default function ResearchPage({ params }: ResearchPageProps) {
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <GlassCard className="text-center">
-                <div className="text-3xl font-bold text-purple-300 mb-2">{paper.citations}</div>
-                <div className="text-gray-300">Citations</div>
-              </GlassCard>
-              <GlassCard className="text-center">
-                <div className="text-3xl font-bold text-blue-300 mb-2">{paper.impact}</div>
-                <div className="text-gray-300">Impact Factor</div>
-              </GlassCard>
-              <GlassCard className="text-center">
-                <div className="text-3xl font-bold text-green-300 mb-2">{paper.year}</div>
-                <div className="text-gray-300">Publication Year</div>
-              </GlassCard>
+              <StatCard
+                label="Citations"
+                value={String(paper.citations)}
+                description="Academic citations"
+                icon={Quote}
+                color="purple"
+              />
+              <StatCard
+                label="Impact Factor"
+                value={String(paper.impact)}
+                description="Journal impact factor"
+                icon={TrendingUp}
+                color="blue"
+              />
+              <StatCard
+                label="Publication Year"
+                value={String(paper.year)}
+                description="Year of publication"
+                icon={Calendar}
+                color="green"
+              />
             </div>
           </div>
         </section>
@@ -160,45 +172,48 @@ export default function ResearchPage({ params }: ResearchPageProps) {
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Full Abstract */}
-                <GlassCard>
-                  <h3 className="text-2xl font-bold mb-4 text-purple-300">Abstract</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    {paper.content.fullAbstract}
-                  </p>
-                </GlassCard>
+                <InfoCard
+                  icon={FileText}
+                  title="Abstract"
+                  value="Research Abstract"
+                  description={paper.content.fullAbstract}
+                  priority="High Priority"
+                  category="Research"
+                />
 
                 {/* Methodology */}
-                <GlassCard>
-                  <h3 className="text-2xl font-bold mb-4 text-purple-300">Methodology</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    {paper.content.methodology}
-                  </p>
-                </GlassCard>
+                <InfoCard
+                  icon={FlaskConical}
+                  title="Methodology"
+                  value="Research Methods"
+                  description={paper.content.methodology}
+                  priority="High Priority"
+                  category="Research"
+                />
               </div>
 
               {/* Results */}
               <div className="mt-8">
-                <GlassCard>
-                  <h3 className="text-2xl font-bold mb-4 text-green-300">Key Results</h3>
-                  <ul className="space-y-3">
-                    {paper.content.results.map((result: string, index: number) => (
-                      <li key={index} className="flex items-start space-x-3">
-                        <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-300">{result}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </GlassCard>
+                <InfoCard
+                  icon={BarChart3}
+                  title="Key Results"
+                  value="Research Findings"
+                  description={`Results: ${paper.content.results.join(', ')}`}
+                  priority="High Priority"
+                  category="Findings"
+                />
               </div>
 
               {/* Conclusions */}
               <div className="mt-8">
-                <GlassCard>
-                  <h3 className="text-2xl font-bold mb-4 text-blue-300">Conclusions</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    {paper.content.conclusions}
-                  </p>
-                </GlassCard>
+                <InfoCard
+                  icon={CheckCircle}
+                  title="Conclusions"
+                  value="Research Conclusions"
+                  description={paper.content.conclusions}
+                  priority="High Priority"
+                  category="Research"
+                />
               </div>
             </div>
           </section>

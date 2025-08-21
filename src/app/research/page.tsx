@@ -14,6 +14,10 @@ import { GlassCard } from "@/components/GlassCard";
 import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
+import { ScrollIndicator } from "@/components/ui/ScrollIndicator";
+import { StatCard } from "@/components/ui/StatCard";
+import { InfoCard } from "@/components/ui/InfoCard";
+import { Brain, Cpu, Activity, FlaskConical, Lightbulb, Target, Infinity } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getPapersByArea } from "@/lib/research-data";
 
@@ -112,23 +116,7 @@ export default function Research() {
               </p>
             </GlassCard>
 
-            {/* Scroll Indicator - Smooth transition */}
-            <div 
-              className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
-                isAtTop 
-                  ? 'opacity-100 translate-y-0 animate-bounce' 
-                  : 'opacity-0 translate-y-4 pointer-events-none'
-              }`}
-            >
-              <div className="flex flex-col items-center text-white/60 hover:text-white/80 transition-colors cursor-pointer group">
-                <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">
-                  Scroll to explore
-                </span>
-                <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
-                  <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-                </div>
-              </div>
-            </div>
+            <ScrollIndicator isVisible={isAtTop} />
           </div>
         </section>
 
@@ -281,44 +269,32 @@ export default function Research() {
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <GlassCard className="text-center">
-                <div className="text-4xl mb-4 font-bold text-purple-300">Neurology</div>
-                <h3 className="text-xl font-bold mb-3 text-purple-300">Neurology</h3>
-                <p className="text-gray-300 mb-4">
-                  Focus on neurological disorders, brain-computer interfaces, and neural signal processing
-                </p>
-                <div className="space-y-2 text-sm text-gray-400">
-                                  <div>• Parkinson&apos;s Disease Detection</div>
-                <div>• Alzheimer&apos;s Research</div>
-                  <div>• Neural Signal Analysis</div>
-                </div>
-              </GlassCard>
+              <InfoCard
+                icon={Brain}
+                title="Neurology"
+                value="Neurological Research"
+                description="Focus on neurological disorders, brain-computer interfaces, and neural signal processing"
+                priority="Research Area"
+                category="High Priority"
+              />
 
-              <GlassCard className="text-center">
-                <div className="text-4xl mb-4 font-bold text-blue-300">AI/ML</div>
-                <h3 className="text-xl font-bold mb-3 text-blue-300">AI/ML</h3>
-                <p className="text-gray-300 mb-4">
-                  Machine learning applications in healthcare and biomedical data analysis
-                </p>
-                <div className="space-y-2 text-sm text-gray-400">
-                  <div>• Healthcare AI</div>
-                  <div>• Medical Diagnostics</div>
-                  <div>• Predictive Modeling</div>
-                </div>
-              </GlassCard>
+              <InfoCard
+                icon={Cpu}
+                title="AI/ML"
+                value="Artificial Intelligence"
+                description="Machine learning applications in healthcare and biomedical data analysis"
+                priority="Research Area"
+                category="High Priority"
+              />
 
-              <GlassCard className="text-center">
-                <div className="text-4xl mb-4 font-bold text-green-300">Signal</div>
-                <h3 className="text-xl font-bold mb-3 text-green-300">Signal Processing</h3>
-                <p className="text-gray-300 mb-4">
-                  Advanced signal processing for neural and biomedical data analysis
-                </p>
-                <div className="space-y-2 text-sm text-gray-400">
-                  <div>• Voice Analysis</div>
-                  <div>• Real-time Processing</div>
-                  <div>• Feature Extraction</div>
-                </div>
-              </GlassCard>
+              <InfoCard
+                icon={Activity}
+                title="Signal Processing"
+                value="Signal Analysis"
+                description="Advanced signal processing for neural and biomedical data analysis"
+                priority="Research Area"
+                category="Medium Priority"
+              />
             </div>
           </div>
         </section>
@@ -360,26 +336,36 @@ export default function Research() {
         {/* Research Stats */}
         <section className="py-16 px-8">
           <div className="max-w-4xl mx-auto">
-            <GlassCard>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-                <div>
-                  <div className="text-3xl font-bold text-purple-400 mb-2">1</div>
-                  <div className="text-gray-300">Active Project</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-blue-400 mb-2">3+</div>
-                  <div className="text-gray-300">Research Ideas</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-green-400 mb-2">2</div>
-                  <div className="text-gray-300">Research Areas</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-orange-400 mb-2">∞</div>
-                  <div className="text-gray-300">Future Potential</div>
-                </div>
-              </div>
-            </GlassCard>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <StatCard
+                label="Active Projects"
+                value="1"
+                description="Current research in progress"
+                icon={FlaskConical}
+                color="purple"
+              />
+              <StatCard
+                label="Research Ideas"
+                value="3+"
+                description="Concepts in development"
+                icon={Lightbulb}
+                color="blue"
+              />
+              <StatCard
+                label="Research Areas"
+                value="3"
+                description="Primary focus domains"
+                icon={Target}
+                color="green"
+              />
+              <StatCard
+                label="Future Potential"
+                value="∞"
+                description="Endless possibilities"
+                icon={Infinity}
+                color="orange"
+              />
+            </div>
           </div>
         </section>
 

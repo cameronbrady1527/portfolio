@@ -9,19 +9,35 @@ import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
 import { StyledLink } from "@/components/StyledLink";
-import { useState, useEffect } from "react";
+import { ScrollIndicator, InfoCard } from "@/components/ui";
+import { useState, useEffect, useCallback } from "react";
+import { GraduationCap, Target, Code, Database, Brain, Users, ExternalLink } from "lucide-react";
 
 export default function About() {
   const [isAtTop, setIsAtTop] = useState(true);
 
-  useEffect(() => {
+  // Throttled scroll handler for consistency
+  const throttledScroll = useCallback(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      setIsAtTop(window.scrollY < 100);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsAtTop(window.scrollY < 100);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    return handleScroll;
   }, []);
+
+  useEffect(() => {
+    const scrollHandler = throttledScroll();
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+    return () => window.removeEventListener('scroll', scrollHandler);
+  }, [throttledScroll]);
   return (
     <div className="relative min-h-screen">
       {/* Header */}
@@ -54,23 +70,8 @@ export default function About() {
               </p>
             </GlassCard>
 
-            {/* Scroll Indicator - Smooth transition */}
-            <div 
-              className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
-                isAtTop 
-                  ? 'opacity-100 translate-y-0 animate-bounce' 
-                  : 'opacity-0 translate-y-4 pointer-events-none'
-              }`}
-            >
-              <div className="flex flex-col items-center text-white/60 hover:text-white/80 transition-colors cursor-pointer group">
-                <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">
-                  Scroll to explore
-                </span>
-                <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
-                  <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-                </div>
-              </div>
-            </div>
+            {/* Scroll Indicator */}
+            <ScrollIndicator isVisible={isAtTop} />
           </div>
         </section>
 
@@ -148,22 +149,25 @@ export default function About() {
             </h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <GlassCard>
-                <h3 className="text-2xl font-bold mb-4 text-purple-300">Education</h3>
-                <div className="space-y-4">
-                  <div className="border-l-4 border-purple-400 pl-4">
-                    <h4 className="font-semibold text-white">Cornell University</h4>
-                    <p className="text-gray-300">Interdisciplinary Studies, B.S.</p>
-                    <p className="text-sm text-gray-400">Computer Science, Applied Economics and Management, Agricultural Studies</p>
-                    <p className="text-sm text-gray-400">2020 - 2024</p>
-                  </div>
-                  <div className="border-l-4 border-blue-400 pl-4">
-                    <h4 className="font-semibold text-white">Self-Directed Learning</h4>
-                    <p className="text-gray-300">Machine Learning & Neuroscience</p>
-                    <p className="text-sm text-gray-400">2022 - Present</p>
-                  </div>
-                </div>
-              </GlassCard>
+              <div className="space-y-6">
+                <InfoCard
+                  icon={GraduationCap}
+                  title="Cornell University"
+                  value="Interdisciplinary Studies, B.S."
+                  description="Computer Science, Applied Economics and Management, Agricultural Studies"
+                  priority="2020 - 2024"
+                  category="Education"
+                />
+                
+                <InfoCard
+                  icon={Brain}
+                  title="Self-Directed Learning"
+                  value="Machine Learning & Neuroscience"
+                  description="Continuous learning in computational neuroscience and AI applications"
+                  priority="2022 - Present"
+                  category="Research"
+                />
+              </div>
 
               <GlassCard>
                 <h3 className="text-2xl font-bold mb-4 text-purple-300">Research Focus</h3>
@@ -203,77 +207,68 @@ export default function About() {
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <GlassCard>
-                <h3 className="text-xl font-bold mb-4 text-purple-300">Programming Languages</h3>
-                <div className="space-y-3">
-                  {["Python", "JavaScript", "TypeScript", "Java", "HTML/CSS", "SQL"].map((skill) => (
-                    <button
-                      key={skill}
-                      onClick={() => {
-                        const params = new URLSearchParams();
-                        params.set('tech', skill);
-                        window.location.href = `/projects?${params.toString()}`;
-                      }}
-                      className="w-full text-left p-3 rounded-lg bg-gray-800/30 hover:bg-gray-700/50 border border-gray-600/50 hover:border-purple-400/50 transition-all duration-300 group"
-                    >
-                      <span className="text-gray-300 group-hover:text-purple-300 transition-colors font-medium">
-                        {skill}
-                      </span>
-                      <div className="text-xs text-gray-400 mt-1 group-hover:text-purple-400/70 transition-colors">
-                        Click to view projects →
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </GlassCard>
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-purple-300 flex items-center">
+                  <Code className="w-5 h-5 mr-2" />
+                  Programming Languages
+                </h3>
+                {["Python", "JavaScript", "TypeScript", "Java", "HTML/CSS", "SQL"].map((skill) => (
+                  <InfoCard
+                    key={skill}
+                    title="Programming Language"
+                    value={skill}
+                    description="Click to view projects"
+                    onClick={() => {
+                      const params = new URLSearchParams();
+                      params.set('tech', skill);
+                      window.location.href = `/projects?${params.toString()}`;
+                    }}
+                    className="hover:border-purple-400/50"
+                  />
+                ))}
+              </div>
 
-              <GlassCard>
-                <h3 className="text-xl font-bold mb-4 text-purple-300">Frameworks & Tools</h3>
-                <div className="space-y-3">
-                  {["React", "Node.js", "Next.js", "Spring Boot", "Git", "PostgreSQL"].map((skill) => (
-                    <button
-                      key={skill}
-                      onClick={() => {
-                        const params = new URLSearchParams();
-                        params.set('tech', skill);
-                        window.location.href = `/projects?${params.toString()}`;
-                      }}
-                      className="w-full text-left p-3 rounded-lg bg-gray-800/30 hover:bg-gray-700/50 border border-gray-600/50 hover:border-blue-400/50 transition-all duration-300 group"
-                    >
-                      <span className="text-gray-300 group-hover:text-blue-300 transition-colors font-medium">
-                        {skill}
-                      </span>
-                      <div className="text-xs text-gray-400 mt-1 group-hover:text-blue-400/70 transition-colors">
-                        Click to view projects →
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </GlassCard>
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-purple-300 flex items-center">
+                  <Database className="w-5 h-5 mr-2" />
+                  Frameworks & Tools
+                </h3>
+                {["React", "Node.js", "Next.js", "Spring Boot", "Git", "PostgreSQL"].map((skill) => (
+                  <InfoCard
+                    key={skill}
+                    title="Framework/Tool"
+                    value={skill}
+                    description="Click to view projects"
+                    onClick={() => {
+                      const params = new URLSearchParams();
+                      params.set('tech', skill);
+                      window.location.href = `/projects?${params.toString()}`;
+                    }}
+                    className="hover:border-blue-400/50"
+                  />
+                ))}
+              </div>
 
-              <GlassCard>
-                <h3 className="text-xl font-bold mb-4 text-purple-300">ML & AI Tools</h3>
-                <div className="space-y-3">
-                  {["Scikit-learn", "PyTorch", "Pandas", "Matplotlib", "Seaborn", "Jupyter"].map((skill) => (
-                    <button
-                      key={skill}
-                      onClick={() => {
-                        const params = new URLSearchParams();
-                        params.set('tech', skill);
-                        window.location.href = `/projects?${params.toString()}`;
-                      }}
-                      className="w-full text-left p-3 rounded-lg bg-gray-800/30 hover:bg-gray-700/50 border border-gray-600/50 hover:border-green-400/50 transition-all duration-300 group"
-                    >
-                      <span className="text-gray-300 group-hover:text-green-300 transition-colors font-medium">
-                        {skill}
-                      </span>
-                      <div className="text-xs text-gray-400 mt-1 group-hover:text-green-400/70 transition-colors">
-                        Click to view projects →
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </GlassCard>
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-purple-300 flex items-center">
+                  <Brain className="w-5 h-5 mr-2" />
+                  ML & AI Tools
+                </h3>
+                {["Scikit-learn", "PyTorch", "Pandas", "Matplotlib", "Seaborn", "Jupyter"].map((skill) => (
+                  <InfoCard
+                    key={skill}
+                    title="ML/AI Tool"
+                    value={skill}
+                    description="Click to view projects"
+                    onClick={() => {
+                      const params = new URLSearchParams();
+                      params.set('tech', skill);
+                      window.location.href = `/projects?${params.toString()}`;
+                    }}
+                    className="hover:border-green-400/50"
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -291,100 +286,56 @@ export default function About() {
               
               <div className="space-y-8">
                 <div className="relative flex items-start">
-                  {/* <div className="absolute left-6 w-4 h-4 bg-purple-400 rounded-full -translate-x-2"></div> */}
-                  <div className="ml-16">
-                    <GlassCard>
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold text-purple-300">Full-Stack Software Developer</h3>
-                        <span className="text-sm text-gray-400">2025 - Present</span>
-                      </div>
-                      <p className="text-gray-300 mb-2"><StyledLink href="https://www.useastral.dev" variant="default" external>Astral AI</StyledLink> <strong>[AI Startup]</strong>, <i>Founding Engineering Team</i></p>
-                      <p className="text-gray-400">
-                        -  Building full-stack AI-powered web applications and web crawling automations for clients 
-                        (see <StyledLink href="/projects/1" variant="default">sesha-v3</StyledLink> or <StyledLink href="/projects/2" variant="default">astral-aggregator</StyledLink>).
-                      </p>
-                      <p className="text-gray-400 pt-1">
-                        -  Co-developing Astral, a platform optimizing the building and deployment of intelligent solutions to complex 
-                          business problems, with implementation and AI-workflow complexity abstracted by the use of natural language.
-                      </p>
-                      <p className="text-gray-400 pt-1">
-                        -  Collaboratively pushing the boundaries of software development, establishing best practices and workflows with artificial intelligence models 
-                        (check out <StyledLink href="https://github.com/astral-ai-labs" variant="github" external>astral-ai-labs</StyledLink> on GitHub).
-                      </p>
-                    </GlassCard>
+                  <div className="ml-16 w-full">
+                    <InfoCard
+                      icon={Code}
+                      title="Full-Stack Software Developer"
+                      value="Astral AI [AI Startup] - Founding Engineering Team"
+                      description="Building full-stack AI-powered web applications and web crawling automations for clients. Co-developing Astral platform for intelligent business solutions."
+                      priority="2025 - Present"
+                      category="Current Role"
+                      link="https://www.useastral.dev"
+                    />
                   </div>
                 </div>
 
                 <div className="relative flex items-start">
-                  {/* <div className="absolute left-6 w-4 h-4 bg-blue-400 rounded-full -translate-x-2"></div> */}
-                  <div className="ml-16">
-                    <GlassCard>
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold text-purple-300">Nonprofit Consultant</h3>
-                        <span className="text-sm text-gray-400">2024 - Present</span>
-                      </div>
-                      <p className="text-gray-300 mb-2">Community Mindfulness Project, <i>Independent Consultant</i></p>
-                      <p className="text-gray-400">
-                        -  Developed industry-competitive, data-driven, and open-source nonprofit data collection and analysis tools, 
-                           leveraging financial records from over 1.8 million of American 501(c)3 organizations 
-                           (see <StyledLink href="/projects/4" variant="default">nonprofit-data-scraper</StyledLink>).
-                      </p>
-                      <p className="text-gray-400 pt-2">
-                        -  Spearheading the creation of a digital board handbook and new SOPs, whilst advising on strategic program 
-                           development and board governance best practices, streamlining repetitive practices.
-                      </p>
-                      <p className="text-gray-400 pt-2">
-                        -  Produced significant overhaul to executive compensation and budget deliberations, resulting in a major time reduction 
-                           in compensation data research from months to merely days.
-                      </p>
-                    </GlassCard>
+                  <div className="ml-16 w-full">
+                    <InfoCard
+                      icon={Users}
+                      title="Nonprofit Consultant"
+                      value="Community Mindfulness Project - Independent Consultant"
+                      description="Developed data-driven nonprofit analysis tools leveraging 1.8M+ organization records. Overhauled compensation research reducing time from months to days."
+                      priority="2024 - Present"
+                      category="Consulting"
+                    />
                   </div>
                 </div>
 
                 <div className="relative flex items-start">
-                  {/* <div className="absolute left-6 w-4 h-4 bg-blue-400 rounded-full -translate-x-2"></div> */}
-                  <div className="ml-16">
-                    <GlassCard>
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold text-purple-300">Head Teaching Assistant</h3>
-                        <span className="text-sm text-gray-400">2022 - 2024</span>
-                      </div>
-                      <p className="text-gray-300 mb-2">Cornell Dyson School of Applied Economics and Management</p>
-                      <p className="text-gray-400">
-                        -  Served as Head TA for Farm Business Management, leading five TAs by establishing standardized, 
-                           tech-friendly workflows for lessons, grading, and office hours.
-                      </p>
-                      <p className="text-gray-400 pt-2">
-                        -  Acted as a first point of contact for professors, course administrators, TAs, and students.
-                      </p>
-                    </GlassCard>
+                  <div className="ml-16 w-full">
+                    <InfoCard
+                      icon={GraduationCap}
+                      title="Head Teaching Assistant"
+                      value="Cornell Dyson School - Farm Business Management"
+                      description="Led five TAs establishing standardized workflows for lessons, grading, and office hours. First point of contact for professors and students."
+                      priority="2022 - 2024"
+                      category="Academia"
+                    />
                   </div>
                 </div>
 
                 <div className="relative flex items-start">
-                  {/* <div className="absolute left-6 w-4 h-4 bg-green-400 rounded-full -translate-x-2"></div> */}
-                  <div className="ml-16">
-                    <GlassCard>
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold text-purple-300">CEO & Co-Founder</h3>
-                        <span className="text-sm text-gray-400">2019 - Present</span>
-                      </div>
-                      <p className="text-gray-300 mb-2">The Clover Project, Inc.</p>
-                      <p className="text-gray-400">
-                        -  Co-founded a mission-driven nonprofit to combat food insecurity by cultivating and distributing produce, 
-                        managing a team of six directors and over 250 volunteers.
-                      </p>
-                      <p className="text-gray-400 pt-2">
-                        -  Implemented a comprehensive database and volunteer management system to track inventory, donations, and volunteer hours, 
-                           streamlining operations and improving efficiency.
-                      </p>
-                      <p className="text-gray-400 pt-2">
-                        -  Maintaining an advisory role whilst redesigning our website and planning expansion efforts into other territories outside of Hyde Park, NY.
-                      </p>
-                      <p className="text-gray-400 pt-4">
-                        <i>* See <StyledLink href="https://www.poughkeepsiejournal.com/story/news/local/2019/09/12/arlington-students-project-combating-hunger-dutchess-help/2164033001" variant="default" external>this local news article</StyledLink> to see our founding story... or our roots!</i>
-                      </p>
-                    </GlassCard>
+                  <div className="ml-16 w-full">
+                    <InfoCard
+                      icon={Target}
+                      title="CEO & Co-Founder"
+                      value="The Clover Project, Inc."
+                      description="Co-founded nonprofit combating food insecurity. Managed 6 directors and 250+ volunteers. Implemented comprehensive database and management systems."
+                      priority="2019 - Present"
+                      category="Leadership"
+                      link="https://www.poughkeepsiejournal.com/story/news/local/2019/09/12/arlington-students-project-combating-hunger-dutchess-help/2164033001"
+                    />
                   </div>
                 </div>
               </div>
