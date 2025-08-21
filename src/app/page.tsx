@@ -106,6 +106,7 @@ export default function Home() {
                 description="AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines"
                 technologies={["Next.js 15", "React 19", "TypeScript"]}
                 featured
+                image="/seshalogowithtext.svg"
                 status="completed"
                 date="2024"
                 team="Astral AI"
