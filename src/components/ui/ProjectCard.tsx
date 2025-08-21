@@ -1,10 +1,12 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Calendar, Users, Star } from 'lucide-react';
 import { GlassCard } from '@/components/GlassCard';
 import { NeuralButton } from '@/components/NeuralButton';
+import { TypewriterText } from '@/components/TypewriterText';
 
 interface ProjectCardProps {
   title: string;
@@ -47,6 +49,44 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   onClick,
   className = ""
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [showTitle, setShowTitle] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Extract initials from the title (first letter of each word, max 3)
+  const getInitials = (title: string) => {
+    const words = title.split(' ').filter(word => word.length > 0);
+    const initials = words.slice(0, 3).map(word => word[0]).join('');
+    return initials.toUpperCase();
+  };
+
+  const initials = getInitials(title);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Start title animation after initials (300ms delay)
+          setTimeout(() => {
+            setShowTitle(true);
+          }, 300);
+          // Once visible, we can disconnect the observer
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the element is visible
+        rootMargin: '50px' // Start animation slightly before the element comes into view
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <motion.div
       whileHover={{ y: -5, scale: 1.02 }}
@@ -65,12 +105,43 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         )}
 
-        {/* Image placeholder */}
-        {image && (
-          <div className="h-48 bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center">
-            <div className="text-4xl font-bold text-white/20">{title.charAt(0)}</div>
-          </div>
-        )}
+        {/* Project Image */}
+        <div ref={containerRef} className="w-full h-48 bg-gradient-to-br from-amber-200/30 to-orange-200/30 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+          {image && image.trim() !== "" ? (
+            <Image 
+              src={image} 
+              alt={title}
+              width={200}
+              height={192}
+              className="w-full h-full object-contain p-4"
+            />
+          ) : (
+            <div className="text-center">
+              <div className="text-6xl font-bold text-gray-900 mb-2">
+                {isVisible ? (
+                  <TypewriterText 
+                    text={initials} 
+                    speed={100}
+                    className="text-gray-900"
+                  />
+                ) : (
+                  <span className="text-gray-900">{initials}</span>
+                )}
+              </div>
+              <div className="text-sm text-gray-800 font-semibold">
+                {showTitle ? (
+                  <TypewriterText 
+                    text={title} 
+                    speed={50}
+                    className="text-gray-800"
+                  />
+                ) : (
+                  <span className="opacity-0">{title}</span>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
 
         <div className="p-6">
           {/* Header */}
