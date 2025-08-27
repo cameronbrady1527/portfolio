@@ -106,7 +106,7 @@ export const projects: Project[] = [
     category: "research",
     image: "",
     github: "https://github.com/cameronbrady1527/parkinsons-detection",
-    live: null,
+    live: "https://parkinsons-detection-production.up.railway.app/",
     featured: true,
     date: "2024-2025",
     stats: {
@@ -227,7 +227,7 @@ export const projects: Project[] = [
     category: "web",
     image: "",
     github: "https://github.com/cameronbrady1527/learn-vocab-v1",
-    live: "https://flashcards-demo.com",
+    live: "https://learn-vocab-v1.vercel.app/",
     featured: false,
     date: "2025",
     stats: {
