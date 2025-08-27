@@ -67,19 +67,9 @@ export const InfoCard: React.FC<InfoCardProps> = ({
           <div className="flex-1 min-w-0">
             <h3 className="text-sm font-medium text-gray-400 mb-1">{title}</h3>
             
-            {link && !onClick ? (
-              <a 
-                href={link}
-                className="text-purple-300 hover:text-purple-200 transition-colors text-lg font-medium block truncate group-hover:underline"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {value}
-              </a>
-            ) : (
-              <p className="text-gray-200 text-lg font-medium truncate group-hover:text-white transition-colors">
-                {value}
-              </p>
-            )}
+            <p className="text-purple-300 hover:text-purple-200 transition-colors text-lg font-medium truncate group-hover:text-white">
+              {value}
+            </p>
             
             {description && (
               <p className="text-sm text-gray-400 mt-1">{description}</p>

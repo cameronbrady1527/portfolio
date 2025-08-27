@@ -12,6 +12,7 @@ export const projects: Project[] = [
     github: "https://github.com/cameronbrady1527/sesha-v3",
     live: "https://sesha-v3.vercel.app/",
     featured: true,
+    date: "2025",
     stats: {
       "Article Generation": "5 minutes",
       "Plagiarism Allowed": "0%",
@@ -50,10 +51,12 @@ export const projects: Project[] = [
     longDescription: "A comprehensive web content discovery and monitoring system that automatically discovers, processes, and tracks URLs from various websites using multiple detection methods including sitemaps, AI-powered analysis, and intelligent crawling.",
     technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib", "Seaborn", "Jupyter", "FastAPI", "Railway"],
     category: "research",
-    image: "/web-crawler.png",
+    // image: "/web-crawler.png",
+    image: "",
     github: "https://github.com/cameronbrady/parkinsons-detection",
     live: null,
     featured: true,
+    date: "2025",
     stats: {
       "Content Discovery": "100,000+ per site",
       "Sites Supported": "Unlimited & Any",
@@ -105,6 +108,7 @@ export const projects: Project[] = [
     github: "https://github.com/cameronbrady1527/parkinsons-detection",
     live: null,
     featured: true,
+    date: "2024-2025",
     stats: {
       precision: "94.9%",
       sensitivity: "92.3%",
@@ -144,6 +148,7 @@ export const projects: Project[] = [
     github: "https://github.com/cameronbrady1527/nonprofit-revenue-scraper",
     live: null,
     featured: true,
+    date: "2025",
     stats: {
       efficiency: "85% faster",
       accuracy: "98.5%",
@@ -179,10 +184,12 @@ export const projects: Project[] = [
     longDescription: "A Python toolkit, designed for AI-workflow productivity startup Astral AI, that extracts and organizes web documentation into well-formatted markdown files using the Firecrawl SDK. Features crawler and scraper functionality, well-formatted markdown files for efficient user and machine learning/LLM parsing, and navigable index generation for extracted documents.",
     technologies: ["Python", "Firecrawl SDK"],
     category: "automation",
-    image: "/file.svg",
+    // image: "/file.svg",
+    image: "",
     github: "https://github.com/cameronbrady1527/documentation-scraper",
     live: null,
     featured: false,
+    date: "2025",
     stats: {
       documents: "100+",
       efficiency: "Automated",
@@ -222,6 +229,7 @@ export const projects: Project[] = [
     github: "https://github.com/cameronbrady1527/learn-vocab-v1",
     live: "https://flashcards-demo.com",
     featured: false,
+    date: "2025",
     stats: {
       words: "1000+",
       users: "Personal",
@@ -261,6 +269,7 @@ export const projects: Project[] = [
     github: "https://github.com/cameronbrady/mcdiver-graph-navigation",
     live: null,
     featured: false,
+    date: "2023",
     stats: {
       performance: "Optimized",
       algorithms: "3+",
@@ -296,10 +305,12 @@ export const projects: Project[] = [
     longDescription: "A sophisticated portfolio website showcasing technical projects and research with cutting-edge web technologies. Features neural network background animations, glass morphism UI components, dynamic project filtering, and responsive design optimized for all devices. Built with modern React patterns and TypeScript for maintainability.",
     technologies: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Framer Motion", "Canvas API", "CSS Grid", "Responsive Design"],
     category: "web",
-    image: "/globe.svg",
+    // image: "/globe.svg",
+    image: "",
     github: "https://github.com/cameronbrady1527/portfolio",
     live: "https://cameronbrady.dev",
     featured: true,
+    date: "2025",
     stats: {
       "Performance Score": "95+",
       "Accessibility": "100%",

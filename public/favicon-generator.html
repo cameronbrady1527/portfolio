@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emoji Favicon Generator</title>
+</head>
+<body>
+    <canvas id="canvas" width="32" height="32" style="border: 1px solid #ccc;"></canvas>
+    
+    <script>
+        // Generate favicon from emoji
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas size for favicon
+        canvas.width = 32;
+        canvas.height = 32;
+        
+        // Draw emoji
+        ctx.font = '24px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🧠', 16, 16);
+        
+        // Convert to data URL and download
+        setTimeout(() => {
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = 'favicon.ico';
+            link.href = dataURL;
+            link.click();
+        }, 100);
+    </script>
+</body>
+</html>

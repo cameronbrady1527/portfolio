@@ -16,9 +16,12 @@ import { Header } from "@/components/Header";
 import { ScrollIndicator, StatCard, ProjectCard } from "@/components/ui";
 import { useState, useEffect, useCallback } from "react";
 import { Code, Brain, Zap } from "lucide-react";
+import { projects } from "@/lib/projects-data";
 
 export default function Home() {
   const [isAtTop, setIsAtTop] = useState(true);
+
+  const featuredProjects = projects.filter((project) => project.featured).slice(0, 3);
 
   // Throttled scroll handler for consistency with other pages
   const throttledScroll = useCallback(() => {
@@ -101,50 +104,24 @@ export default function Home() {
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <ProjectCard
-                title="Sesha v3"
-                description="AI-powered content generation platform that transforms source materials into professional articles through multi-step AI pipelines"
-                technologies={["Next.js 15", "React 19", "TypeScript"]}
-                featured
-                image="/seshalogowithtext.svg"
-                status="completed"
-                date="2024"
-                team="Astral AI"
-                metrics={[
-                  { label: "Processing Speed", value: "10x", color: "text-green-400" },
-                  { label: "Accuracy", value: "95%", color: "text-blue-400" }
-                ]}
-                onClick={() => window.location.href = '/projects/1'}
-              />
-
-              <ProjectCard
-                title="Parkinson's Disease Detection"
-                description="Advanced machine learning framework for Parkinson's disease identification utilizing vocal biomarkers with streamlined data processing"
-                technologies={["Python", "Scikit-learn", "Audio Analysis"]}
-                featured
-                status="completed"
-                date="2024"
-                team="Independent Research"
-                metrics={[
-                  { label: "Precision", value: "94.9%", color: "text-orange-400" },
-                  { label: "Recall", value: "92.1%", color: "text-purple-400" }
-                ]}
-                onClick={() => window.location.href = '/research/1'}
-              />
-
-              <ProjectCard
-                title="Nonprofit Data Scraper"
-                description="Scraper for nonprofit revenue and executive compensation data for a selected state with smart data collection algorithms"
-                technologies={["Python", "OCR", "Pandas"]}
-                status="completed"
-                date="2024"
-                team="CMP Consulting"
-                metrics={[
-                  { label: "Organizations", value: "1.8M+", color: "text-blue-400" },
-                  { label: "Time Saved", value: "90%", color: "text-green-400" }
-                ]}
-                onClick={() => window.location.href = '/projects/4'}
-              />
+              {featuredProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  title={project.title}
+                  description={project.description}
+                  technologies={project.technologies}
+                  github={project.github}
+                  link={project.live || undefined}
+                  featured={project.featured}
+                  image={project.image}
+                  date={project.date}
+                  metrics={Object.entries(project.stats).map(([key, value]) => ({
+                    label: key.charAt(0).toUpperCase() + key.slice(1),
+                    value: value
+                  }))}
+                  onClick={() => window.location.href = `/projects/${project.id}`}
+                />
+              ))}
             </div>
           </div>
         </section>

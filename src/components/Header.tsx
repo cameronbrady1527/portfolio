@@ -75,7 +75,7 @@ export function Header({ className = "" }: HeaderProps) {
               className="flex items-center space-x-3 text-xl font-bold text-white hover:text-purple-300 transition-colors duration-200"
             >
               {/* Brain Icon */}
-              <div className="text-2xl hover:scale-110 transition-transform duration-200">
+              <div className="flex items-center justify-center w-8 h-8 text-2xl hover:scale-110 transition-transform duration-200">
                 🧠
               </div>
               <ScramblingName 

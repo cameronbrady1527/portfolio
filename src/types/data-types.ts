@@ -21,6 +21,7 @@ export interface Project {
       technicalDetails: string;
       screenshots?: string[];
     };
+    date?: string;
 }
 
 export interface ResearchPaper {

@@ -234,6 +234,7 @@ export default function Projects() {
                   link={project.live || undefined}
                   featured={project.featured}
                   image={project.image}
+                  date={project.date}
                   metrics={Object.entries(project.stats).map(([key, value]) => ({
                     label: key.charAt(0).toUpperCase() + key.slice(1),
                     value: value
