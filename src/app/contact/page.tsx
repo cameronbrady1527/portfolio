@@ -5,7 +5,7 @@ import { NeuralButton } from "@/components/NeuralButton";
 import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Github, Linkedin, AlertCircle, CheckCircle, Loader2, Send, Mail, MapPin, Clock, Copy, Check } from "lucide-react";
+import { Github, Linkedin, AlertCircle, CheckCircle, Loader2, Send, Mail, MapPin, Clock, Copy, Check, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CelebrationEffect,
@@ -22,6 +22,8 @@ import { ScrollIndicator } from "@/components/ui";
 export default function Contact() {
   const [isAtTop, setIsAtTop] = useState(true);
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
+  const [downloadSuccess, setDownloadSuccess] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const statusMessageRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -75,6 +77,99 @@ export default function Contact() {
       console.error('Failed to copy:', err);
     }
   }, []);
+
+  // Resume download functionality
+  const downloadResume = useCallback(async () => {
+    if (isDownloading) return; // Prevent multiple simultaneous downloads
+    
+    try {
+      setIsDownloading(true);
+      
+      // First check if the file exists
+      const response = await fetch('/resume.pdf', { method: 'HEAD' });
+      if (!response.ok) {
+        console.error('Resume file not found');
+        setIsDownloading(false);
+        return;
+      }
+
+      // Create download link
+      const link = document.createElement('a');
+      link.href = '/resume.pdf';
+      link.download = 'Cameron_Resume.pdf';
+      link.style.display = 'none';
+      
+      let downloadCompleted = false;
+
+      // Function to handle download completion
+      const handleDownloadComplete = () => {
+        if (!downloadCompleted) {
+          downloadCompleted = true;
+          setIsDownloading(false);
+          setDownloadSuccess(true);
+          setTimeout(() => setDownloadSuccess(false), 3000);
+        }
+      };
+
+      // Method 1: Use focus events to detect when user returns to page
+      const handleWindowFocus = () => {
+        if (downloadCompleted) return;
+        // Small delay to ensure this is from download dialog interaction
+        setTimeout(() => {
+          if (!downloadCompleted) {
+            handleDownloadComplete();
+          }
+        }, 500);
+      };
+
+      // Method 2: Use Page Visibility API
+      const handleVisibilityChange = () => {
+        if (downloadCompleted || document.hidden) return;
+        // When page becomes visible again after download dialog
+        setTimeout(() => {
+          if (!downloadCompleted) {
+            handleDownloadComplete();
+          }
+        }, 300);
+      };
+
+      // Method 3: Fallback timer (in case focus/visibility events don't fire)
+      const fallbackTimer = setTimeout(() => {
+        if (!downloadCompleted) {
+          handleDownloadComplete();
+        }
+      }, 2000);
+
+      // Add event listeners
+      window.addEventListener('focus', handleWindowFocus);
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+      
+      // Trigger the download
+      document.body.appendChild(link);
+      link.click();
+      
+      // Clean up function
+      const cleanup = () => {
+        clearTimeout(fallbackTimer);
+        window.removeEventListener('focus', handleWindowFocus);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+        if (document.body.contains(link)) {
+          document.body.removeChild(link);
+        }
+        // Ensure loading state is cleared
+        if (!downloadCompleted) {
+          setIsDownloading(false);
+        }
+      };
+
+      // Clean up after 10 seconds regardless
+      setTimeout(cleanup, 10000);
+      
+    } catch (err) {
+      console.error('Failed to download resume:', err);
+      setIsDownloading(false);
+    }
+  }, [isDownloading]);
 
   // Auto-scroll to status message when submission completes
   useEffect(() => {
@@ -394,7 +489,7 @@ export default function Contact() {
 
                 <div>
                   <h3 className="text-xl font-bold mb-4 text-white">Connect With Me</h3>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-4 mb-4">
                     {socialLinks.map((social, index) => (
                       <motion.a
                         key={index}
@@ -415,6 +510,51 @@ export default function Contact() {
                       </motion.a>
                     ))}
                   </div>
+                  
+                  {/* Resume Download Button */}
+                  <motion.button
+                    onClick={downloadResume}
+                    whileHover={!isDownloading ? { scale: 1.02 } : {}}
+                    whileTap={!isDownloading ? { scale: 0.98 } : {}}
+                    disabled={isDownloading}
+                    className={`w-full flex items-center justify-center space-x-3 p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all group ${
+                      isDownloading 
+                        ? 'opacity-80 cursor-not-allowed' 
+                        : 'hover:from-purple-600/30 hover:to-blue-600/30 hover:border-purple-400/50'
+                    }`}
+                    aria-label={isDownloading ? "Downloading resume..." : "Download my resume"}
+                  >
+                    {isDownloading ? (
+                      <Loader2 className="w-6 h-6 text-purple-400 animate-spin" />
+                    ) : (
+                      <Download className="w-6 h-6 text-purple-400 group-hover:text-purple-300 transition-colors" />
+                    )}
+                    <span className={`font-medium transition-colors ${
+                      isDownloading 
+                        ? 'text-purple-300' 
+                        : 'text-purple-300 group-hover:text-white'
+                    }`}>
+                      {isDownloading ? 'Downloading...' : 'Download Resume'}
+                    </span>
+                  </motion.button>
+
+                  {/* Success Indicator */}
+                  <AnimatePresence>
+                    {downloadSuccess && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="mt-3 flex items-center justify-center space-x-2 p-2 bg-green-500/20 border border-green-500/30 rounded-lg"
+                      >
+                        <CheckCircle className="w-4 h-4 text-green-400" />
+                        <span className="text-green-300 text-sm font-medium">
+                          Resume downloaded successfully!
+                        </span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
             </div>

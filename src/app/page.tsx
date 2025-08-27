@@ -60,13 +60,13 @@ export default function Home() {
             <GlassCard className="mb-8">
               <h1 className="text-4xl sm:text-6xl font-extrabold mb-4 tracking-tight drop-shadow-lg">
                 <TypewriterText 
-                  text="Hi there! I'm Cameron Brady" 
+                  text="Hi there! I'm Cameron Brady." 
                   speed={80}
                   className="text-white"
                 />
               </h1>
               <p className="text-xl sm:text-2xl text-purple-300 font-medium mb-6">
-              Machine Learning Researcher | Computational Neuroscience Enthusiast | Future Neurosurgeon | Full Stack Engineer
+              Machine Learning Researcher | Computational Neuroscience Enthusiast | Full Stack Engineer
               </p>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
                 Passionate about leveraging machine learning and AI to advance computational neuroscience and develop early detection systems for neurological disorders. Currently working on Parkinson&apos;s disease detection through vocal biomarkers while building the foundation for my medical career. My ultimate goal is to become a neurosurgeon who bridges the gap between cutting-edge AI research and clinical practice.
