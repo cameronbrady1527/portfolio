@@ -10,6 +10,8 @@ import { Header } from "@/components/Header";
 import { TypewriterText } from "@/components/TypewriterText";
 import { StyledLink } from "@/components/StyledLink";
 import { ScrollIndicator, InfoCard } from "@/components/ui";
+import { ContactActions } from "@/features/contact";
+import { CurrentlySection } from "@/features/about";
 import { useState, useEffect, useCallback } from "react";
 import { GraduationCap, Target, Code, Database, Brain, Users, ExternalLink } from "lucide-react";
 
@@ -60,7 +62,7 @@ export default function About() {
                 Fullstack Software Developer | Machine Learning Researcher | Nonprofit Consultant
               </p> */}
               <br />
-              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6">
                 I am a computational neuroscience enthusiast and machine learning researcher with a 
                   human-centered focus on advancing our understanding of the brain through AI and statistical learning. 
                 You can also consider me a full-stack software developer and nonprofit consultant!  
@@ -68,6 +70,15 @@ export default function About() {
                   research-driven student/employee, where I plan to bridge cutting-edge AI research with clinical 
                   practice to improve patient outcomes and advance neurological medicine.
               </p>
+              
+              <div className="flex justify-center">
+                <ContactActions 
+                  layout="inline" 
+                  showSocial={true} 
+                  showResume={false}
+                  className="text-center"
+                />
+              </div>
             </GlassCard>
 
             {/* Scroll Indicator */}
@@ -133,7 +144,7 @@ export default function About() {
                   </div>
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
-                    <span className="text-gray-300">Full-scale brain mapping and neurological development simulation</span>
+                    <span className="text-gray-300">Full-scale brain mapping and neurological disorder development simulation</span>
                   </div>
                 </div>
               </GlassCard>
@@ -188,9 +199,15 @@ export default function About() {
                     <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
                     <span className="text-gray-300">Early Detection Systems</span>
                   </div>
-                  <div className="mt-4 p-3 bg-purple-500/10 border border-purple-500/20 rounded-lg">
-                    <p className="text-sm text-purple-300">
+                  <div 
+                    className="mt-4 p-3 bg-purple-500/10 border border-purple-500/20 rounded-lg cursor-pointer hover:bg-purple-500/15 hover:border-purple-400/30 transition-all duration-300 group"
+                    onClick={() => window.location.href = '/projects/3'}
+                  >
+                    <p className="text-sm text-purple-300 group-hover:text-purple-200 transition-colors">
                       Currently developing my first research project focused on Parkinson&apos;s disease detection using vocal biomarkers, achieving 94.9% precision. Seeking opportunities to collaborate and contribute to the field.
+                      <span className="text-xs text-purple-400 block mt-1 group-hover:text-purple-300">
+                        → Click to view project details
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -198,6 +215,9 @@ export default function About() {
             </div>
           </div>
         </section>
+
+        {/* Currently Section */}
+        <CurrentlySection />
 
         {/* Skills Section */}
         <section className="py-16 px-8">
@@ -281,12 +301,12 @@ export default function About() {
             </h2>
             
             <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 to-blue-400"></div>
+              {/* Timeline line - hidden on small screens */}
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 to-blue-400 hidden sm:block"></div>
               
               <div className="space-y-8">
                 <div className="relative flex items-start">
-                  <div className="ml-16 w-full">
+                  <div className="ml-0 sm:ml-16 w-full">
                     <InfoCard
                       icon={Code}
                       title="Full-Stack Software Developer"
@@ -300,7 +320,7 @@ export default function About() {
                 </div>
 
                 <div className="relative flex items-start">
-                  <div className="ml-16 w-full">
+                  <div className="ml-0 sm:ml-16 w-full">
                     <InfoCard
                       icon={Users}
                       title="Nonprofit Consultant"
@@ -313,7 +333,7 @@ export default function About() {
                 </div>
 
                 <div className="relative flex items-start">
-                  <div className="ml-16 w-full">
+                  <div className="ml-0 sm:ml-16 w-full">
                     <InfoCard
                       icon={GraduationCap}
                       title="Head Teaching Assistant"
@@ -326,7 +346,7 @@ export default function About() {
                 </div>
 
                 <div className="relative flex items-start">
-                  <div className="ml-16 w-full">
+                  <div className="ml-0 sm:ml-16 w-full">
                     <InfoCard
                       icon={Target}
                       title="CEO & Co-Founder"
@@ -353,7 +373,7 @@ export default function About() {
               <p className="text-lg text-gray-300 mb-8">
                 Let&apos;s work together on innovative projects that improve lives through AI and medical technology.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
                 <NeuralButton 
                   variant="primary" 
                   size="lg"
@@ -368,6 +388,15 @@ export default function About() {
                 >
                   View Projects
                 </NeuralButton>
+              </div>
+              
+              <div className="flex justify-center">
+                <ContactActions 
+                  layout="inline"
+                  showSocial={false} 
+                  showResume={true}
+                  className="opacity-80 hover:opacity-100 transition-opacity"
+                />
               </div>
             </GlassCard>
           </div>

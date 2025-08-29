@@ -10,10 +10,10 @@ export const contactInfo = [
   {
     icon: "MapPin",
     title: "Location", 
-    value: "Hopewell Junction, NY / Remote",
+    value: "NY, NY / Remote",
     link: null,
     copyable: false,
-    availability: "Remote preferred"
+    availability: "Flexible and available - send a message to discuss!"
   },
   {
     icon: "Clock",
