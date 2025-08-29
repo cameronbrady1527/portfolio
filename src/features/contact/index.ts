@@ -2,6 +2,7 @@
 export { CelebrationEffect } from './components/CelebrationEffect';
 export { FormField } from './components/FormField';
 export { FAQAccordion } from './components/FAQAccordion';
+export { ContactActions } from './components/ContactActions';
 
 // Hooks
 export { useContactForm } from './hooks/useContactForm';

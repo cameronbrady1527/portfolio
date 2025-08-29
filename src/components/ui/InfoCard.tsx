@@ -101,9 +101,9 @@ export const InfoCard: React.FC<InfoCardProps> = ({
           {link && !copyable && (
             <motion.div
               whileHover={{ scale: 1.1 }}
-              className="p-2 rounded-lg bg-gray-700/50 group-hover:bg-gray-600/50 transition-colors opacity-60 group-hover:opacity-100"
+              className="p-1 sm:p-2 rounded-lg bg-gray-700/50 group-hover:bg-gray-600/50 transition-all opacity-0 sm:opacity-60 group-hover:opacity-100 group-focus-within:opacity-100"
             >
-              <ExternalLink className="w-4 h-4 text-gray-400" />
+              <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" />
             </motion.div>
           )}
           
