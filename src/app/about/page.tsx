@@ -11,6 +11,7 @@ import { TypewriterText } from "@/components/TypewriterText";
 import { StyledLink } from "@/components/StyledLink";
 import { ScrollIndicator, InfoCard } from "@/components/ui";
 import { ContactActions } from "@/features/contact";
+import { CurrentlySection } from "@/features/about";
 import { useState, useEffect, useCallback } from "react";
 import { GraduationCap, Target, Code, Database, Brain, Users, ExternalLink } from "lucide-react";
 
@@ -214,6 +215,9 @@ export default function About() {
             </div>
           </div>
         </section>
+
+        {/* Currently Section */}
+        <CurrentlySection />
 
         {/* Skills Section */}
         <section className="py-16 px-8">
