@@ -198,9 +198,15 @@ export default function About() {
                     <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
                     <span className="text-gray-300">Early Detection Systems</span>
                   </div>
-                  <div className="mt-4 p-3 bg-purple-500/10 border border-purple-500/20 rounded-lg">
-                    <p className="text-sm text-purple-300">
+                  <div 
+                    className="mt-4 p-3 bg-purple-500/10 border border-purple-500/20 rounded-lg cursor-pointer hover:bg-purple-500/15 hover:border-purple-400/30 transition-all duration-300 group"
+                    onClick={() => window.location.href = '/projects/3'}
+                  >
+                    <p className="text-sm text-purple-300 group-hover:text-purple-200 transition-colors">
                       Currently developing my first research project focused on Parkinson&apos;s disease detection using vocal biomarkers, achieving 94.9% precision. Seeking opportunities to collaborate and contribute to the field.
+                      <span className="text-xs text-purple-400 block mt-1 group-hover:text-purple-300">
+                        → Click to view project details
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -353,31 +359,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Resume Download Section */}
-        <section className="py-16 px-8 bg-gradient-to-b from-transparent to-purple-900/10">
-          <div className="max-w-4xl mx-auto">
-            <GlassCard>
-              <div className="text-center space-y-6">
-                <h2 className="text-2xl sm:text-3xl font-bold text-white">
-                  Want to Know More?
-                </h2>
-                <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-                  Download my complete resume for detailed information about my education, 
-                  experience, projects, and technical skills.
-                </p>
-                <div className="flex justify-center">
-                  <ContactActions 
-                    layout="inline"
-                    showSocial={false} 
-                    showResume={true}
-                    className="max-w-sm"
-                  />
-                </div>
-              </div>
-            </GlassCard>
-          </div>
-        </section>
-
         {/* Call to Action */}
         <section className="py-16 px-8">
           <div className="max-w-4xl mx-auto text-center">
@@ -388,7 +369,7 @@ export default function About() {
               <p className="text-lg text-gray-300 mb-8">
                 Let&apos;s work together on innovative projects that improve lives through AI and medical technology.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
                 <NeuralButton 
                   variant="primary" 
                   size="lg"
@@ -403,6 +384,15 @@ export default function About() {
                 >
                   View Projects
                 </NeuralButton>
+              </div>
+              
+              <div className="flex justify-center">
+                <ContactActions 
+                  layout="inline"
+                  showSocial={false} 
+                  showResume={true}
+                  className="opacity-80 hover:opacity-100 transition-opacity"
+                />
               </div>
             </GlassCard>
           </div>
