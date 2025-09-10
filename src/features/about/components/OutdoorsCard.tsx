@@ -31,10 +31,10 @@ interface ActivityPhoto {
 }
 
 const activityStats: ActivityStats = {
-  totalRuns: 47,
-  totalTime: "25h 47m",
-  totalDistance: 144,
-  elevationGained: 4776,
+  totalRuns: 50,
+  totalTime: "28h 21m",
+  totalDistance: 159,
+  elevationGained: 4996,
   countries: 2,
   states: 4
 };
@@ -43,7 +43,7 @@ const currentTraining: TrainingGoal = {
   event: "Philadelphia Half Marathon",
   date: "November 2025",
   distance: "13.1 miles",
-  progress: 21
+  progress: 29
 };
 
 const recentPhotos: ActivityPhoto[] = [
