@@ -56,6 +56,13 @@ export function NeuralButton({
     lg: 'px-8 py-4 text-lg'
   };
 
+  // Fallback background colors for mobile browsers that don't support gradients
+  const fallbackColors = {
+    primary: '#f97316', // orange-500
+    secondary: '#3b82f6', // blue-500
+    accent: '#10b981' // green-500
+  };
+
   return (
     <button
       className={`
@@ -64,6 +71,16 @@ export function NeuralButton({
         ${sizeClasses[size]}
         ${className}
       `}
+      style={{
+        background: fallbackColors[variant],
+        backgroundImage: `linear-gradient(to right, ${
+          variant === 'primary' ? '#f97316, #ec4899, #a855f7' :
+          variant === 'secondary' ? '#3b82f6, #a855f7, #ec4899' :
+          '#10b981, #3b82f6, #a855f7'
+        })`,
+        color: '#ffffff',
+        border: 'none'
+      }}
       onClick={onClick}
       disabled={disabled}
     >
