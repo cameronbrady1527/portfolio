@@ -11,7 +11,7 @@ const currentBook = {
   author: "Frank Herbert",
   coverImage: "/images/books/dune-cover.jpg",
   rating: 5,
-  progress: "Page 145 / 624",
+  progress: "Page 333 / 624",
   genre: "Science Fiction",
   startedDate: "Jul 2025",
   review: "I love this novel so far! The world building is incredible, and the characters are so believable. As someone who knows little to nothing about the Dune universe or lore, it has been quite fun building a mental image of what everything looks like... kind of like when I had read the Harry Potter books before watching the movies. I am loving reading and discussing this book in my lovely book club! I highly recommend this book to anyone."
