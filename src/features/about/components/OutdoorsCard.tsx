@@ -31,9 +31,9 @@ interface ActivityPhoto {
 }
 
 const activityStats: ActivityStats = {
-  totalRuns: 70,
+  totalRuns: 71,
   totalTime: "44h 41m",
-  totalDistance: 253,
+  totalDistance: 263,
   elevationGained: 7040,
   countries: 2,
   states: 4
@@ -43,7 +43,7 @@ const currentTraining: TrainingGoal = {
   event: "Philadelphia Half Marathon",
   date: "November 2025",
   distance: "13.1 miles",
-  progress: 64
+  progress: 71
 };
 
 const recentPhotos: ActivityPhoto[] = [
@@ -250,7 +250,7 @@ export const OutdoorsCard: React.FC = () => {
                   <div>
                     <p className="text-sm font-medium text-green-300">{currentTraining.event}</p>
                     <p className="text-xs text-gray-400">{currentTraining.date} • {currentTraining.distance}</p>
-                    <p className="text-xs text-gray-500">Week 9 of 14</p>
+                    <p className="text-xs text-gray-500">Week 10 of 14</p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-bold text-white">{currentTraining.progress}%</p>
