@@ -31,9 +31,9 @@ interface ActivityPhoto {
 }
 
 const activityStats: ActivityStats = {
-  totalRuns: 71,
-  totalTime: "44h 41m",
-  totalDistance: 263,
+  totalRuns: 73,
+  totalTime: "48h 30m",
+  totalDistance: 275,
   elevationGained: 7040,
   countries: 2,
   states: 4
