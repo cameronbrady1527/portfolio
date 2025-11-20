@@ -43,7 +43,7 @@ export function Header({ className = "" }: HeaderProps) {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
-    { name: "Research", href: "/research" },
+    // { name: "Research", href: "/research" },
   ];
 
   // Helper function to check if a nav item is active

@@ -273,13 +273,13 @@ export default function Projects() {
                 >
                   Get In Touch
                 </NeuralButton>
-                <NeuralButton 
+                {/* <NeuralButton 
                   variant="secondary" 
                   size="lg"
                   onClick={() => window.location.href = '/research'}
                 >
                   View Research
-                </NeuralButton>
+                </NeuralButton> */}
               </div>
             </GlassCard>
           </div>
